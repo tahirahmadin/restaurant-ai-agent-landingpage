@@ -681,23 +681,16 @@ export const LandingPage = () => {
               }}
             />
           </Box>
-          <ReactPlayer
-            url={
-              sm
-                ? "https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/videos/homepage_banner_mobile.webm"
-                : "https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/videos/homepage_banner.mp4"
-            }
-            loop={true}
-            muted={true}
-            playing={true}
-            width="100%"
-            height="100%"
-            style={{
-              position: "relative",
-              zIndex: 2,
-              pointerEvents: "none",
-            }}
-          />
+          <section id="demo" className="py-8">
+            <div className="max-w-[1800px] mx-auto px-4">
+              <h2 className="text-3xl font-bold text-white mb-8 text-center">
+                Interactive Demo
+              </h2>
+              <div className="h-[500px] bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800 overflow-hidden">
+                <DemoSimulation />
+              </div>
+            </div>
+          </section>
         </Box>
       </Box>
 
