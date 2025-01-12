@@ -1,8 +1,14 @@
 import { DemoSimulation } from "./mainComponents/DemoSimulation";
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import { Button, Fade, Typography, useMediaQuery } from "@mui/material";
-import { makeStyles, useTheme } from "@mui/styles";
+import {
+  Button,
+  Fade,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import Slider from "react-slick";
 import {
   team,
@@ -163,6 +169,7 @@ const TitleComponent = ({ title1, title2, style, titleStyle, badgeStyle }) => {
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
   const md = useMediaQuery(theme.breakpoints.down("md"));
   const lg = useMediaQuery(theme.breakpoints.down("lg"));
+
   return (
     <Box
       style={{
@@ -301,6 +308,7 @@ const ExploreCard = ({
         }}
       />
       <Typography
+        variant="inherit"
         style={{
           width: "85%",
           maxWidth: sm ? 150 : "100%",
@@ -316,6 +324,7 @@ const ExploreCard = ({
         {title}
       </Typography>
       <Typography
+        variant="inherit"
         className={classes.description}
         style={{
           textAlign: "center",
@@ -529,6 +538,7 @@ export const LandingPage = () => {
                 <Box className="banner_text" />
               </Box>
               <Typography
+                variant="inherit"
                 style={{
                   fontWeight: 500,
                   fontSize: md ? 18 : lg ? 20 : 25,
@@ -681,23 +691,16 @@ export const LandingPage = () => {
               }}
             />
           </Box>
-          <ReactPlayer
-            url={
-              sm
-                ? "https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/videos/homepage_banner_mobile.webm"
-                : "https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/videos/homepage_banner.mp4"
-            }
-            loop={true}
-            muted={true}
-            playing={true}
-            width="100%"
-            height="100%"
-            style={{
-              position: "relative",
-              zIndex: 2,
-              pointerEvents: "none",
-            }}
-          />
+          <section id="demo" className="py-8">
+            <div className="max-w-[1800px] mx-auto px-4">
+              <h2 className="text-3xl font-bold text-white mb-8 text-center">
+                Interactive Demo
+              </h2>
+              <div className="h-[500px] bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800 overflow-hidden">
+                <DemoSimulation />
+              </div>
+            </div>
+          </section>
         </Box>
       </Box>
 
@@ -966,12 +969,14 @@ export const LandingPage = () => {
                 }}
               >
                 <Typography
+                  variant="inherit"
                   className={classes.heading2}
                   style={{ color: "#64FF99", height: sm ? 45 : 115 }}
                 >
                   EAT
                 </Typography>
                 <Typography
+                  variant="inherit"
                   className={classes.sub_heading}
                   style={{
                     maxWidth: 390,
@@ -1063,6 +1068,7 @@ export const LandingPage = () => {
               }}
             >
               <Typography
+                variant="inherit"
                 className={classes.heading2}
                 style={{
                   color: "#FAFF00",
@@ -1071,6 +1077,7 @@ export const LandingPage = () => {
                 PAY
               </Typography>
               <Typography
+                variant="inherit"
                 className={classes.sub_heading}
                 style={{ textAlign: "left", lineHeight: "140%" }}
               >
@@ -1104,6 +1111,7 @@ export const LandingPage = () => {
                   }}
                 >
                   <Typography
+                    variant="inherit"
                     style={{
                       fontWeight: 400,
                       fontSize: md ? 20 : lg ? 24 : 28,
@@ -1114,7 +1122,7 @@ export const LandingPage = () => {
                   >
                     {item.title}
                   </Typography>
-                  <Typography className={classes.description}>
+                  <Typography variant="inherit" className={classes.description}>
                     {item.description}
                   </Typography>
                 </Box>
@@ -1204,6 +1212,7 @@ export const LandingPage = () => {
             >
               <Box style={{ width: "100%" }}>
                 <Typography
+                  variant="inherit"
                   className={classes.heading2}
                   style={{
                     color: "#FF9CFF",
@@ -1212,6 +1221,7 @@ export const LandingPage = () => {
                   PLAY
                 </Typography>
                 <Typography
+                  variant="inherit"
                   className={classes.sub_heading}
                   style={{ textAlign: "left", maxWidth: 540 }}
                 >
@@ -1282,6 +1292,7 @@ export const LandingPage = () => {
                     }}
                   />
                   <Typography
+                    variant="inherit"
                     style={{
                       fontWeight: 400,
                       fontSize: md ? 20 : lg ? 24 : 28,
@@ -1294,6 +1305,7 @@ export const LandingPage = () => {
                     {item.title}
                   </Typography>
                   <Typography
+                    variant="inherit"
                     className={classes.description}
                     style={{
                       textAlign: "center",
@@ -1653,6 +1665,7 @@ export const LandingPage = () => {
             >
               <Box style={{ width: "100%" }}>
                 <Typography
+                  variant="inherit"
                   style={{
                     fontFamily: "'Rubik'",
                     fontWeight: 900,
@@ -1664,6 +1677,7 @@ export const LandingPage = () => {
                   500,000,000
                 </Typography>
                 <Typography
+                  variant="inherit"
                   style={{
                     fontFamily: "'Rubik'",
                     fontWeight: 900,
@@ -1699,6 +1713,7 @@ export const LandingPage = () => {
                   </span>
                 </Typography>
                 <Typography
+                  variant="inherit"
                   className={classes.sub_heading}
                   style={{
                     textAlign: "left",
@@ -2070,6 +2085,7 @@ export const LandingPage = () => {
                         />
                       </Box>
                       <Typography
+                        variant="inherit"
                         style={{
                           fontFamily: "Karla",
                           fontWeight: 700,
@@ -2142,6 +2158,7 @@ export const LandingPage = () => {
                         />
                       </Box>
                       <Typography
+                        variant="inherit"
                         style={{
                           fontFamily: "Karla",
                           fontWeight: 700,
@@ -2211,6 +2228,7 @@ export const LandingPage = () => {
                         />
                       </Box>
                       <Typography
+                        variant="inherit"
                         style={{
                           fontFamily: "Karla",
                           fontWeight: 700,
@@ -2288,6 +2306,7 @@ export const LandingPage = () => {
         >
           <Box style={{ width: "100%", maxWidth: 440 }}>
             <Typography
+              variant="inherit"
               style={{
                 fontFamily: "'Rubik'",
                 fontWeight: 900,
@@ -2299,6 +2318,7 @@ export const LandingPage = () => {
               Partner with us
             </Typography>
             <Typography
+              variant="inherit"
               className={classes.sub_heading}
               style={{
                 textAlign: "left",

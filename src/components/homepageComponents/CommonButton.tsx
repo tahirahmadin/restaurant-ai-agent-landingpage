@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   btn: {
     width: "100%",
     height: "100%",
-    borderRadius: "15px",
+    borderRadius: "16px",
     fontWeight: 700,
     fontSize: "20px",
     lineHeight: "23px",
@@ -118,6 +118,7 @@ const CommonButton = ({
             ? btnBorderColor
             : "#9CC300",
           flexDirection: insufficient ? "column" : "row",
+          borderRadius: "15px",
           ...btnStyle,
         }}
         onClick={onClick}
