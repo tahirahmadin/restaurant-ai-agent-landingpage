@@ -1,12 +1,12 @@
 import React from "react";
-import ProfileCard from "./ProfileCard";
+import ProfileCard from "./homepageComponents/ProfileCard";
 import {
   profiles,
   brands,
   foodBrands,
   partners,
   chef_partners,
-} from "./data/partnersData";
+} from "./homepageComponents/data/partnersData";
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 
 const Partners = () => {
@@ -132,7 +132,7 @@ const Partners = () => {
             }}
           >
             <Typography
-              variant="inherit"
+              variant=""
               sx={{
                 textAlign: "left",
                 whiteSpace: "nowrap",
@@ -190,7 +190,7 @@ const Partners = () => {
                 />
               </svg>
               <Typography
-                variant="inherit"
+                variant=""
                 sx={{
                   textAlign: "left",
                   whiteSpace: "nowrap",
@@ -304,7 +304,7 @@ const Partners = () => {
             />
           </svg>
           <Typography
-            variant="inherit"
+            variant=""
             sx={{
               textAlign: "left",
               whiteSpace: "nowrap",
@@ -404,7 +404,7 @@ const Partners = () => {
             />
           </svg>
           <Typography
-            variant="inherit"
+            variant=""
             sx={{
               textAlign: "left",
               whiteSpace: "nowrap",
@@ -488,7 +488,7 @@ const Partners = () => {
             />
           </svg>
           <Typography
-            variant="inherit"
+            variant=""
             sx={{
               textAlign: "left",
               whiteSpace: "nowrap",
@@ -578,7 +578,7 @@ const Partners = () => {
             />
           </svg>
           <Typography
-            variant="inherit"
+            variant=""
             sx={{
               textAlign: "left",
               whiteSpace: "nowrap",

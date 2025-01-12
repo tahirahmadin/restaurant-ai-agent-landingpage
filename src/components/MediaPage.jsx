@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { mediaArticles, mediaVideos } from "./data/mediaData";
+import {
+  mediaArticles,
+  mediaVideos,
+} from "./homepageComponents/data/mediaData";
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
-import Image from "next/image";
-import Seo from "../../common-v4/Seo";
-import CommonButton from "../../common-v4/CommonButton";
+import CommonButton from "./homepageComponents/CommonButton";
 
 const MediaPage = () => {
   const theme = useTheme();
@@ -21,13 +22,6 @@ const MediaPage = () => {
 
   return (
     <div className="media">
-      <Seo
-        title="Media | Foodverse"
-        description="The Farm consists of six theme pools. Farmers can stake their $ORARE tokens on our farm to win Ingredients' NFTs as rewards. Start staking now."
-        keywords="farm, onerare farm, foodverse farm, stake in farm, nft farm, nft game, metaverse game, game nft, nft metaverse, nft blockchain, metaverse blockchain, food metaverse, foodverse, food game, nft food, metaverse food game, onerare, onerare foodverse, onerare metaverse"
-        image="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/images/farm.jpg"
-      />
-
       {/* videos */}
       <Box
         style={{
@@ -37,7 +31,7 @@ const MediaPage = () => {
           position: "relative",
         }}
       >
-        <Image
+        <img
           src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
           alt="FoodVerse"
           width={2000}
@@ -54,7 +48,7 @@ const MediaPage = () => {
             height: "50%",
           }}
         />
-        <Image
+        <img
           src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
           alt="FoodVerse"
           width={2000}
@@ -93,7 +87,7 @@ const MediaPage = () => {
               }}
             >
               <Typography
-                variant="inherit"
+                variant=""
                 sx={{
                   textAlign: "left",
                   whiteSpace: "nowrap",
@@ -150,7 +144,7 @@ const MediaPage = () => {
                   />
                 </svg>
                 <Typography
-                  variant="inherit"
+                  variant=""
                   sx={{
                     textAlign: "left",
                     whiteSpace: "nowrap",
@@ -206,7 +200,7 @@ const MediaPage = () => {
                     padding: sm ? "10px 10px 35px" : "20px 20px 60px",
                   }}
                 >
-                  <Image
+                  <img
                     src={video.thumb}
                     alt={video.platform}
                     className="media_thumb"
@@ -215,7 +209,7 @@ const MediaPage = () => {
                     style={{ minWidth: "100%" }}
                   />
                   <div>
-                    <Image
+                    <img
                       src={video.logo}
                       alt={video.platform}
                       className="media_logo"
@@ -244,7 +238,7 @@ const MediaPage = () => {
 
       {/* articles */}
       <div className="media_articles">
-        <Image
+        <img
           src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
           alt="FoodVerse"
           width={2000}
@@ -261,7 +255,7 @@ const MediaPage = () => {
             height: "50%",
           }}
         />
-        <Image
+        <img
           src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
           alt="FoodVerse"
           width={2000}
@@ -312,7 +306,7 @@ const MediaPage = () => {
               />
             </svg>
             <Typography
-              variant="inherit"
+              variant=""
               sx={{
                 textAlign: "left",
                 whiteSpace: "nowrap",
@@ -353,14 +347,14 @@ const MediaPage = () => {
           <div className="media_cards">
             {mediaArticles.slice(0, articles).map((article, i) => (
               <div className="media_card" key={i}>
-                <Image
+                <img
                   src={article.logo}
                   alt="FoodVerse Article"
                   className="article_logo"
                   width={208}
                   height={80}
                 />
-                <Image
+                <img
                   src={article.article}
                   alt="FoodVerse Article"
                   className="article_Image"
@@ -386,7 +380,7 @@ const MediaPage = () => {
 
       {/* press_kit */}
       <div className="kit_container">
-        <Image
+        <img
           src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
           alt="FoodVerse"
           width={2000}
@@ -425,7 +419,7 @@ const MediaPage = () => {
               }}
             >
               <Typography
-                variant="inherit"
+                variant=""
                 sx={{
                   textAlign: "left",
                   whiteSpace: "nowrap",
@@ -483,7 +477,7 @@ const MediaPage = () => {
                   />
                 </svg>
                 <Typography
-                  variant="inherit"
+                  variant=""
                   sx={{
                     textAlign: "left",
                     whiteSpace: "nowrap",
@@ -543,7 +537,7 @@ const MediaPage = () => {
             target="_blank"
             className="kit_1"
           >
-            <Image
+            <img
               src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/kit/kit_1.png"
               alt="FoodVerse Trailers"
               width={590}
@@ -555,7 +549,7 @@ const MediaPage = () => {
             target="_blank"
             className="kit_2"
           >
-            <Image
+            <img
               src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/kit/kit_2.png"
               alt="FoodVerse Logos"
               width={300}
@@ -567,7 +561,7 @@ const MediaPage = () => {
             target="_blank"
             className="kit_3"
           >
-            <Image
+            <img
               src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/kit/kit_3.png"
               alt="FoodVerse Blurb"
               width={300}
@@ -579,7 +573,7 @@ const MediaPage = () => {
             target="_blank"
             className="kit_4"
           >
-            <Image
+            <img
               src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/kit/kit_4.png"
               alt="FoodVerse Food DIGITAL COLLECTIBLES"
               width={300}
@@ -591,7 +585,7 @@ const MediaPage = () => {
             target="_blank"
             className="kit_5"
           >
-            <Image
+            <img
               src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/kit/kit_5.png"
               alt="FoodVerse Game Screenshots"
               width={590}
@@ -603,7 +597,7 @@ const MediaPage = () => {
             target="_blank"
             className="kit_6"
           >
-            <Image
+            <img
               src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/kit/kit_6.png"
               alt="FoodVerse Environment"
               width={300}

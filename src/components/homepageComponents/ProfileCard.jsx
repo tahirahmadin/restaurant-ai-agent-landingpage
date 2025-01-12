@@ -1,18 +1,17 @@
-import Image from "next/image";
 import React from "react";
 
 const ProfileCard = ({ redirectUrl, profile, batch, name, company }) => {
   return (
     <a href={redirectUrl} target="_blank" className="profile_card">
       <div className="profile_card_image">
-        <Image
+        <img
           src={profile}
           alt="FoodVerse"
           className="profile_card_person"
           width={100}
           height={100}
         />
-        <Image
+        <img
           src={batch}
           alt="FoodVerse"
           className="profile_card_batch"

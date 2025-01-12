@@ -1,14 +1,8 @@
 import { DemoSimulation } from "./mainComponents/DemoSimulation";
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import {
-  Button,
-  Fade,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import { Button, Fade, Typography, useMediaQuery } from "@mui/material";
+import { makeStyles, useTheme } from "@mui/styles";
 import Slider from "react-slick";
 import {
   team,
@@ -33,6 +27,7 @@ import {
   MessageCircle,
   Pizza,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -183,8 +178,7 @@ const TitleComponent = ({ title1, title2, style, titleStyle, badgeStyle }) => {
         ...style,
       }}
     >
-      <Typography
-        variant="inherit"
+      <Box
         className={classes.heading}
         style={{
           textAlign: "left",
@@ -193,7 +187,7 @@ const TitleComponent = ({ title1, title2, style, titleStyle, badgeStyle }) => {
         }}
       >
         {title1}
-      </Typography>
+      </Box>
       <Box
         style={{
           width: "100%",
@@ -226,8 +220,7 @@ const TitleComponent = ({ title1, title2, style, titleStyle, badgeStyle }) => {
             fill="#0000FF"
           />
         </svg>
-        <Typography
-          variant="inherit"
+        <Box
           className={classes.heading}
           style={{
             color: "#161810",
@@ -235,7 +228,7 @@ const TitleComponent = ({ title1, title2, style, titleStyle, badgeStyle }) => {
           }}
         >
           {title2}
-        </Typography>
+        </Box>
         <svg
           width={sm ? "22" : "31"}
           height={sm ? "23" : "32"}
@@ -255,7 +248,9 @@ const TitleComponent = ({ title1, title2, style, titleStyle, badgeStyle }) => {
 
 const ExploreCard = ({
   img,
+  imgSize,
   title,
+  sub_title,
   description1,
   description2,
   description3,
@@ -273,7 +268,7 @@ const ExploreCard = ({
       sx={{
         width: "100%",
         maxWidth: "286px",
-        height: sm ? 200 : lg ? 300 : 345,
+        height: sm ? 200 : lg ? 300 : 315,
         background:
           "linear-gradient(241.27deg, rgba(255, 255, 255, 0.08) -5.59%, rgba(255, 255, 255, 0) 100%)",
         filter: "drop-shadow(0px 8px 28px rgba(0, 0, 0, 0.25))",
@@ -297,18 +292,18 @@ const ExploreCard = ({
       <img
         src={img}
         alt="Foodverse"
-        width={sm ? 120 : 200}
-        height={sm ? 120 : 200}
+        width={imgSize}
+        height={imgSize}
         style={{
-          minWidth: sm ? 120 : 200,
-          minHeight: sm ? 120 : 200,
+          minWidth: imgSize,
+          minHeight: imgSize,
           top: sm ? -70 : -140,
           zIndex: 1,
           position: "absolute",
         }}
       />
       <Typography
-        variant="inherit"
+        variant=""
         style={{
           width: "85%",
           maxWidth: sm ? 150 : "100%",
@@ -317,14 +312,26 @@ const ExploreCard = ({
           fontSize: sm ? 20 : 32,
           lineHeight: "100%",
           textAlign: "center",
-          color: "#FF9CFF",
+          color: "#fff",
           margin: "auto auto 0",
         }}
       >
         {title}
       </Typography>
       <Typography
-        variant="inherit"
+        variant=""
+        className={classes.description}
+        style={{
+          textAlign: "center",
+          color: "#FF9CFF",
+          fontWeight: 500,
+          marginTop: "-10px",
+        }}
+      >
+        {sub_title}
+      </Typography>
+      <Typography
+        variant=""
         className={classes.description}
         style={{
           textAlign: "center",
@@ -525,61 +532,47 @@ export const LandingPage = () => {
                 zIndex: 2,
               }}
             >
-              <Box style={{ display: "flex", gap: "25px" }}>
+              <Box
+                style={{ display: "flex", gap: "35px", marginBottom: "15px" }}
+              >
                 <img
                   src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_logo.svg"
                   alt="FoodVerse Gobbl"
-                  width={md ? 140 : 260}
+                  width={md ? 140 : 240}
                   height={md ? 60 : 100}
                   style={{
                     objectFit: "contain",
                   }}
                 />
-                <Box className="banner_text" />
+                <Typography
+                  style={{
+                    fontFamily: "'Rubik'",
+                    fontWeight: 900,
+                    fontSize: "96px",
+                    lineHeight: "114px",
+                    color: "#fff",
+                    color: "#64FF99",
+                    marginTop: "-15px",
+                  }}
+                >
+                  AI
+                </Typography>
               </Box>
               <Typography
-                variant="inherit"
+                variant=""
                 style={{
                   fontWeight: 500,
                   fontSize: md ? 18 : lg ? 20 : 25,
                   lineHeight: "110%",
                   color: "#FDFFF5",
-                  maxWidth: 570,
+                  maxWidth: 480,
                   marginTop: "25px",
+                  marginBottom: sm ? "50px" : "75px",
                 }}
               >
-                Powering the Food3 revolution with real-world perks for $GOBBL
-                Holders
+                Transform your Restaurant with new employees. Introducing AI for
+                Food.
               </Typography>
-              <a
-                href="https://t.me/GobblUpBot"
-                target="_blank"
-                style={{
-                  textDecoration: "none",
-                }}
-              >
-                <CommonButton
-                  style={{
-                    maxWidth: 240,
-                    margin: md ? "35px 0 50px" : "50px 0 75px",
-                  }}
-                >
-                  START GOBBLING
-                  <Box
-                    style={{
-                      width: 25,
-                      height: 25,
-                      borderRadius: "50%",
-                      background: "#000",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Github style={{ fill: "#fff", fontSize: 16 }} />
-                  </Box>
-                </CommonButton>
-              </a>
               <StarSvg
                 size={md ? 12 : 20}
                 color="#66FF99"
@@ -715,23 +708,6 @@ export const LandingPage = () => {
           overflow: "hidden",
         }}
       >
-        <img
-          src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
-          alt="FoodVerse"
-          width={2000}
-          height={2000}
-          style={{
-            pointerEvents: "none",
-            objectFit: "cover",
-            position: "absolute",
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            width: "100%",
-            height: "100%",
-          }}
-        />
         <Box
           style={{
             width: "100%",
@@ -775,7 +751,7 @@ export const LandingPage = () => {
                   },
                   onscreen: {
                     x: -30,
-                    y: -70,
+                    y: -30,
                     transition: {
                       type: "spring",
                       bounce: 0.5,
@@ -797,7 +773,7 @@ export const LandingPage = () => {
               </motion.div>
             </motion.div>
             <img
-              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/food3_network.svg"
+              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/food_with_ai.svg"
               alt="FoodVerse"
               width={600}
               height={450}
@@ -812,21 +788,21 @@ export const LandingPage = () => {
             />
             <Box style={{ width: sm ? "100%" : "50%" }}>
               <Typography
-                variant="inherit"
+                variant=""
                 className={classes.sub_heading}
                 style={{
                   width: "100%",
-                  maxWidth: 450,
+                  maxWidth: 390,
                   textAlign: "left",
                   fontWeight: 400,
                 }}
               >
-                Gobbl is building the Food3 network to turn your digital wallet
-                into a food passport IRL.
+                Gobbl is creating essential AI infrastructure for restaurants
+                that thinks like your best manager.
                 <br />
                 <br />
-                Discover epic restaurants, pay with crypto, access VIP food
-                events, & compete in food quests. Ready to feast like a Gobblin?
+                We are replacing static systems across the board with self
+                learning systems that will reshape the modern restaurant.
               </Typography>
             </Box>
             <StarSvg style={{ top: 0, right: 0, animationDuration: "1.2s" }} />
@@ -909,7 +885,8 @@ export const LandingPage = () => {
             </motion.div>
           </motion.div>
         </Box>
-        {/* eat */}
+
+        {/* how */}
         <Box
           style={{
             width: "100%",
@@ -968,24 +945,26 @@ export const LandingPage = () => {
                   flexDirection: sm ? "column" : "row",
                 }}
               >
-                <Typography
-                  variant="inherit"
+                <Box
                   className={classes.heading2}
                   style={{ color: "#64FF99", height: sm ? 45 : 115 }}
                 >
-                  EAT
-                </Typography>
+                  HOW
+                </Box>
                 <Typography
-                  variant="inherit"
+                  variant=""
                   className={classes.sub_heading}
                   style={{
+                    fontWeight: 600,
+                    fontSize: sm ? 24 : 32,
+                    lineHeight: "100%",
                     maxWidth: 390,
                     textAlign: "left",
                   }}
                 >
-                  at the Earth's most coveted tables:
+                  does AI make your
                   <br />
-                  from rising chefs to Michelin stars
+                  restaurant <span style={{ color: "#FF9CFF" }}>better?</span>
                 </Typography>
               </Box>
               <Box
@@ -996,10 +975,11 @@ export const LandingPage = () => {
                 }}
               >
                 <img
-                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/frenchFries.png"
+                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/how_ai.webp"
                   alt="FoodVerse"
                   width={1440}
                   height={517}
+                  loading="eager"
                   style={{
                     pointerEvents: "none",
                     userSelect: "none",
@@ -1011,12 +991,13 @@ export const LandingPage = () => {
         </Box>
       </Box>
 
-      {/* enter_foodverse */}
+      {/* the ai_agent */}
       <Box
         style={{
           width: "100%",
           height: "100%",
           background: "#000",
+          padding: md ? (sm ? "50px 5%" : "75px 5%") : "7%",
           position: "relative",
           zIndex: 2,
           overflow: "hidden",
@@ -1042,296 +1023,114 @@ export const LandingPage = () => {
         <Box
           style={{
             width: "100%",
+            maxWidth: "1440px",
+            margin: "0 auto",
+            // minHeight: "100vh",
             height: "100%",
             position: "relative",
-            padding: md ? (sm ? "50px 5%" : "75px 5%") : "7% 7% 7%",
           }}
         >
           <Box
             style={{
               width: "100%",
-              maxWidth: "1440px",
-              margin: "0 auto",
-              position: "relative",
               display: "flex",
-              alignItems: "flex-start",
-              gap: sm ? "25px" : "60px",
-              flexDirection: sm ? "column" : "row",
+              alignItems: sm ? "flex-start" : "center",
+              justifyContent: "space-between",
+              flexDirection: sm ? "column" : "row-reverse",
+              gap: "10px",
+              position: "relative",
             }}
           >
-            <Box
-              style={{
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                gap: "15px",
+            <TitleComponent
+              title1="The AI"
+              title2="Agents"
+              style={{ alignItems: sm ? "flex-start" : "flex-end" }}
+              titleStyle={{
+                paddingRight: !sm && "15px",
+                paddingLeft: sm && "25px",
               }}
-            >
-              <Typography
-                variant="inherit"
-                className={classes.heading2}
-                style={{
-                  color: "#FAFF00",
-                }}
-              >
-                PAY
-              </Typography>
-              <Typography
-                variant="inherit"
-                className={classes.sub_heading}
-                style={{ textAlign: "left", lineHeight: "140%" }}
-              >
-                with GOBBL PAY- the {!md && <br />}
-                future of restaurant {!md && <br />}
-                payments
-              </Typography>
-            </Box>
-            <Box
-              style={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                gap: md ? "10px" : "25px",
-              }}
-            >
-              {payData.map((item, i) => (
-                <Box
-                  key={i}
-                  style={{
-                    width: "100%",
-                    height: md ? 90 : lg ? 100 : 115,
-                    background: "#000000",
-                    border: "1px solid rgba(255, 255, 255, 0.5)",
-                    boxShadow: "0px 11px 11px rgba(0, 0, 0, 0.55)",
-                    borderRadius: md ? "18px" : "25px",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    padding: lg ? "15px" : "25px",
-                  }}
-                >
-                  <Typography
-                    variant="inherit"
-                    style={{
-                      fontWeight: 400,
-                      fontSize: md ? 20 : lg ? 24 : 28,
-                      textTransform: "uppercase",
-                      lineHeight: "140%",
-                      color: "#FAFF00",
-                    }}
-                  >
-                    {item.title}
-                  </Typography>
-                  <Typography variant="inherit" className={classes.description}>
-                    {item.description}
-                  </Typography>
-                </Box>
-              ))}
-            </Box>
-            <StarSvg
-              style={{
-                top: "-20%",
-                left: "0%",
-                animationDuration: "1.2s",
+              badgeStyle={{
+                transform: sm ? "rotate(-5.5deg)" : "rotate(7deg)",
+                marginTop: sm ? "-5px" : "-15px",
+                zIndex: 1,
               }}
             />
+            <Typography
+              variant=""
+              className={classes.sub_heading}
+              style={{ maxWidth: 460, textAlign: "left", fontWeight: 400 }}
+            >
+              AI powered Agents are set to take over from static systems.
+              Creating restaurants that think, learn, and grow smarter every
+              day.
+            </Typography>
           </Box>
-          {!md && (
-            <img
-              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/pay_gobbl.png"
-              style={{
-                width: 700,
-                height: 320,
-                objectFit: "contain",
-                maxWidth: "50%",
-                position: "absolute",
-                left: "-2.5%",
-                bottom: "-8%",
-              }}
-            />
-          )}
-        </Box>
-      </Box>
-
-      {/* experience */}
-      <Box
-        style={{
-          width: "100%",
-          height: "100%",
-          background: "#161810",
-          position: "relative",
-          zIndex: 2,
-          overflow: "hidden",
-        }}
-      >
-        <img
-          src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
-          alt="FoodVerse"
-          width={2000}
-          height={2000}
-          style={{
-            pointerEvents: "none",
-            objectFit: "cover",
-            position: "absolute",
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            width: "100%",
-            height: "100%",
-          }}
-        />
-        <Box
-          style={{
-            width: "100%",
-            height: "100%",
-            position: "relative",
-            padding: md ? (sm ? "50px 5%" : "75px 5%") : "7% 7% 7%",
-          }}
-        >
           <Box
             style={{
               width: "100%",
-              maxWidth: "1440px",
-              margin: "0 auto",
-              position: "relative",
-              display: "flex",
-              flexDirection: "column",
-              gap: sm ? "5px" : "75px",
+              display: "grid",
+              gridTemplateColumns: lg ? "1fr 1fr" : "1fr 1fr 1fr 1fr",
+              placeItems: "center",
+              gap: "10px",
+              rowGap: lg ? (sm ? "85px" : "120px") : "20px",
+              paddingTop: md ? 90 : "12%",
             }}
           >
-            <Box
-              style={{
-                width: "100%",
-                display: "flex",
-                alignItems: md ? "flex-start" : "flex-end",
-                justifyContent: "space-between",
-                flexDirection: md ? "column" : "row",
-                gap: md ? "10px" : "25px",
-              }}
-            >
-              <Box style={{ width: "100%" }}>
-                <Typography
-                  variant="inherit"
-                  className={classes.heading2}
-                  style={{
-                    color: "#FF9CFF",
-                  }}
-                >
-                  PLAY
-                </Typography>
-                <Typography
-                  variant="inherit"
-                  className={classes.sub_heading}
-                  style={{ textAlign: "left", maxWidth: 540 }}
-                >
-                  Next-gen Web3 adventures. Join millions of gamers to compete
-                  for virtual glory & real rewards!
-                </Typography>
-              </Box>
-              <a
-                href="https://t.me/GobblUpBot"
-                target="_blank"
-                style={{
-                  textDecoration: "none",
-                  width: "100%",
-                  maxWidth: md ? 220 : 300,
-                }}
-              >
-                <CommonButton style={{ maxWidth: 300 }}>
-                  START PLAYING
-                  <Box
-                    style={{
-                      width: 25,
-                      height: 25,
-                      borderRadius: "50%",
-                      background: "#000",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <MessageCircle style={{ fill: "#fff", fontSize: 16 }} />
-                  </Box>
-                </CommonButton>
-              </a>
-            </Box>
-            <Box
-              style={{
-                width: "100%",
-                position: "relative",
-                display: sm ? "grid" : "flex",
-                gridTemplateColumns: "1fr 1fr",
-                gap: md ? "10px" : "25px",
-                paddingTop: "25px",
-              }}
-            >
-              {playData.map((item, i) => (
-                <Box
-                  key={i}
-                  style={{
-                    width: "100%",
-                    background: "#000000",
-                    border: "1px solid rgba(255, 255, 255, 0.5)",
-                    boxShadow: "0px 11px 11px rgba(0, 0, 0, 0.55)",
-                    borderRadius: md ? "16px" : "25px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    padding: lg ? (sm ? "10px" : "15px") : "25px",
-                  }}
-                >
-                  <img
-                    src={`https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/play${
-                      i + 1
-                    }.png`}
-                    style={{
-                      width: "100%",
-                      objectFit: "contain",
-                      marginBottom: "15px",
-                    }}
-                  />
-                  <Typography
-                    variant="inherit"
-                    style={{
-                      fontWeight: 400,
-                      fontSize: md ? 20 : lg ? 24 : 28,
-                      textTransform: "uppercase",
-                      lineHeight: "140%",
-                      color: "#FF9CFF",
-                      textAlign: "center",
-                    }}
-                  >
-                    {item.title}
-                  </Typography>
-                  <Typography
-                    variant="inherit"
-                    className={classes.description}
-                    style={{
-                      textAlign: "center",
-                      maxWidth: md ? "100%" : 210,
-                    }}
-                  >
-                    {item.description}
-                  </Typography>
-                </Box>
-              ))}
-            </Box>
+            <ExploreCard
+              img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/roadmap1.png"
+              imgSize={sm ? 105 : 170}
+              title="ORDER"
+              sub_title="Intuitive food ordering"
+              description1="Deploy self-learning"
+              description2="voice & chat agents to"
+              description3="accept orders using"
+              description4="natural language"
+            />
+            <ExploreCard
+              img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap2.png"
+              imgSize={sm ? 120 : 200}
+              title="OPERATE"
+              sub_title="Kitchen AI Cockpit"
+              description1="Transform backend ops"
+              description2="into a synchronized dance"
+              description3="of preparation, cooking,"
+              description4="and dispatch"
+            />
+            <ExploreCard
+              img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap3.png"
+              imgSize={sm ? 120 : 200}
+              title="DELIVER"
+              sub_title="Managing the last mile"
+              description1="Slash delivery costs with"
+              description2="AI-powered route"
+              description3="optimization that learns"
+              description4="and adapts in real-time"
+            />
+            <ExploreCard
+              img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap4.png"
+              imgSize={sm ? 120 : 200}
+              title="INTEGRATE"
+              sub_title="with partner systems"
+              description1="Connect to any platform,"
+              description2="anywhere, through"
+              description3="intelligent APIs that speak"
+              description4="every system's language"
+            />
           </Box>
+          <Box
+            style={{
+              position: "absolute",
+              width: lg ? (sm ? 160 : 250) : 318,
+              height: lg ? (sm ? 160 : 250) : 318,
+              right: "-25%",
+              bottom: "-20%",
+              background: "#40FFF4",
+              opacity: 0.6,
+              filter: "blur(212px)",
+            }}
+          />
         </Box>
       </Box>
-
-      {/* Demo Section */}
-      <section id="demo" className="py-8">
-        <div className="max-w-[1800px] mx-auto px-4">
-          <h2 className="text-3xl font-bold text-white mb-8 text-center">
-            Interactive Demo
-          </h2>
-          <div className="h-[500px] bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800 overflow-hidden">
-            <DemoSimulation />
-          </div>
-        </div>
-      </section>
 
       {/* meet_gobbl */}
       <Box
@@ -1416,17 +1215,17 @@ export const LandingPage = () => {
                 }}
               />
               <Typography
-                variant="inherit"
+                variant=""
                 className={classes.sub_heading}
                 style={{
-                  maxWidth: 580,
+                  maxWidth: 540,
                   textAlign: "left",
                   fontWeight: 400,
                   marginTop: sm ? "-25px" : "35px",
                 }}
               >
-                The powerhouse token fueling the future of Food x Web3. Stake,
-                play, feast and earn – all in one revolutionary ecosystem!
+                Building a decentralized ecosystem where network value is
+                distributed to those who fuel its growth
               </Typography>
             </Box>
             <Box
@@ -1439,15 +1238,16 @@ export const LandingPage = () => {
               }}
             >
               <img
-                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/tokenomics.png"
+                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/meet_gobbl.webp"
                 alt="FoodVerse"
                 width={1150}
                 height={600}
+                loading="eager"
               />
               {/* )} */}
             </Box>
             <img
-              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.png"
+              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
               alt="FoodVerse"
               width={sm ? 36 : 72}
               height={sm ? 36 : 72}
@@ -1455,10 +1255,11 @@ export const LandingPage = () => {
               style={{
                 top: sm ? "10%" : "20%",
                 right: sm ? "10%" : "15%",
+                animation: "zoom_rotate 2.2s ease-in-out infinite 0.5s",
               }}
             />
             <img
-              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.png"
+              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
               alt="FoodVerse"
               width={sm ? 28 : 56}
               height={sm ? 28 : 56}
@@ -1467,11 +1268,12 @@ export const LandingPage = () => {
                 opacity: 0.2,
                 top: "-5%",
                 left: "18%",
+                animation: "zoom_rotate 2.2s ease-in-out infinite 1s",
               }}
             />
             {!sm && (
               <img
-                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.png"
+                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
                 alt="FoodVerse"
                 width={96}
                 height={96}
@@ -1480,12 +1282,13 @@ export const LandingPage = () => {
                   opacity: 0.6,
                   top: "18%",
                   left: "-3%",
+                  animation: "zoom_rotate 2.2s ease-in-out infinite 1.5s",
                 }}
               />
             )}
             {!sm && (
               <img
-                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.png"
+                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
                 alt="FoodVerse"
                 width={72}
                 height={72}
@@ -1494,11 +1297,12 @@ export const LandingPage = () => {
                   opacity: 0.4,
                   bottom: "-15%",
                   left: "12%",
+                  animation: "zoom_rotate 2.2s ease-in-out infinite 2s",
                 }}
               />
             )}
             <img
-              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.png"
+              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
               alt="FoodVerse"
               width={sm ? 28 : 56}
               height={sm ? 28 : 56}
@@ -1507,10 +1311,11 @@ export const LandingPage = () => {
                 opacity: 0.2,
                 bottom: "-5%",
                 left: sm ? "-5%" : "32%",
+                animation: "zoom_rotate 2.2s ease-in-out infinite 2.5s",
               }}
             />
             <img
-              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.png"
+              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
               alt="FoodVerse"
               width={sm ? 48 : 96}
               height={sm ? 48 : 96}
@@ -1519,11 +1324,12 @@ export const LandingPage = () => {
                 opacity: 0.6,
                 bottom: "-15%",
                 right: 0,
+                animation: "zoom_rotate 2.2s ease-in-out infinite 3s",
               }}
             />
             {!sm && (
               <img
-                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.png"
+                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
                 alt="FoodVerse"
                 width={56}
                 height={56}
@@ -1532,6 +1338,7 @@ export const LandingPage = () => {
                   opacity: 0.2,
                   top: "40%",
                   right: "0%",
+                  animation: "zoom_rotate 2.2s ease-in-out infinite 3.5s",
                 }}
               />
             )}
@@ -1549,313 +1356,6 @@ export const LandingPage = () => {
             />
           </Box>
         </Box>
-        {/* slider */}
-        <Box
-          style={{
-            width: "100%",
-            height: md ? (sm ? 32 : 46) : 66,
-            background: "#5438D3",
-            position: "relative",
-            zIndex: 2,
-            pointerEvents: "none",
-          }}
-        >
-          <img
-            src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
-            alt="FoodVerse"
-            width={1440}
-            height={md ? (sm ? 32 : 46) : 66}
-            style={{
-              objectFit: "cover",
-              position: "absolute",
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              width: "100%",
-              height: "100%",
-              zIndex: 3,
-            }}
-          />
-          <Box
-            style={{
-              width: "100%",
-              // maxWidth: "1440px",
-              // margin: "0 auto",
-              height: "100%",
-              overflow: "hidden",
-              position: "relative",
-              zIndex: 4,
-            }}
-          >
-            <Box
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                padding: md ? "10px 0" : "15px 0",
-                overflow: "visible",
-              }}
-              className="home_slider"
-            >
-              {[...Array(20)]?.map((emoji, i) => (
-                <Box
-                  key={i}
-                  style={{
-                    minWidth: "100%",
-                    fontFamily: "'Rubik'",
-                    fontWeight: 900,
-                    fontSize: md ? (sm ? 17 : 24) : 30,
-                    color: "#FF9CFF",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: md ? "25px" : "50px",
-                    whiteSpace: "nowrap",
-                    fontFamily: "'Rubik'",
-                    fontWeight: 900,
-                    background:
-                      "linear-gradient(254.51deg, #D1FF19 5.63%, #66FF99 62.41%, #0000FF 116.96%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                    textFillColor: "transparent",
-                  }}
-                >
-                  <span>AIRDROP LIVE</span> <span>AIRDROP LIVE</span>
-                  <span>AIRDROP LIVE</span> <span>AIRDROP LIVE</span>
-                  {!lg && <span>AIRDROP LIVE</span>}
-                </Box>
-              ))}
-            </Box>
-          </Box>
-        </Box>
-        <Box
-          style={{
-            width: "100%",
-            height: "100%",
-            padding: md ? (sm ? "50px 5%" : "75px 5%") : "7%",
-            position: "relative",
-            zIndex: 2,
-            background:
-              "linear-gradient(254.51deg, #00CCCC 5.63%, #009999 61.19%, #6666FF 116.96%)",
-          }}
-        >
-          <Box
-            style={{
-              width: "100%",
-              maxWidth: "1440px",
-              margin: "0 auto",
-              // minHeight: "100vh",
-              height: "100%",
-              position: "relative",
-            }}
-          >
-            <Box
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: sm ? "column" : "row",
-                gap: md && "15px",
-              }}
-            >
-              <Box style={{ width: "100%" }}>
-                <Typography
-                  variant="inherit"
-                  style={{
-                    fontFamily: "'Rubik'",
-                    fontWeight: 900,
-                    fontSize: md ? 48 : lg ? 60 : 80,
-                    lineHeight: "120%",
-                    color: "#64FF99",
-                  }}
-                >
-                  500,000,000
-                </Typography>
-                <Typography
-                  variant="inherit"
-                  style={{
-                    fontFamily: "'Rubik'",
-                    fontWeight: 900,
-                    fontSize: md ? 28 : lg ? 36 : 50,
-                    lineHeight: "100%",
-                    color: "#FDFFF5",
-                    display: "flex",
-                    gap: md ? "3px" : "7px",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  $GOBBL AIRDROP
-                  <span
-                    style={{
-                      width: md ? 80 : lg ? 100 : 125,
-                      height: md ? 36 : lg ? 48 : 62,
-                      fontFamily: "'Rubik'",
-                      fontWeight: 900,
-                      fontSize: md ? 20 : lg ? 32 : 40,
-                      textAlign: "center",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: "#FFFFFF",
-                      background: "#ff181a",
-                      borderRadius: md ? "8px" : lg ? "12px" : "16px",
-                      transform: "rotate(-10deg)",
-                      marginTop: md ? "-15px" : lg ? "-18px" : "-22px",
-                      zIndex: -1,
-                    }}
-                  >
-                    LIVE
-                  </span>
-                </Typography>
-                <Typography
-                  variant="inherit"
-                  className={classes.sub_heading}
-                  style={{
-                    textAlign: "left",
-                    opacity: 0.8,
-                    marginTop: sm ? "15px" : "50px",
-                  }}
-                >
-                  Don't Just Eat the Food - Own the Network.
-                  <br />
-                  <br />
-                  We're airdropping 500M $GOBBL - 5% of our total supply - to
-                  early Gobblins. Game and claim your slice of the future!
-                </Typography>
-                <a href="/airdrop/tasks" style={{ textDecoration: "none" }}>
-                  <CommonButton
-                    style={{
-                      height: md ? 50 : 60,
-                      maxWidth: 560,
-                      marginTop: md ? "25px" : "35px",
-                    }}
-                    btnStyle={{
-                      fontSize: md ? 24 : 30,
-                      borderRadius: md ? "16px" : "20px",
-                    }}
-                    btnBgStyle={{ borderRadius: md ? "16px" : "20px" }}
-                  >
-                    JOIN $GOBBL AIRDROP
-                  </CommonButton>
-                </a>
-              </Box>
-              <Box
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <motion.div
-                  initial="offscreen"
-                  whileInView="onscreen"
-                  viewport={{ once: true, amount: 1 }}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    zIndex: 1,
-                    marginTop: sm ? "15px" : 0,
-                  }}
-                >
-                  <motion.div
-                    variants={{
-                      offscreen: {
-                        y: 200,
-                      },
-                      onscreen: {
-                        y: 0,
-                        transition: {
-                          type: "spring",
-                          bounce: 0.5,
-                          duration: 1.5,
-                        },
-                      },
-                    }}
-                  >
-                    <motion.div
-                      initial={{
-                        rotate: -5,
-                      }}
-                      animate={{
-                        rotate: 0,
-                      }}
-                      transition={{
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                        type: "spring",
-                        bounce: 0.65,
-                        duration: 1.5,
-                      }}
-                    >
-                      <img
-                        src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/gobbl_winner.png"
-                        alt="FoodVerse"
-                        width={sm ? 300 : 420}
-                        height={sm ? 300 : 420}
-                      />
-                    </motion.div>
-                  </motion.div>
-                </motion.div>
-              </Box>
-            </Box>
-            <motion.div
-              initial="offscreen"
-              whileInView="onscreen"
-              viewport={{ once: true, amount: 0.8 }}
-              style={{
-                position: "absolute",
-                top: sm ? -135 : -320,
-                left: sm ? -15 : -100,
-                zIndex: 5,
-              }}
-            >
-              <motion.div
-                variants={{
-                  offscreen: {
-                    x: -350,
-                    y: 100,
-                  },
-                  onscreen: {
-                    x: 0,
-                    y: 0,
-                    transition: {
-                      type: "spring",
-                      bounce: 0.5,
-                      duration: 1.5,
-                    },
-                  },
-                }}
-              >
-                <img
-                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/launching_soon.svg"
-                  alt="FoodVerse"
-                  width={sm ? 150 : 350}
-                  height={sm ? 150 : 350}
-                  style={{
-                    pointerEvents: "none",
-                  }}
-                />
-              </motion.div>
-            </motion.div>
-          </Box>
-          <Box
-            style={{
-              width: "634px",
-              height: md ? 150 : 300,
-              background: "#5438D3",
-              position: "absolute",
-              bottom: md ? "-16%" : lg ? "-35%" : "-27%",
-              left: "50%",
-              transform: "rotate(-15deg)",
-              width: "100%",
-            }}
-          />
-        </Box>
       </Box>
 
       {/* food_partners */}
@@ -1863,7 +1363,7 @@ export const LandingPage = () => {
         style={{
           width: "100%",
           height: "100%",
-          background: "#161810",
+          background: "#000",
           position: "relative",
           zIndex: 2,
         }}
@@ -1934,7 +1434,7 @@ export const LandingPage = () => {
               }}
             >
               <Typography
-                variant="inherit"
+                variant=""
                 className={classes.sub_heading}
                 style={{
                   maxWidth: 420,
@@ -1942,11 +1442,7 @@ export const LandingPage = () => {
                   fontWeight: 400,
                   marginBottom: sm ? "15px" : 0,
                 }}
-              >
-                Bringing the finest to your table- {!sm && <br />}
-                from top brands to celebrity chefs, {!sm && <br />}
-                it’s all happening in the Foodverse.
-              </Typography>
+              ></Typography>
               <TitleComponent
                 title1="Food"
                 title2="Partners"
@@ -1982,7 +1478,7 @@ export const LandingPage = () => {
                   style={{
                     width: "100%",
                     height: "100%",
-                    background: "#2B2D25",
+                    background: "#000",
                     borderRadius: sm ? "12px" : "16px",
                     display: "flex",
                     alignItems: "center",
@@ -1992,8 +1488,20 @@ export const LandingPage = () => {
                   }}
                 >
                   <Button
-                    className={classes.tab}
                     style={{
+                      fontFamily: "Rubik",
+                      fontSize: 20,
+                      textAlign: "center",
+                      boxSizing: "border-box",
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      padding: "10px 20px",
+                      gap: "8px",
+                      width: "max-content",
+                      height: "52px",
+                      borderRadius: "16px",
                       fontWeight: tab === 1 ? 800 : 600,
                       opacity: tab === 1 ? 1 : 0.56,
                       background: tab === 1 ? "#D1FF19" : "transparent",
@@ -2004,8 +1512,19 @@ export const LandingPage = () => {
                     BRANDS
                   </Button>
                   <Button
-                    className={classes.tab}
                     style={{
+                      fontFamily: "Rubik",
+                      fontSize: 20,
+                      textAlign: "center",
+                      boxSizing: "border-box",
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      padding: "10px 20px",
+                      gap: "8px",
+                      width: "max-content",
+                      borderRadius: "16px",
                       fontWeight: tab === 2 ? 800 : 600,
                       opacity: tab === 2 ? 1 : 0.56,
                       background: tab === 2 ? "#D1FF19" : "transparent",
@@ -2016,8 +1535,19 @@ export const LandingPage = () => {
                     CHEFS
                   </Button>
                   <Button
-                    className={classes.tab}
                     style={{
+                      fontFamily: "Rubik",
+                      fontSize: 20,
+                      textAlign: "center",
+                      boxSizing: "border-box",
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      padding: "10px 20px",
+                      gap: "8px",
+                      width: "max-content",
+                      borderRadius: "16px",
                       fontWeight: tab === 3 ? 800 : 600,
                       opacity: tab === 3 ? 1 : 0.56,
                       background: tab === 3 ? "#D1FF19" : "transparent",
@@ -2027,17 +1557,29 @@ export const LandingPage = () => {
                   >
                     RESTAURANTS
                   </Button>
-                  <Button
-                    className={classes.tab}
-                    style={{
-                      opacity: 0.56,
-                      background: "transparent",
-                      color: "#FDFFF5",
-                    }}
-                    onClick={() => push("/partners")}
-                  >
-                    VIEW ALL
-                  </Button>
+                  <Link to="/partners">
+                    <Button
+                      style={{
+                        fontFamily: "Rubik",
+                        fontSize: 20,
+                        textAlign: "center",
+                        boxSizing: "border-box",
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        padding: "10px 20px",
+                        gap: "8px",
+                        width: "max-content",
+                        borderRadius: "16px",
+                        opacity: 0.56,
+                        background: "transparent",
+                        color: "#FDFFF5",
+                      }}
+                    >
+                      VIEW ALL
+                    </Button>
+                  </Link>
                 </Box>
               </Box>
 
@@ -2085,7 +1627,7 @@ export const LandingPage = () => {
                         />
                       </Box>
                       <Typography
-                        variant="inherit"
+                        variant=""
                         style={{
                           fontFamily: "Karla",
                           fontWeight: 700,
@@ -2158,7 +1700,7 @@ export const LandingPage = () => {
                         />
                       </Box>
                       <Typography
-                        variant="inherit"
+                        variant=""
                         style={{
                           fontFamily: "Karla",
                           fontWeight: 700,
@@ -2228,7 +1770,7 @@ export const LandingPage = () => {
                         />
                       </Box>
                       <Typography
-                        variant="inherit"
+                        variant=""
                         style={{
                           fontFamily: "Karla",
                           fontWeight: 700,
@@ -2259,277 +1801,12 @@ export const LandingPage = () => {
         </Box>
       </Box>
 
-      {/* partner_with_us */}
+      {/* meet_foodies */}
       <Box
         style={{
           width: "100%",
           height: "100%",
-          background:
-            "linear-gradient(257.44deg, #2B2982 12.7%, #6666FF 94.07%)",
-          padding: md ? (sm ? "50px 5%" : "75px 5%") : "7%",
-          position: "relative",
-          zIndex: 2,
-          overflow: "hidden",
-        }}
-      >
-        <img
-          src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
-          alt="FoodVerse"
-          width={2000}
-          height={2000}
-          style={{
-            pointerEvents: "none",
-            objectFit: "cover",
-            position: "absolute",
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            width: "100%",
-            height: "100%",
-          }}
-        />
-        <Box
-          style={{
-            width: "100%",
-            maxWidth: "1440px",
-            margin: "0 auto",
-            // minHeight: "100vh",
-            height: "100%",
-            position: "relative",
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "space-between",
-            flexDirection: sm ? "column" : "row",
-            gap: sm ? "50px" : "25px",
-          }}
-        >
-          <Box style={{ width: "100%", maxWidth: 440 }}>
-            <Typography
-              variant="inherit"
-              style={{
-                fontFamily: "'Rubik'",
-                fontWeight: 900,
-                fontSize: sm ? 40 : 50,
-                lineHeight: "90%",
-                color: "#FFFFFF",
-              }}
-            >
-              Partner with us
-            </Typography>
-            <Typography
-              variant="inherit"
-              className={classes.sub_heading}
-              style={{
-                textAlign: "left",
-                marginTop: sm ? "15px" : "25px",
-                maxWidth: 400,
-              }}
-            >
-              Wake up and smell the coffee! Secure alpha access to our
-              Restaurants program and launch co-marketing initiatives
-            </Typography>
-          </Box>
-          <Box
-            style={{
-              width: "100%",
-              display: "flex",
-              alignItems: sm ? "center" : "flex-end",
-              justifyContent: sm ? "center" : "flex-end",
-              flexDirection: sm ? "column" : "row",
-              gap: sm ? "50px" : "5%",
-            }}
-          >
-            <Box
-              style={{
-                width: "200px",
-                height: "137px",
-                background: "rgba(65, 65, 65, 0.5)",
-                border: "1px solid #FFFFFF",
-                boxShadow: "0px 11px 11px rgba(0, 0, 0, 0.25)",
-                borderRadius: "20px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-                flexDirection: "column",
-                gap: "10px",
-                padding: "0 15px 15px",
-              }}
-            >
-              <img
-                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/partnership1.png"
-                width={110}
-                height={110}
-                style={{ marginTop: "-55px" }}
-              />
-              <Box
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-end",
-                  gap: "10px",
-                  fontWeight: 700,
-                  fontSize: "22px",
-                  lineHeight: "110%",
-                  color: "#64FF99",
-                }}
-              >
-                F&B
-                <br />
-                BRANDS
-                <a
-                  target="_blank"
-                  href="https://docs.google.com/forms/d/e/1FAIpQLScASnfjyROzWDHa_XH9-XA86wH7GCIhf6tZRRdaYeTssEseBg/viewform"
-                >
-                  <ArrowRightIcon
-                    style={{
-                      width: 32,
-                      height: 32,
-                      cursor: "pointer",
-                      border: "1px solid #fff",
-                      borderRadius: "50%",
-                      color: "#fff",
-                      background:
-                        "linear-gradient(241.27deg, rgba(255, 255, 255, 0.08) -5.59%, rgba(255, 255, 255, 0) 100%)",
-                      filter: "drop-shadow(0px 8px 28px rgba(0, 0, 0, 0.25))",
-                      borderRadius: "24px",
-                      color: "#64FF99",
-                    }}
-                  />
-                </a>
-              </Box>
-            </Box>
-            <Box
-              style={{
-                width: "200px",
-                height: "137px",
-                background: "rgba(65, 65, 65, 0.5)",
-                border: "1px solid #FFFFFF",
-                boxShadow: "0px 11px 11px rgba(0, 0, 0, 0.25)",
-                borderRadius: "20px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-                flexDirection: "column",
-                gap: "10px",
-                padding: "0 15px 15px",
-              }}
-            >
-              <img
-                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/partnership2.png"
-                width={110}
-                height={110}
-                style={{ marginTop: "-55px" }}
-              />
-              <Box
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-end",
-                  gap: "10px",
-                  fontWeight: 700,
-                  fontSize: "22px",
-                  lineHeight: "110%",
-                  color: "#64FF99",
-                }}
-              >
-                WEB3
-                <br />
-                BUILDERS
-                <a
-                  target="_blank"
-                  href="https://docs.google.com/forms/d/e/1FAIpQLSf39AlUa_YSAc31G0F-qeVCegzcwwt7IyMy06fWsg8c0hCgnA/viewform"
-                >
-                  <ArrowRightIcon
-                    style={{
-                      width: 32,
-                      height: 32,
-                      cursor: "pointer",
-                      border: "1px solid #fff",
-                      borderRadius: "50%",
-                      color: "#fff",
-                      background:
-                        "linear-gradient(241.27deg, rgba(255, 255, 255, 0.08) -5.59%, rgba(255, 255, 255, 0) 100%)",
-                      filter: "drop-shadow(0px 8px 28px rgba(0, 0, 0, 0.25))",
-                      borderRadius: "24px",
-                      color: "#64FF99",
-                    }}
-                  />
-                </a>
-              </Box>
-            </Box>
-            <Box
-              style={{
-                width: "200px",
-                height: "137px",
-                background: "rgba(65, 65, 65, 0.5)",
-                border: "1px solid #FFFFFF",
-                boxShadow: "0px 11px 11px rgba(0, 0, 0, 0.25)",
-                borderRadius: "20px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-                flexDirection: "column",
-                gap: "10px",
-                padding: "0 15px 15px",
-              }}
-            >
-              <img
-                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/partnership3.png"
-                width={110}
-                height={110}
-                style={{ marginTop: "-55px" }}
-              />
-              <Box
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-end",
-                  gap: "10px",
-                  fontWeight: 700,
-                  fontSize: "22px",
-                  lineHeight: "110%",
-                  color: "#64FF99",
-                }}
-              >
-                CONTENT
-                <br />
-                CREATORS
-                <a
-                  target="_blank"
-                  href="https://docs.google.com/forms/d/e/1FAIpQLSfocL524iwGkqC4VyGdosdHEQWZvurMJeP5Uu3lc5XEt3cwVg/viewform"
-                >
-                  <ArrowRightIcon
-                    style={{
-                      width: 32,
-                      height: 32,
-                      cursor: "pointer",
-                      border: "1px solid #fff",
-                      borderRadius: "50%",
-                      color: "#fff",
-                      background:
-                        "linear-gradient(241.27deg, rgba(255, 255, 255, 0.08) -5.59%, rgba(255, 255, 255, 0) 100%)",
-                      filter: "drop-shadow(0px 8px 28px rgba(0, 0, 0, 0.25))",
-                      borderRadius: "24px",
-                      color: "#64FF99",
-                    }}
-                  />
-                </a>
-              </Box>
-            </Box>
-          </Box>
-        </Box>
-      </Box>
-
-      {/* project_roadmap */}
-      <Box
-        style={{
-          width: "100%",
-          height: "100%",
-          background: "#000",
+          background: "#161810",
           padding: md ? (sm ? "50px 5%" : "75px 5%") : "7%",
           position: "relative",
           zIndex: 2,
@@ -2569,90 +1846,421 @@ export const LandingPage = () => {
               display: "flex",
               alignItems: sm ? "flex-start" : "center",
               justifyContent: "space-between",
-              flexDirection: sm ? "column" : "row-reverse",
+              flexDirection: sm ? "column" : "row",
               gap: "10px",
               position: "relative",
             }}
           >
             <TitleComponent
-              title1="Future"
-              title2="Roadmap"
-              style={{ alignItems: sm ? "flex-start" : "flex-end" }}
+              title1="Meet the"
+              title2="Foodies"
               titleStyle={{
-                paddingRight: !sm && "15px",
                 paddingLeft: sm && "25px",
               }}
               badgeStyle={{
-                transform: sm ? "rotate(-5.5deg)" : "rotate(7deg)",
-                marginTop: sm ? "-5px" : "-15px",
+                transform: sm ? "rotate(-5.5deg)" : "rotate(-6deg)",
+                marginTop: sm ? "-2px" : "-8px",
+                marginLeft: lg ? "0%" : "5%",
                 zIndex: 1,
               }}
             />
             <Typography
-              variant="inherit"
+              variant=""
               className={classes.sub_heading}
-              style={{ maxWidth: 460, textAlign: "left", fontWeight: 400 }}
+              style={{ maxWidth: 500, textAlign: "left", fontWeight: 400 }}
             >
-              Our first course of features is now served. The secret sauce is
-              still brewing. Hope you saved room—the feast is just beginning!
+              Gobbl is powered by 30+ Web3 Buidlers, Designers & Marketers on
+              one mission: to revolutionize food through blockchain.
             </Typography>
           </Box>
           <Box
             style={{
               width: "100%",
-              display: "grid",
-              gridTemplateColumns: lg ? "1fr 1fr" : "1fr 1fr 1fr 1fr",
-              placeItems: "center",
-              gap: "10px",
-              rowGap: lg ? (sm ? "85px" : "120px") : "20px",
-              paddingTop: md ? 90 : "10%",
+              position: "relative",
+              display: "flex",
+              justifyContent: "center",
+              // flexDirection: sm ? "column" : "row",
+              alignItems: "center",
+              gap: sm ? "10px" : "75px",
+              padding: md ? "50px 0" : "5%",
             }}
           >
-            <ExploreCard
-              img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap1.png"
-              title="LIVE ON TELEGRAM"
-              description1="Gobbl UP App"
-              description2="Dish Collectibles"
-              description3="Game Launches"
-              description4="Referral System"
+            <Box
+              style={{
+                position: "relative",
+                width: md ? 185 : 260,
+                height: md ? 248 : 367,
+                padding: md ? "10px 5px 5px" : "25px 15px 15px",
+                borderRadius: md ? "16px" : "24px",
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "column",
+                justifyContent: "center",
+                gap: md ? "5px" : "10px",
+              }}
+            >
+              <img
+                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/team_frame1.svg"
+                alt="FoodVerse"
+                width={260}
+                height={367}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                }}
+              />
+              <img
+                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
+                style={{
+                  width: md ? 120 : 172,
+                  height: md ? 120 : 172,
+                }}
+              />
+              <Typography
+                style={{
+                  fontFamily: "'Rubik'",
+                  fontWeight: 700,
+                  fontSize: md ? 24 : 32,
+                  lineHeight: "100%",
+                  textAlign: "center",
+                  color: "#FF9CFF",
+                }}
+              >
+                Supreet
+              </Typography>
+              <Typography
+                style={{
+                  fontFamily: "'Rubik'",
+                  fontWeight: 400,
+                  fontSize: md ? 14 : 24,
+                  lineHeight: md ? "100%" : "140%",
+                  textAlign: "center",
+                  color: "rgba(255, 255, 255, 0.8)",
+                }}
+              >
+                CO-FOUNDER
+              </Typography>
+              <Box
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  gap: md ? "15px" : "25px",
+                  marginTop: md ? 0 : "5px",
+                }}
+              >
+                <a href="https://twitter.com/supreetraju" target="_blank">
+                  <img
+                    src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/twitter.svg"
+                    alt="FoodVerse"
+                    width={md ? 24 : 36}
+                    height={md ? 24 : 36}
+                    style={{ position: "relative", zIndex: 1 }}
+                  />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/supreetraju/"
+                  target="_blank"
+                >
+                  <img
+                    src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/linkedIn.svg"
+                    alt="FoodVerse"
+                    width={md ? 24 : 36}
+                    height={md ? 24 : 36}
+                    style={{ position: "relative", zIndex: 1 }}
+                  />
+                </a>
+              </Box>
+            </Box>
+            <Box
+              style={{
+                position: "relative",
+                width: md ? 185 : 260,
+                height: md ? 248 : 367,
+                padding: md ? "10px 5px 5px" : "25px 15px 15px",
+                borderRadius: md ? "16px" : "24px",
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "column",
+                justifyContent: "center",
+                gap: md ? "5px" : "10px",
+              }}
+            >
+              <img
+                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/team_frame1.svg"
+                alt="FoodVerse"
+                width={180}
+                height={250}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                }}
+              />
+              <img
+                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
+                style={{
+                  width: md ? 120 : 172,
+                  height: md ? 120 : 172,
+                }}
+              />
+              <Typography
+                style={{
+                  fontFamily: "'Rubik'",
+                  fontWeight: 700,
+                  fontSize: md ? 24 : 32,
+                  lineHeight: "100%",
+                  textAlign: "center",
+                  color: "#FF9CFF",
+                }}
+              >
+                Gaurav
+              </Typography>
+              <Typography
+                style={{
+                  fontFamily: "'Rubik'",
+                  fontWeight: 400,
+                  fontSize: md ? 14 : 24,
+                  lineHeight: md ? "100%" : "140%",
+                  textAlign: "center",
+                  color: "rgba(255, 255, 255, 0.8)",
+                }}
+              >
+                CO-FOUNDER
+              </Typography>
+              <Box
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  gap: md ? "15px" : "25px",
+                  marginTop: md ? 0 : "5px",
+                }}
+              >
+                <a href="https://twitter.com/gaurav_gupta9" target="_blank">
+                  <img
+                    src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/twitter.svg"
+                    alt="FoodVerse"
+                    width={md ? 24 : 36}
+                    height={md ? 24 : 36}
+                    style={{ position: "relative", zIndex: 1 }}
+                  />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/gauravgupta99/"
+                  target="_blank"
+                >
+                  <img
+                    src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/linkedIn.svg"
+                    alt="FoodVerse"
+                    width={md ? 24 : 36}
+                    height={md ? 24 : 36}
+                    style={{ position: "relative", zIndex: 1 }}
+                  />
+                </a>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+        <motion.div
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true, amount: 1 }}
+          style={{
+            position: "absolute",
+            top: md ? "23%" : "20%",
+            right: 0,
+            zIndex: -1,
+          }}
+        >
+          <motion.div
+            variants={{
+              offscreen: {
+                x: 250,
+              },
+              onscreen: {
+                x: 10,
+                transition: {
+                  type: "spring",
+                  bounce: 0.35,
+                  duration: 1.5,
+                },
+              },
+            }}
+          >
+            <img
+              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/popcorn1.svg"
+              alt="FoodVerse"
+              width={md ? 90 : 300}
+              height={md ? 90 : 300}
             />
-            <ExploreCard
-              img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap2.png"
-              title="NOW SERVING"
-              description1="Strategic Partnerships"
-              description2="Multiplayer Games V2"
-              description3="Deals Activation"
-              description4="Dubai Pilot Launch"
+          </motion.div>
+        </motion.div>
+        <motion.div
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true, amount: 1 }}
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            zIndex: -1,
+          }}
+        >
+          <motion.div
+            variants={{
+              offscreen: {
+                x: -280,
+              },
+              onscreen: {
+                x: -10,
+                transition: {
+                  type: "spring",
+                  bounce: 0.35,
+                  duration: 1.5,
+                },
+              },
+            }}
+          >
+            <img
+              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/popcorn2.png"
+              alt="FoodVerse"
+              width={md ? 105 : 330}
+              height={md ? 105 : 330}
             />
-            <ExploreCard
-              img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap3.png"
-              title="THE NEXT COURSE"
-              description1="Global Deals Launch"
-              description2="Gobbl Black"
-              description3="$GOBBL TGE"
-              description4="Membership Program"
-            />
-            <ExploreCard
-              img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap4.png"
-              title="FUTURE PLANS"
-              description1="Gobbl Pay"
-              description2="Events & Partnerships"
-              description3="Social Integrations"
-              description4="Foodchain L2 solution"
-            />
+          </motion.div>
+        </motion.div>
+      </Box>
+
+      {/* request_for_demo */}
+      <Box
+        style={{
+          width: "100%",
+          height: "100%",
+          background: "#5438D3",
+          padding: md ? (sm ? "50px 5% 0" : "75px 5% 0") : "7% 7% 0",
+          position: "relative",
+          zIndex: 2,
+          overflow: "hidden",
+        }}
+      >
+        <Box
+          style={{
+            width: "100%",
+            maxWidth: "1440px",
+            margin: "0 auto",
+            // minHeight: "100vh",
+            height: "100%",
+            position: "relative",
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "space-between",
+            flexDirection: sm ? "column" : "row",
+            gap: sm ? "50px" : "25px",
+          }}
+        >
+          <Box
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              gap: "15px",
+              marginBottom: md ? (sm ? "50px" : "75px") : "7%",
+            }}
+          >
+            <Typography
+              variant=""
+              style={{
+                fontFamily: "'Rubik'",
+                fontWeight: 900,
+                fontSize: sm ? 40 : 50,
+                lineHeight: "90%",
+                color: "#64FF99",
+              }}
+            >
+              Ready or not, A I come!
+            </Typography>
+            <Typography
+              variant=""
+              style={{
+                fontFamily: "'Karla'",
+                fontWeight: 600,
+                fontSize: sm ? 20 : "25px",
+                lineHeight: "110%",
+                display: "flex",
+                alignItems: "center",
+                color: "#FFFFFF",
+              }}
+            >
+              Shape the future of your restaurant with the our Co-Pilot
+            </Typography>
+            <CommonButton
+              style={{
+                marginTop: sm ? "25px" : "50px",
+              }}
+              btnBgStyle={{ width: 330 }}
+              btnStyle={{
+                width: 330,
+                fontSize: sm ? 20 : 25,
+              }}
+            >
+              REQUEST FOR DEMO
+            </CommonButton>
           </Box>
           <Box
             style={{
-              position: "absolute",
-              width: lg ? (sm ? 160 : 250) : 318,
-              height: lg ? (sm ? 160 : 250) : 318,
-              right: "-25%",
-              bottom: "-20%",
-              background: "#40FFF4",
-              opacity: 0.6,
-              filter: "blur(212px)",
+              width: "100%",
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "center",
+              gap: sm ? "50px" : "5%",
             }}
-          />
+          >
+            <motion.div
+              initial={{
+                y: 200,
+              }}
+              animate={{
+                y: 0,
+              }}
+              transition={{
+                type: "spring",
+                bounce: 0.5,
+                duration: 1.5,
+              }}
+              style={{
+                marginTop: "auto",
+                zIndex: 1,
+                position: "relative",
+              }}
+            >
+              <motion.div
+                initial={{
+                  x: -5,
+                }}
+                animate={{
+                  x: 5,
+                }}
+                transition={{
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  type: "spring",
+                  bounce: 0.5,
+                  duration: 1.5,
+                }}
+              >
+                <img
+                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_meet.webp"
+                  style={{ width: "fit-content", maxHeight: 223 }}
+                />
+              </motion.div>
+            </motion.div>
+          </Box>
         </Box>
       </Box>
     </div>

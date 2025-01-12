@@ -171,7 +171,7 @@ const TitleComponent = ({ title1, title2, style, titleStyle, badgeStyle }) => {
       }}
     >
       <Typography
-        variant="inherit"
+        variant=""
         className={classes.heading}
         style={{
           textAlign: "left",
@@ -214,7 +214,7 @@ const TitleComponent = ({ title1, title2, style, titleStyle, badgeStyle }) => {
           />
         </svg>
         <Typography
-          variant="inherit"
+          variant=""
           className={classes.heading}
           style={{
             color: "#161810",
@@ -813,7 +813,7 @@ const NewHomePage = () => {
                 />
                 <Box style={{ width: sm ? "100%" : "50%" }}>
                   <Typography
-                    variant="inherit"
+                    variant=""
                     className={classes.sub_heading}
                     style={{
                       width: "100%",
@@ -1399,7 +1399,7 @@ const NewHomePage = () => {
                     }}
                   />
                   <Typography
-                    variant="inherit"
+                    variant=""
                     className={classes.sub_heading}
                     style={{
                       maxWidth: 580,
@@ -1916,7 +1916,7 @@ const NewHomePage = () => {
                   }}
                 >
                   <Typography
-                    variant="inherit"
+                    variant=""
                     className={classes.sub_heading}
                     style={{
                       maxWidth: 420,
@@ -2568,7 +2568,7 @@ const NewHomePage = () => {
                   }}
                 />
                 <Typography
-                  variant="inherit"
+                  variant=""
                   className={classes.sub_heading}
                   style={{ maxWidth: 500, textAlign: "left", fontWeight: 400 }}
                 >
@@ -2989,7 +2989,7 @@ const NewHomePage = () => {
                   }}
                 />
                 <Typography
-                  variant="inherit"
+                  variant=""
                   className={classes.sub_heading}
                   style={{ maxWidth: 460, textAlign: "left", fontWeight: 400 }}
                 >
