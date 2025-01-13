@@ -278,7 +278,7 @@ const Navbar: React.FC = () => {
             </Typography>
           </Link>
 
-          <Link
+          {/* <Link
             to="https://onerare.gitbook.io/docs"
             target="_blank"
             style={{
@@ -307,7 +307,7 @@ const Navbar: React.FC = () => {
             >
               WHITEPAPER
             </Typography>
-          </Link>
+          </Link> */}
         </Box>
       </nav>
     </Box>
