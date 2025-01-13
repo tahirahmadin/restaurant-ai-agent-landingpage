@@ -87,9 +87,7 @@ const MediaPage = () => {
               }}
             >
               <Typography
-                variant=""
                 sx={{
-                  textAlign: "left",
                   whiteSpace: "nowrap",
                   fontFamily: "'Rubik'",
                   fontWeight: 900,
@@ -144,9 +142,7 @@ const MediaPage = () => {
                   />
                 </svg>
                 <Typography
-                  variant=""
                   sx={{
-                    textAlign: "left",
                     whiteSpace: "nowrap",
                     fontFamily: "'Rubik'",
                     fontWeight: 900,
@@ -306,9 +302,7 @@ const MediaPage = () => {
               />
             </svg>
             <Typography
-              variant=""
               sx={{
-                textAlign: "left",
                 whiteSpace: "nowrap",
                 fontFamily: "'Rubik'",
                 fontWeight: 900,
@@ -419,9 +413,7 @@ const MediaPage = () => {
               }}
             >
               <Typography
-                variant=""
                 sx={{
-                  textAlign: "left",
                   whiteSpace: "nowrap",
                   fontFamily: "'Rubik'",
                   fontWeight: 900,
@@ -477,9 +469,7 @@ const MediaPage = () => {
                   />
                 </svg>
                 <Typography
-                  variant=""
                   sx={{
-                    textAlign: "left",
                     whiteSpace: "nowrap",
                     fontFamily: "'Rubik'",
                     fontWeight: 900,
