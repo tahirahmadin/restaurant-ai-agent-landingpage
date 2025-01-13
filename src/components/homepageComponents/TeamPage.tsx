@@ -1,6 +1,3 @@
-import Image from "next/image";
-import React from "react";
-
 const teamData = [
   {
     image:
@@ -154,7 +151,7 @@ const TeamPage = () => {
       <div className="team_container">
         <h1 className="team_hero_title">Humans of OneRare</h1>
         <div className="team_hero">
-          <Image
+          <img
             src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/images/team_bg.svg"
             alt="FoodVerse Team"
             className="team_hero_bg"
@@ -163,7 +160,7 @@ const TeamPage = () => {
           />
           <div className="team_hero_card">
             <div className="hero_card_left">
-              <Image
+              <img
                 src={
                   "https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/avatars/supreetAvatar.png"
                 }
@@ -172,7 +169,7 @@ const TeamPage = () => {
                 width={180}
                 height={180}
               />
-              <Image
+              <img
                 src={
                   "https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/team/supreet.png"
                 }
@@ -198,7 +195,7 @@ const TeamPage = () => {
                   href="https://www.linkedin.com/in/supreetraju/"
                   target="_blank"
                 >
-                  <Image
+                  <img
                     src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/images/linkedin.png"
                     alt="FoodVerse LinkedIn"
                     width={30}
@@ -206,7 +203,7 @@ const TeamPage = () => {
                   />
                 </a>
                 <a href="https://twitter.com/supreetraju" target="_blank">
-                  <Image
+                  <img
                     src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/images/twitter.png"
                     alt="FoodVerse Twitter"
                     width={30}
@@ -218,7 +215,7 @@ const TeamPage = () => {
           </div>
           <div className="team_hero_card">
             <div className="hero_card_left">
-              <Image
+              <img
                 src={
                   "https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/avatars/gauravAvatar.png"
                 }
@@ -227,7 +224,7 @@ const TeamPage = () => {
                 width={180}
                 height={180}
               />
-              <Image
+              <img
                 src={
                   "https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/team/gaurav.png"
                 }
@@ -253,7 +250,7 @@ const TeamPage = () => {
                   href="https://www.linkedin.com/in/gauravgupta99/"
                   target="_blank"
                 >
-                  <Image
+                  <img
                     src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/images/linkedin.png"
                     alt="FoodVerse LinkedIn"
                     width={30}
@@ -261,7 +258,7 @@ const TeamPage = () => {
                   />
                 </a>
                 <a href="https://twitter.com/gaurav_gupta9" target="_blank">
-                  <Image
+                  <img
                     src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/images/twitter.png"
                     alt="FoodVerse Twitter"
                     width={30}
@@ -277,14 +274,14 @@ const TeamPage = () => {
           {teamData?.map((team, i) => (
             <div className="team_card" key={i}>
               <div className="img_container">
-                <Image
+                <img
                   src={team.avatar}
                   alt={team.name}
                   className="avatar"
                   width={145}
                   height={145}
                 />
-                <Image
+                <img
                   src={team.image}
                   alt={team.name}
                   className="image"

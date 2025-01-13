@@ -132,9 +132,7 @@ const Partners = () => {
             }}
           >
             <Typography
-              variant=""
               sx={{
-                textAlign: "left",
                 whiteSpace: "nowrap",
                 fontFamily: "'Rubik'",
                 fontWeight: 900,
@@ -190,9 +188,7 @@ const Partners = () => {
                 />
               </svg>
               <Typography
-                variant=""
                 sx={{
-                  textAlign: "left",
                   whiteSpace: "nowrap",
                   fontFamily: "'Rubik'",
                   fontWeight: 900,
@@ -304,9 +300,7 @@ const Partners = () => {
             />
           </svg>
           <Typography
-            variant=""
             sx={{
-              textAlign: "left",
               whiteSpace: "nowrap",
               fontFamily: "'Rubik'",
               fontWeight: 900,
@@ -404,9 +398,7 @@ const Partners = () => {
             />
           </svg>
           <Typography
-            variant=""
             sx={{
-              textAlign: "left",
               whiteSpace: "nowrap",
               fontFamily: "'Rubik'",
               fontWeight: 900,
@@ -488,9 +480,7 @@ const Partners = () => {
             />
           </svg>
           <Typography
-            variant=""
             sx={{
-              textAlign: "left",
               whiteSpace: "nowrap",
               fontFamily: "'Rubik'",
               fontWeight: 900,
@@ -578,7 +568,6 @@ const Partners = () => {
             />
           </svg>
           <Typography
-            variant=""
             sx={{
               textAlign: "left",
               whiteSpace: "nowrap",
@@ -587,7 +576,6 @@ const Partners = () => {
               fontSize: 50,
               lineHeight: "100%",
               color: "#161810",
-              textAlign: "center",
               position: "relative",
               zIndex: 1,
               [theme.breakpoints.down("lg")]: {

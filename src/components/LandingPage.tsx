@@ -3,16 +3,7 @@ import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { Button, Fade, Typography, useMediaQuery } from "@mui/material";
 import { makeStyles, useTheme } from "@mui/styles";
-import Slider from "react-slick";
-import {
-  team,
-  web2Data,
-  web3Data,
-  payData,
-  playData,
-} from "./homepageComponents/data/newHomeDate";
-import ReactPlayer from "react-player";
-
+import { Theme } from "@mui/material/styles";
 import {
   restaurants,
   home_brands,
@@ -20,16 +11,53 @@ import {
 } from "./homepageComponents/data/partnersData";
 import { motion } from "framer-motion";
 import CommonButton from "./homepageComponents/CommonButton";
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  Github,
-  MessageCircle,
-  Pizza,
-} from "lucide-react";
+import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
+interface TitleComponentProps {
+  title1: string;
+  title2: string;
+  style?: React.CSSProperties;
+  titleStyle?: React.CSSProperties;
+  badgeStyle?: React.CSSProperties;
+}
+
+interface LandingPageState {
+  playVideo: boolean;
+  loaded: boolean;
+  tab: number;
+  roadmapTab: number;
+  emailVerifiTried: boolean;
+  tvl: number;
+  staked: number;
+  web3Toggle: boolean;
+}
+
+interface ExploreCardProps {
+  img: string;
+  imgSize: number;
+  title: string;
+  sub_title: string;
+  description1: string;
+  description2: string;
+  description3: string;
+  description4: string;
+  color?: string;
+  url?: string;
+}
+
+interface StarSvgProps {
+  color?: string;
+  size?: string | number;
+  style?: React.CSSProperties;
+}
+interface ArrowProps {
+  className?: string;
+  style?: React.CSSProperties;
+  onClick?: () => void;
+}
+
+const useStyles = makeStyles((theme: Theme) => ({
   heading: {
     fontFamily: "'Rubik'",
     fontWeight: 900,
@@ -158,9 +186,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TitleComponent = ({ title1, title2, style, titleStyle, badgeStyle }) => {
+const TitleComponent: React.FC<TitleComponentProps> = ({
+  title1,
+  title2,
+  style,
+  titleStyle,
+  badgeStyle,
+}) => {
   const classes = useStyles();
-  const theme = useTheme();
+  const theme: Theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
   const md = useMediaQuery(theme.breakpoints.down("md"));
   const lg = useMediaQuery(theme.breakpoints.down("lg"));
@@ -246,7 +280,7 @@ const TitleComponent = ({ title1, title2, style, titleStyle, badgeStyle }) => {
   );
 };
 
-const ExploreCard = ({
+const ExploreCard: React.FC<ExploreCardProps> = ({
   img,
   imgSize,
   title,
@@ -259,7 +293,7 @@ const ExploreCard = ({
   url,
 }) => {
   const classes = useStyles();
-  const theme = useTheme();
+  const theme: Theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
   const md = useMediaQuery(theme.breakpoints.down("md"));
   const lg = useMediaQuery(theme.breakpoints.down("lg"));
@@ -303,7 +337,6 @@ const ExploreCard = ({
         }}
       />
       <Typography
-        variant=""
         style={{
           width: "85%",
           maxWidth: sm ? 150 : "100%",
@@ -319,7 +352,6 @@ const ExploreCard = ({
         {title}
       </Typography>
       <Typography
-        variant=""
         className={classes.description}
         style={{
           textAlign: "center",
@@ -331,7 +363,6 @@ const ExploreCard = ({
         {sub_title}
       </Typography>
       <Typography
-        variant=""
         className={classes.description}
         style={{
           textAlign: "center",
@@ -351,8 +382,8 @@ const ExploreCard = ({
   );
 };
 
-const StarSvg = ({ color, size, style }) => {
-  const theme = useTheme();
+const StarSvg: React.FC<StarSvgProps> = ({ color, size, style }) => {
+  const theme: Theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <svg
@@ -372,41 +403,8 @@ const StarSvg = ({ color, size, style }) => {
   );
 };
 
-const Avatar = ({ img, style, imgStyle }) => (
-  <Box
-    style={{
-      width: "172px",
-      height: "172px",
-      position: "relative",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      ...style,
-    }}
-  >
-    <img
-      src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/avatar_frame.svg"
-      alt="FoodVerse"
-      width={172}
-      height={172}
-      style={{ width: "100%", height: "100%" }}
-    />
-    <img
-      src={img}
-      alt="FoodVerse"
-      width={142}
-      height={142}
-      style={{
-        position: "absolute",
-        borderRadius: "50%",
-        ...imgStyle,
-      }}
-    />
-  </Box>
-);
-
-function NextArrow(props) {
-  const theme = useTheme();
+const NextArrow: React.FC<ArrowProps> = (props) => {
+  const theme: Theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.down("md"));
   const { className, onClick } = props;
   return (
@@ -434,10 +432,10 @@ function NextArrow(props) {
       </Button>
     </div>
   );
-}
+};
 
-function PrevArrow(props) {
-  const theme = useTheme();
+const PrevArrow: React.FC<ArrowProps> = (props) => {
+  const theme: Theme = useTheme();
   const md = useMediaQuery(theme.breakpoints.down("md"));
   const { className, style, onClick } = props;
   return (
@@ -465,11 +463,11 @@ function PrevArrow(props) {
       </Button>
     </div>
   );
-}
+};
 export const LandingPage = () => {
   const classes = useStyles();
 
-  const theme = useTheme();
+  const theme: Theme = useTheme();
   const xs = useMediaQuery(theme.breakpoints.down(380));
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
   const md = useMediaQuery(theme.breakpoints.down("md"));
@@ -550,7 +548,6 @@ export const LandingPage = () => {
                     fontWeight: 900,
                     fontSize: "96px",
                     lineHeight: "114px",
-                    color: "#fff",
                     color: "#64FF99",
                     marginTop: "-15px",
                   }}
@@ -559,7 +556,6 @@ export const LandingPage = () => {
                 </Typography>
               </Box>
               <Typography
-                variant=""
                 style={{
                   fontWeight: 500,
                   fontSize: md ? 18 : lg ? 20 : 25,
@@ -788,7 +784,6 @@ export const LandingPage = () => {
             />
             <Box style={{ width: sm ? "100%" : "50%" }}>
               <Typography
-                variant=""
                 className={classes.sub_heading}
                 style={{
                   width: "100%",
@@ -952,7 +947,6 @@ export const LandingPage = () => {
                   HOW
                 </Box>
                 <Typography
-                  variant=""
                   className={classes.sub_heading}
                   style={{
                     fontWeight: 600,
@@ -1046,8 +1040,8 @@ export const LandingPage = () => {
               title2="Agents"
               style={{ alignItems: sm ? "flex-start" : "flex-end" }}
               titleStyle={{
-                paddingRight: !sm && "15px",
-                paddingLeft: sm && "25px",
+                paddingRight: !sm ? "15px" : 0,
+                paddingLeft: sm ? "15px" : 0,
               }}
               badgeStyle={{
                 transform: sm ? "rotate(-5.5deg)" : "rotate(7deg)",
@@ -1056,7 +1050,6 @@ export const LandingPage = () => {
               }}
             />
             <Typography
-              variant=""
               className={classes.sub_heading}
               style={{ maxWidth: 460, textAlign: "left", fontWeight: 400 }}
             >
@@ -1215,7 +1208,6 @@ export const LandingPage = () => {
                 }}
               />
               <Typography
-                variant=""
                 className={classes.sub_heading}
                 style={{
                   maxWidth: 540,
@@ -1234,7 +1226,7 @@ export const LandingPage = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                paddingTop: sm && "25px",
+                paddingTop: sm ? "25px" : undefined, // Use ternary operator instead
               }}
             >
               <img
@@ -1244,7 +1236,6 @@ export const LandingPage = () => {
                 height={600}
                 loading="eager"
               />
-              {/* )} */}
             </Box>
             <img
               src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
@@ -1434,7 +1425,6 @@ export const LandingPage = () => {
               }}
             >
               <Typography
-                variant=""
                 className={classes.sub_heading}
                 style={{
                   maxWidth: 420,
@@ -1447,7 +1437,7 @@ export const LandingPage = () => {
                 title1="Food"
                 title2="Partners"
                 titleStyle={{
-                  paddingLeft: sm && "25px",
+                  paddingLeft: "25px",
                 }}
                 style={{
                   alignItems: sm ? "flex-start" : "center",
@@ -1627,7 +1617,6 @@ export const LandingPage = () => {
                         />
                       </Box>
                       <Typography
-                        variant=""
                         style={{
                           fontFamily: "Karla",
                           fontWeight: 700,
@@ -1700,7 +1689,6 @@ export const LandingPage = () => {
                         />
                       </Box>
                       <Typography
-                        variant=""
                         style={{
                           fontFamily: "Karla",
                           fontWeight: 700,
@@ -1770,7 +1758,6 @@ export const LandingPage = () => {
                         />
                       </Box>
                       <Typography
-                        variant=""
                         style={{
                           fontFamily: "Karla",
                           fontWeight: 700,
@@ -1855,7 +1842,7 @@ export const LandingPage = () => {
               title1="Meet the"
               title2="Foodies"
               titleStyle={{
-                paddingLeft: sm && "25px",
+                paddingLeft: "25px",
               }}
               badgeStyle={{
                 transform: sm ? "rotate(-5.5deg)" : "rotate(-6deg)",
@@ -1865,7 +1852,6 @@ export const LandingPage = () => {
               }}
             />
             <Typography
-              variant=""
               className={classes.sub_heading}
               style={{ maxWidth: 500, textAlign: "left", fontWeight: 400 }}
             >
@@ -1879,7 +1865,6 @@ export const LandingPage = () => {
               position: "relative",
               display: "flex",
               justifyContent: "center",
-              // flexDirection: sm ? "column" : "row",
               alignItems: "center",
               gap: sm ? "10px" : "75px",
               padding: md ? "50px 0" : "5%",
@@ -2174,7 +2159,6 @@ export const LandingPage = () => {
             }}
           >
             <Typography
-              variant=""
               style={{
                 fontFamily: "'Rubik'",
                 fontWeight: 900,
@@ -2186,7 +2170,6 @@ export const LandingPage = () => {
               Ready or not, A I come!
             </Typography>
             <Typography
-              variant=""
               style={{
                 fontFamily: "'Karla'",
                 fontWeight: 600,

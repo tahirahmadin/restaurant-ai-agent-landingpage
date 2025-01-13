@@ -1,6 +1,20 @@
 import React from "react";
 
-const ProfileCard = ({ redirectUrl, profile, batch, name, company }) => {
+interface ProfileCardProps {
+  redirectUrl: string;
+  profile: string;
+  batch: string;
+  name: string;
+  company: string;
+}
+
+const ProfileCard: React.FC<ProfileCardProps> = ({
+  redirectUrl,
+  profile,
+  batch,
+  name,
+  company,
+}) => {
   return (
     <a href={redirectUrl} target="_blank" className="profile_card">
       <div className="profile_card_image">
