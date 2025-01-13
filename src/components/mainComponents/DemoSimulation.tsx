@@ -49,7 +49,7 @@ export const DemoSimulation: React.FC = () => {
           <AgentsPanel />
         </div>
       </div>
-      {showGauravChat && <GauravChat />}
+      {/* {showGauravChat && <GauravChat />} */}
     </div>
   );
 };

@@ -1,4 +1,3 @@
-import React from "react";
 import { WeatherBar } from "./WeatherBar";
 import { DeliveryBike } from "./DeliveryBike";
 import { Home, Store, MessageSquare } from "lucide-react";
@@ -9,6 +8,7 @@ import { CoinAnimation } from "../effects/CoinAnimation";
 import { useStore } from "../../store/useStore";
 import { SimulationControls } from "../SimulationControls";
 import { calculateTimeLeft } from "../../utils/delivery";
+import React from "react";
 
 interface HouseComponentProps {
   className?: string;
@@ -66,19 +66,19 @@ const HouseComponent: React.FC<HouseComponentProps> = ({
 };
 
 const DELIVERY_PATHS = {
-  "Habib House": [
+  "Charlie House": [
     { start: [50, 50], end: [50, 75] },
     { start: [50, 75], end: [50, 100] },
   ],
-  "Salman House": [
+  "Bob House": [
     { start: [50, 50], end: [25, 50] },
     { start: [25, 50], end: [0, 50] },
   ],
-  "Ashwin House": [
+  "Alice House": [
     { start: [50, 50], end: [50, 25] },
     { start: [50, 25], end: [50, 0] },
   ],
-  "Gaurav House": [{ start: [50, 50], end: [100, 50] }],
+  "David House": [{ start: [50, 50], end: [100, 50] }],
 };
 
 export const GridMap: React.FC = () => {
@@ -116,7 +116,7 @@ export const GridMap: React.FC = () => {
         <div className="group relative">
           <HouseComponent
             imageSrc="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobblai/home_ashwin.png"
-            houseName="Ashwin House"
+            houseName="Alice House"
           />
           <p className="absolute -bottom-1 left-1/2 -translate-x-1/2 font-medium text-[10px] text-gray-700 bg-white/90 backdrop-blur-sm px-1.5 py-0.5 rounded-full shadow-sm border border-gray-200/50 opacity-60 group-hover:opacity-100 transition-opacity">
             Alice
@@ -129,7 +129,7 @@ export const GridMap: React.FC = () => {
         <div className="group relative">
           <HouseComponent
             imageSrc="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobblai/home_salman.png"
-            houseName="Salman House"
+            houseName="Bob House"
           />
           <p className="absolute -bottom-1 left-1/2 -translate-x-1/2 font-medium text-[10px] text-gray-700 bg-white/90 backdrop-blur-sm px-1.5 py-0.5 rounded-full shadow-sm border border-gray-200/50 opacity-60 group-hover:opacity-100 transition-opacity">
             Bob
@@ -142,7 +142,7 @@ export const GridMap: React.FC = () => {
         <div className="group relative">
           <HouseComponent
             imageSrc="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobblai/home_habib.png"
-            houseName="Habib House"
+            houseName="Charlie House"
           />
           <p className="absolute -bottom-1 left-1/2 -translate-x-1/2 font-medium text-[10px] text-gray-700 bg-white/90 backdrop-blur-sm px-1.5 py-0.5 rounded-full shadow-sm border border-gray-200/50 opacity-60 group-hover:opacity-100 transition-opacity">
             Charlie
@@ -152,16 +152,16 @@ export const GridMap: React.FC = () => {
 
       {/* Gaurav House */}
       <div className="absolute right-0 top-[50%] -translate-y-1/2 text-center z-20">
-        <button
+        {/* <button
           onClick={() => useStore.setState({ showGauravChat: true })}
           className="absolute -top-10 left-1/2 -translate-x-1/2 p-2 bg-purple-500 hover:bg-purple-600 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-110 z-20"
         >
           <MessageSquare className="w-5 h-5 text-white" />
-        </button>
+        </button> */}
         <div className="group relative">
           <HouseComponent
             imageSrc="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobblai/home_gaurav.png"
-            houseName="Gaurav House"
+            houseName="David House"
           />
           <p className="absolute -bottom-1 left-1/2 -translate-x-1/2 font-medium text-[10px] text-gray-700 bg-white/90 backdrop-blur-sm px-1.5 py-0.5 rounded-full shadow-sm border border-gray-200/50 opacity-60 group-hover:opacity-100 transition-opacity">
             David

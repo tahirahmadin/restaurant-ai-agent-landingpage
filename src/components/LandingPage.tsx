@@ -680,12 +680,9 @@ export const LandingPage = () => {
               }}
             />
           </Box>
-          <section id="demo" className="py-8">
-            <div className="max-w-[1800px] mx-auto px-4">
-              <h2 className="text-3xl font-bold text-white mb-8 text-center">
-                Interactive Demo
-              </h2>
-              <div className="h-[500px] bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800 overflow-hidden">
+          <section className="py-16">
+            <div className="max-w-[1800px] mx-auto px-8 md:px-12 lg:px-16">
+              <div className="h-[600px] bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800 overflow-hidden">
                 <DemoSimulation />
               </div>
             </div>

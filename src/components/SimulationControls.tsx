@@ -54,12 +54,12 @@ export const SimulationControls: React.FC<SimulationControlsProps> = ({
       {isPlaying ? (
         <>
           <Pause className="w-5 h-5" strokeWidth={2.5} />
-          <span className="text-sm font-medium">Stop Simulation</span>
+          <span className="text-sm font-medium">Close Restaurant</span>
         </>
       ) : (
         <>
           <Play className="w-5 h-5" strokeWidth={2.5} />
-          <span className="text-sm font-medium">Start Simulation</span>
+          <span className="text-sm font-medium">Open Restaurant</span>
         </>
       )}
     </button>
