@@ -66,14 +66,7 @@ const Footer = () => {
             height={40}
           />
         </a>
-        <a href="https://discord.gg/7shQgawD2w" target="_blank">
-          <img
-            src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/footer_icons/discordIcon.svg"
-            alt="FoodVerse"
-            width={40}
-            height={40}
-          />
-        </a>
+
         <a href="https://www.linkedin.com/company/gobbl" target="_blank">
           <img
             src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/linkedInIcon.svg"

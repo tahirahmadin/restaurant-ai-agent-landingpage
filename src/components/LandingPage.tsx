@@ -2182,18 +2182,20 @@ export const LandingPage = () => {
             >
               Shape the future of your restaurant with the our Co-Pilot
             </Typography>
-            <CommonButton
-              style={{
-                marginTop: sm ? "25px" : "50px",
-              }}
-              btnBgStyle={{ width: 330 }}
-              btnStyle={{
-                width: 330,
-                fontSize: sm ? 20 : 25,
-              }}
-            >
-              REQUEST FOR DEMO
-            </CommonButton>
+            <a href="https://forms.gle/VuR6zz3kxB4skbep6" target="_blank">
+              <CommonButton
+                style={{
+                  marginTop: sm ? "25px" : "50px",
+                }}
+                btnBgStyle={{ width: 330 }}
+                btnStyle={{
+                  width: 330,
+                  fontSize: sm ? 20 : 25,
+                }}
+              >
+                REQUEST FOR DEMO
+              </CommonButton>
+            </a>
           </Box>
           <Box
             style={{
