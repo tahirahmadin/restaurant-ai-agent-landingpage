@@ -481,6 +481,7 @@ export const LandingPage = () => {
   const [tvl, setTvl] = useState(0);
   const [staked, setStaked] = useState(0);
   const [web3Toggle, setWeb3Toggle] = useState(false);
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
 
   const settings = {
     dots: false,
@@ -680,9 +681,13 @@ export const LandingPage = () => {
               }}
             />
           </Box>
-          <section className="py-16">
+          <section className={isMobile ? "py-8" : "py-16"}>
             <div className="max-w-[1800px] mx-auto px-8 md:px-12 lg:px-16">
-              <div className="h-[600px] bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800 overflow-hidden">
+              <div
+                className={`${
+                  window.innerWidth < 768 ? "h-[240px]" : "h-[600px]"
+                } bg-gray-900/50 backdrop-blur-sm rounded-xl border border-gray-800 overflow-hidden`}
+              >
                 <DemoSimulation />
               </div>
             </div>
