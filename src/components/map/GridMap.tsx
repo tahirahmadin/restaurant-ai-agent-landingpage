@@ -1,3 +1,4 @@
+import React from "react";
 import { WeatherBar } from "./WeatherBar";
 import { DeliveryBike } from "./DeliveryBike";
 import { Home, Store, MessageSquare } from "lucide-react";
@@ -8,7 +9,6 @@ import { CoinAnimation } from "../effects/CoinAnimation";
 import { useStore } from "../../store/useStore";
 import { SimulationControls } from "../SimulationControls";
 import { calculateTimeLeft } from "../../utils/delivery";
-import React from "react";
 
 interface HouseComponentProps {
   className?: string;
@@ -95,15 +95,29 @@ export const GridMap: React.FC = () => {
 
   return (
     <div
-      className="relative h-full p-4 rounded-xl overflow-hidden"
+      className={`relative h-full p-4 rounded-xl overflow-hidden ${
+        weather === "sunny"
+          ? "before:absolute before:inset-0 before:bg-gradient-to-b before:from-yellow-400/5 before:to-white/10 before:mix-blend-soft-light before:z-10"
+          : ""
+      }`}
       style={{
         backgroundImage:
           'url("https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobblai/map.png")',
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+        ...(weather === "sunny"
+          ? {
+              filter: "brightness(1.1) contrast(1.05)",
+            }
+          : {}),
       }}
     >
+      {/* Sunny weather overlay */}
+      {weather === "sunny" && (
+        <div className="absolute inset-0 bg-gradient-to-b from-yellow-400/5 via-transparent to-white/5 mix-blend-overlay pointer-events-none z-10" />
+      )}
+
       {/* Semi-transparent overlay */}
       <WeatherBar />
       {weather === "sunny" && <SunnyEffect />}
@@ -118,7 +132,7 @@ export const GridMap: React.FC = () => {
             imageSrc="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobblai/home_ashwin.png"
             houseName="Alice House"
           />
-          <p className="absolute -bottom-1 left-1/2 -translate-x-1/2 font-medium text-[10px] text-gray-700 bg-white/90 backdrop-blur-sm px-1.5 py-0.5 rounded-full shadow-sm border border-gray-200/50 opacity-60 group-hover:opacity-100 transition-opacity">
+          <p className="absolute -bottom-2 left-1/2 -translate-x-1/2 font-medium text-[13px] text-gray-800 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg border border-gray-200 opacity-90 group-hover:opacity-100 transition-all duration-200 hover:scale-105">
             Alice
           </p>
         </div>
@@ -131,7 +145,7 @@ export const GridMap: React.FC = () => {
             imageSrc="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobblai/home_salman.png"
             houseName="Bob House"
           />
-          <p className="absolute -bottom-1 left-1/2 -translate-x-1/2 font-medium text-[10px] text-gray-700 bg-white/90 backdrop-blur-sm px-1.5 py-0.5 rounded-full shadow-sm border border-gray-200/50 opacity-60 group-hover:opacity-100 transition-opacity">
+          <p className="absolute -bottom-2 left-1/2 -translate-x-1/2 font-medium text-[13px] text-gray-800 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg border border-gray-200 opacity-90 group-hover:opacity-100 transition-all duration-200 hover:scale-105">
             Bob
           </p>
         </div>
@@ -144,7 +158,7 @@ export const GridMap: React.FC = () => {
             imageSrc="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobblai/home_habib.png"
             houseName="Charlie House"
           />
-          <p className="absolute -bottom-1 left-1/2 -translate-x-1/2 font-medium text-[10px] text-gray-700 bg-white/90 backdrop-blur-sm px-1.5 py-0.5 rounded-full shadow-sm border border-gray-200/50 opacity-60 group-hover:opacity-100 transition-opacity">
+          <p className="absolute -bottom-2 left-1/2 -translate-x-1/2 font-medium text-[13px] text-gray-800 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg border border-gray-200 opacity-90 group-hover:opacity-100 transition-all duration-200 hover:scale-105">
             Charlie
           </p>
         </div>
@@ -163,7 +177,7 @@ export const GridMap: React.FC = () => {
             imageSrc="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobblai/home_gaurav.png"
             houseName="David House"
           />
-          <p className="absolute -bottom-1 left-1/2 -translate-x-1/2 font-medium text-[10px] text-gray-700 bg-white/90 backdrop-blur-sm px-1.5 py-0.5 rounded-full shadow-sm border border-gray-200/50 opacity-60 group-hover:opacity-100 transition-opacity">
+          <p className="absolute -bottom-2 left-1/2 -translate-x-1/2 font-medium text-[13px] text-gray-800 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg border border-gray-200 opacity-90 group-hover:opacity-100 transition-all duration-200 hover:scale-105">
             David
           </p>
         </div>
