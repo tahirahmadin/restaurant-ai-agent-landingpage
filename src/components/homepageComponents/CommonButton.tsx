@@ -86,6 +86,7 @@ const CommonButton = ({
 }) => {
   const classes = useStyles();
   const theme = useTheme();
+  const sm = useMediaQuery(theme.breakpoints.down("sm"));
   const md = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <div className={classes.container} style={{ ...style }}>
@@ -118,7 +119,7 @@ const CommonButton = ({
             ? btnBorderColor
             : "#9CC300",
           flexDirection: insufficient ? "column" : "row",
-          borderRadius: "15px",
+          borderRadius: sm ? "12px" : "15px",
           ...btnStyle,
         }}
         onClick={onClick}

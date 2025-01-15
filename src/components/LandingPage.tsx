@@ -302,7 +302,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
       sx={{
         width: "100%",
         maxWidth: "286px",
-        height: sm ? 200 : lg ? 300 : 315,
+        height: sm ? 180 : lg ? 300 : 315,
         background:
           "linear-gradient(241.27deg, rgba(255, 255, 255, 0.08) -5.59%, rgba(255, 255, 255, 0) 100%)",
         filter: "drop-shadow(0px 8px 28px rgba(0, 0, 0, 0.25))",
@@ -317,7 +317,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
         transition: "all 0.3s ease",
         transform: "translateY(0)",
         "&:hover": {
-          transform: sm ? "translateY(-20px)" : "translateY(-30px)",
+          transform: sm ? "translateY(-15px)" : "translateY(-30px)",
           border: `1px solid #695204`,
           boxShadow: `0 3px 20px 1px #695204`,
         },
@@ -331,7 +331,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
         style={{
           minWidth: imgSize,
           minHeight: imgSize,
-          top: sm ? -70 : -140,
+          top: sm ? -60 : -140,
           zIndex: 1,
           position: "absolute",
         }}
@@ -346,7 +346,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
           lineHeight: "100%",
           textAlign: "center",
           color: "#fff",
-          margin: "auto auto 0",
+          margin: sm ? "35px auto 0" : "auto auto 0",
         }}
       >
         {title}
@@ -355,9 +355,11 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
         className={classes.description}
         style={{
           textAlign: "center",
+          lineHeight: "120%",
+          fontSize: sm ? 12 : 18,
           color: "#FF9CFF",
           fontWeight: 500,
-          marginTop: "-10px",
+          marginTop: sm ? "-5px" : "-10px",
         }}
       >
         {sub_title}
@@ -366,6 +368,8 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
         className={classes.description}
         style={{
           textAlign: "center",
+          lineHeight: "120%",
+          fontSize: sm ? 12 : 18,
           height: sm ? 75 : 127,
         }}
       >
@@ -532,7 +536,11 @@ export const LandingPage = () => {
               }}
             >
               <Box
-                style={{ display: "flex", gap: "35px", marginBottom: "15px" }}
+                style={{
+                  display: "flex",
+                  gap: sm ? "15px" : "35px",
+                  marginBottom: "15px",
+                }}
               >
                 <img
                   src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_logo.svg"
@@ -547,10 +555,10 @@ export const LandingPage = () => {
                   style={{
                     fontFamily: "'Rubik'",
                     fontWeight: 900,
-                    fontSize: "96px",
-                    lineHeight: "114px",
+                    fontSize: sm ? 54 : "96px",
+                    lineHeight: "120%",
                     color: "#64FF99",
-                    marginTop: "-15px",
+                    marginTop: sm ? "-10px" : "-15px",
                   }}
                 >
                   AI
@@ -824,8 +832,8 @@ export const LandingPage = () => {
             />
             <StarSvg
               style={{
-                bottom: "-30%",
-                left: "25%",
+                bottom: sm ? "-15%" : "-30%",
+                left: sm ? "15%" : "25%",
                 animationDuration: "1.2s",
               }}
             />
@@ -935,16 +943,16 @@ export const LandingPage = () => {
                 style={{
                   width: "100%",
                   display: "flex",
-                  alignItems: sm ? "flex-start" : "flex-end",
+                  alignItems: "flex-end",
                   justifyContent: "center",
-                  gap: sm ? "3px" : "5px",
+                  gap: "5px",
                   padding: sm ? "0 5%" : 0,
-                  flexDirection: sm ? "column" : "row",
+                  // flexDirection: sm ? "column" : "row",
                 }}
               >
                 <Box
                   className={classes.heading2}
-                  style={{ color: "#64FF99", height: sm ? 45 : 115 }}
+                  style={{ color: "#64FF99", height: sm ? 42 : 115 }}
                 >
                   HOW
                 </Box>
@@ -952,7 +960,7 @@ export const LandingPage = () => {
                   className={classes.sub_heading}
                   style={{
                     fontWeight: 600,
-                    fontSize: sm ? 24 : 32,
+                    fontSize: sm ? 16 : 32,
                     lineHeight: "100%",
                     maxWidth: 390,
                     textAlign: "left",
@@ -1067,13 +1075,13 @@ export const LandingPage = () => {
               gridTemplateColumns: lg ? "1fr 1fr" : "1fr 1fr 1fr 1fr",
               placeItems: "center",
               gap: "10px",
-              rowGap: lg ? (sm ? "85px" : "120px") : "20px",
-              paddingTop: md ? 90 : "12%",
+              rowGap: lg ? (sm ? "60px" : "120px") : "20px",
+              paddingTop: md ? 80 : "12%",
             }}
           >
             <ExploreCard
               img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/roadmap1.png"
-              imgSize={sm ? 105 : 170}
+              imgSize={sm ? 95 : 170}
               title="ORDER"
               sub_title="Intuitive food ordering"
               description1="Deploy self-learning"
@@ -1083,7 +1091,7 @@ export const LandingPage = () => {
             />
             <ExploreCard
               img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap2.png"
-              imgSize={sm ? 120 : 200}
+              imgSize={sm ? 110 : 200}
               title="OPERATE"
               sub_title="Kitchen AI Cockpit"
               description1="Transform backend ops"
@@ -1093,7 +1101,7 @@ export const LandingPage = () => {
             />
             <ExploreCard
               img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap3.png"
-              imgSize={sm ? 120 : 200}
+              imgSize={sm ? 100 : 200}
               title="DELIVER"
               sub_title="Managing the last mile"
               description1="Slash delivery costs with"
@@ -1103,7 +1111,7 @@ export const LandingPage = () => {
             />
             <ExploreCard
               img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap4.png"
-              imgSize={sm ? 120 : 200}
+              imgSize={sm ? 110 : 200}
               title="INTEGRATE"
               sub_title="with partner systems"
               description1="Connect to any platform,"
@@ -1480,7 +1488,7 @@ export const LandingPage = () => {
                   }}
                 >
                   <Button
-                    style={{
+                    sx={{
                       fontFamily: "Rubik",
                       fontSize: 20,
                       textAlign: "center",
@@ -1498,13 +1506,19 @@ export const LandingPage = () => {
                       opacity: tab === 1 ? 1 : 0.56,
                       background: tab === 1 ? "#D1FF19" : "transparent",
                       color: tab === 1 ? "#161810" : "#FDFFF5",
+                      [theme.breakpoints.down("sm")]: {
+                        fontSize: 12,
+                        padding: "5px 10px",
+                        height: "40px",
+                        borderRadius: "10px",
+                      },
                     }}
                     onClick={() => setTab(1)}
                   >
                     BRANDS
                   </Button>
                   <Button
-                    style={{
+                    sx={{
                       fontFamily: "Rubik",
                       fontSize: 20,
                       textAlign: "center",
@@ -1521,13 +1535,19 @@ export const LandingPage = () => {
                       opacity: tab === 2 ? 1 : 0.56,
                       background: tab === 2 ? "#D1FF19" : "transparent",
                       color: tab === 2 ? "#161810" : "#FDFFF5",
+                      [theme.breakpoints.down("sm")]: {
+                        fontSize: 12,
+                        padding: "5px 10px",
+                        height: "40px",
+                        borderRadius: "10px",
+                      },
                     }}
                     onClick={() => setTab(2)}
                   >
                     CHEFS
                   </Button>
                   <Button
-                    style={{
+                    sx={{
                       fontFamily: "Rubik",
                       fontSize: 20,
                       textAlign: "center",
@@ -1544,6 +1564,12 @@ export const LandingPage = () => {
                       opacity: tab === 3 ? 1 : 0.56,
                       background: tab === 3 ? "#D1FF19" : "transparent",
                       color: tab === 3 ? "#161810" : "#FDFFF5",
+                      [theme.breakpoints.down("sm")]: {
+                        fontSize: 12,
+                        padding: "5px 10px",
+                        height: "40px",
+                        borderRadius: "10px",
+                      },
                     }}
                     onClick={() => setTab(3)}
                   >
@@ -1551,7 +1577,7 @@ export const LandingPage = () => {
                   </Button>
                   <Link to="/partners">
                     <Button
-                      style={{
+                      sx={{
                         fontFamily: "Rubik",
                         fontSize: 20,
                         textAlign: "center",
@@ -1567,6 +1593,12 @@ export const LandingPage = () => {
                         opacity: 0.56,
                         background: "transparent",
                         color: "#FDFFF5",
+                        [theme.breakpoints.down("sm")]: {
+                          fontSize: 12,
+                          padding: "5px 10px",
+                          height: "40px",
+                          borderRadius: "10px",
+                        },
                       }}
                     >
                       VIEW ALL
@@ -1581,7 +1613,9 @@ export const LandingPage = () => {
                     width: "100%",
                     paddingTop: "5%",
                     display: "grid",
-                    gridTemplateColumns: md
+                    gridTemplateColumns: sm
+                      ? "repeat(auto-fill,minmax(130px, 1fr))"
+                      : md
                       ? "repeat(auto-fill,minmax(160px, 1fr))"
                       : "repeat(auto-fill,minmax(175px, 1fr))",
                     columnGap: md ? "15px" : "50px",
@@ -2165,11 +2199,11 @@ export const LandingPage = () => {
                 fontFamily: "'Rubik'",
                 fontWeight: 900,
                 fontSize: sm ? 40 : 50,
-                lineHeight: "90%",
+                lineHeight: "100%",
                 color: "#64FF99",
               }}
             >
-              Ready or not, A I come!
+              Ready or not, AI come!
             </Typography>
             <Typography
               style={{
@@ -2189,9 +2223,11 @@ export const LandingPage = () => {
                 style={{
                   marginTop: sm ? "25px" : "50px",
                 }}
-                btnBgStyle={{ width: 330 }}
+                btnBgStyle={{
+                  width: sm ? 280 : 330,
+                }}
                 btnStyle={{
-                  width: 330,
+                  width: sm ? 280 : 330,
                   fontSize: sm ? 20 : 25,
                 }}
               >
@@ -2228,10 +2264,10 @@ export const LandingPage = () => {
             >
               <motion.div
                 initial={{
-                  x: -5,
+                  x: sm ? 5 : -5,
                 }}
                 animate={{
-                  x: 5,
+                  x: sm ? -5 : 5,
                 }}
                 transition={{
                   repeat: Infinity,
@@ -2243,7 +2279,11 @@ export const LandingPage = () => {
               >
                 <img
                   src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_meet.webp"
-                  style={{ width: "fit-content", maxHeight: 223 }}
+                  style={{
+                    width: "fit-content",
+                    maxHeight: 223,
+                    marginBottom: sm ? "-3px" : 0,
+                  }}
                 />
               </motion.div>
             </motion.div>
