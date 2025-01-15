@@ -212,7 +212,7 @@ const TitleComponent: React.FC<TitleComponentProps> = ({
         ...style,
       }}
     >
-      <h1
+      <h2
         className={classes.heading}
         style={{
           textAlign: "left",
@@ -221,7 +221,7 @@ const TitleComponent: React.FC<TitleComponentProps> = ({
         }}
       >
         {title1}
-      </h1>
+      </h2>
       <Box
         style={{
           width: "100%",
@@ -254,7 +254,7 @@ const TitleComponent: React.FC<TitleComponentProps> = ({
             fill="#0000FF"
           />
         </svg>
-        <h1
+        <h2
           className={classes.heading}
           style={{
             color: "#161810",
@@ -262,7 +262,7 @@ const TitleComponent: React.FC<TitleComponentProps> = ({
           }}
         >
           {title2}
-        </h1>
+        </h2>
         <svg
           width={sm ? "22" : "31"}
           height={sm ? "23" : "32"}
