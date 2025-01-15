@@ -1896,7 +1896,7 @@ export const LandingPage = () => {
                 marginTop: "10px",
               }}
             >
-              Gobbl is powered by 30+ Web3 Buidlers, Designers & Marketers on
+              Gobbl is powered by 30+ Web3 Builders, Designers & Marketers on
               one mission: to revolutionize food through blockchain.
             </Typography>
           </Box>
