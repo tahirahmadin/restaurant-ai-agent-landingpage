@@ -1223,7 +1223,7 @@ export const LandingPage = () => {
                   maxWidth: 540,
                   textAlign: "left",
                   fontWeight: 400,
-                  marginTop: sm ? "-25px" : "35px",
+                  marginTop: sm ? 0 : "35px",
                 }}
               >
                 Building a decentralized ecosystem where network value is
@@ -1460,7 +1460,7 @@ export const LandingPage = () => {
                 }}
               />
             </Box>
-            <Box style={{ width: "100%", padding: "5% 0 0" }}>
+            <Box style={{ width: "100%", padding: sm ? 0 : "5% 0 0" }}>
               <Box
                 style={{
                   width: "100%",
@@ -1889,7 +1889,12 @@ export const LandingPage = () => {
             />
             <Typography
               className={classes.sub_heading}
-              style={{ maxWidth: 500, textAlign: "left", fontWeight: 400 }}
+              style={{
+                maxWidth: 500,
+                textAlign: "left",
+                fontWeight: 400,
+                marginTop: "10px",
+              }}
             >
               Gobbl is powered by 30+ Web3 Buidlers, Designers & Marketers on
               one mission: to revolutionize food through blockchain.
