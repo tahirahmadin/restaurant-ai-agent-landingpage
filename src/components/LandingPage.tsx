@@ -545,9 +545,9 @@ export const LandingPage = () => {
                 <img
                   src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_logo.svg"
                   alt="Gobbl AI"
-                  width={md ? 140 : 240}
-                  height={md ? 60 : 100}
                   style={{
+                    minWidth: md ? 140 : 240,
+                    height: md ? 60 : 100,
                     objectFit: "contain",
                   }}
                 />
@@ -558,10 +558,12 @@ export const LandingPage = () => {
                     fontSize: sm ? 54 : "96px",
                     lineHeight: "120%",
                     color: "#64FF99",
-                    marginTop: sm ? "-10px" : "-15px",
+                    marginTop: sm ? "-7px" : "-15px",
+                    whiteSpace: "nowrap",
                   }}
                 >
                   AI
+                  <span style={{ opacity: 0 }}> gobbl</span>
                 </h1>
               </Box>
               <Typography
