@@ -212,7 +212,7 @@ const TitleComponent: React.FC<TitleComponentProps> = ({
         ...style,
       }}
     >
-      <Box
+      <h1
         className={classes.heading}
         style={{
           textAlign: "left",
@@ -221,7 +221,7 @@ const TitleComponent: React.FC<TitleComponentProps> = ({
         }}
       >
         {title1}
-      </Box>
+      </h1>
       <Box
         style={{
           width: "100%",
@@ -254,7 +254,7 @@ const TitleComponent: React.FC<TitleComponentProps> = ({
             fill="#0000FF"
           />
         </svg>
-        <Box
+        <h1
           className={classes.heading}
           style={{
             color: "#161810",
@@ -262,7 +262,7 @@ const TitleComponent: React.FC<TitleComponentProps> = ({
           }}
         >
           {title2}
-        </Box>
+        </h1>
         <svg
           width={sm ? "22" : "31"}
           height={sm ? "23" : "32"}
@@ -325,7 +325,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
     >
       <img
         src={img}
-        alt="Foodverse"
+        alt="Gobbl AI"
         width={imgSize}
         height={imgSize}
         style={{
@@ -544,14 +544,14 @@ export const LandingPage = () => {
               >
                 <img
                   src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_logo.svg"
-                  alt="FoodVerse Gobbl"
+                  alt="Gobbl AI"
                   width={md ? 140 : 240}
                   height={md ? 60 : 100}
                   style={{
                     objectFit: "contain",
                   }}
                 />
-                <Typography
+                <h1
                   style={{
                     fontFamily: "'Rubik'",
                     fontWeight: 900,
@@ -562,9 +562,9 @@ export const LandingPage = () => {
                   }}
                 >
                   AI
-                </Typography>
+                </h1>
               </Box>
-              <Typography
+              <h2
                 style={{
                   fontWeight: 500,
                   fontSize: md ? 18 : lg ? 20 : 25,
@@ -577,7 +577,7 @@ export const LandingPage = () => {
               >
                 Transform your Restaurant with new employees. Introducing AI for
                 Food.
-              </Typography>
+              </h2>
               <StarSvg
                 size={md ? 12 : 20}
                 color="#66FF99"
@@ -630,7 +630,7 @@ export const LandingPage = () => {
                 >
                   <img
                     src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/banner_gobbl.png"
-                    alt="FoodVerse Gobbl"
+                    alt="Gobbl AI"
                     width={560}
                     height={1190}
                     style={{
@@ -768,7 +768,7 @@ export const LandingPage = () => {
               >
                 <img
                   src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/shushi.png"
-                  alt="FoodVerse"
+                  alt="Gobbl AI"
                   width={sm ? 220 : 300}
                   height={sm ? 220 : 300}
                   style={{
@@ -780,7 +780,7 @@ export const LandingPage = () => {
             </motion.div>
             <img
               src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/food_with_ai.svg"
-              alt="FoodVerse"
+              alt="Gobbl AI - Powering food with AI"
               width={600}
               height={450}
               style={{
@@ -794,6 +794,7 @@ export const LandingPage = () => {
             />
             <Box style={{ width: sm ? "100%" : "50%" }}>
               <Typography
+                variant="body1"
                 className={classes.sub_heading}
                 style={{
                   width: "100%",
@@ -879,7 +880,7 @@ export const LandingPage = () => {
             >
               <img
                 src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/shushi_plate.svg"
-                alt="FoodVerse"
+                alt="Gobbl AI"
                 width={md ? 100 : lg ? 220 : 290}
                 height={md ? 100 : lg ? 220 : 290}
                 style={{
@@ -904,7 +905,7 @@ export const LandingPage = () => {
         >
           <img
             src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
-            alt="FoodVerse"
+            alt="Gobbl AI"
             width={2000}
             height={2000}
             style={{
@@ -950,13 +951,14 @@ export const LandingPage = () => {
                   // flexDirection: sm ? "column" : "row",
                 }}
               >
-                <Box
+                <h1
                   className={classes.heading2}
                   style={{ color: "#64FF99", height: sm ? 42 : 115 }}
                 >
                   HOW
-                </Box>
+                </h1>
                 <Typography
+                  variant="body1"
                   className={classes.sub_heading}
                   style={{
                     fontWeight: 600,
@@ -980,7 +982,7 @@ export const LandingPage = () => {
               >
                 <img
                   src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/how_ai.webp"
-                  alt="FoodVerse"
+                  alt="Gobbl AI"
                   width={1440}
                   height={517}
                   loading="eager"
@@ -1009,7 +1011,7 @@ export const LandingPage = () => {
       >
         <img
           src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
-          alt="FoodVerse"
+          alt="Gobbl AI"
           width={2000}
           height={2000}
           style={{
@@ -1060,6 +1062,7 @@ export const LandingPage = () => {
               }}
             />
             <Typography
+              variant="body1"
               className={classes.sub_heading}
               style={{ maxWidth: 460, textAlign: "left", fontWeight: 400 }}
             >
@@ -1148,7 +1151,7 @@ export const LandingPage = () => {
       >
         <img
           src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
-          alt="FoodVerse"
+          alt="Gobbl AI"
           width={2000}
           height={2000}
           style={{
@@ -1164,7 +1167,7 @@ export const LandingPage = () => {
         />
         <img
           src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
-          alt="FoodVerse"
+          alt="Gobbl AI"
           width={2000}
           height={2000}
           style={{
@@ -1218,6 +1221,7 @@ export const LandingPage = () => {
                 }}
               />
               <Typography
+                variant="body1"
                 className={classes.sub_heading}
                 style={{
                   maxWidth: 540,
@@ -1241,7 +1245,7 @@ export const LandingPage = () => {
             >
               <img
                 src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/meet_gobbl.webp"
-                alt="FoodVerse"
+                alt="Gobbl AI"
                 width={1150}
                 height={600}
                 loading="eager"
@@ -1249,7 +1253,7 @@ export const LandingPage = () => {
             </Box>
             <img
               src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
-              alt="FoodVerse"
+              alt="Gobbl AI"
               width={sm ? 36 : 72}
               height={sm ? 36 : 72}
               className={classes.bg_orare}
@@ -1261,7 +1265,7 @@ export const LandingPage = () => {
             />
             <img
               src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
-              alt="FoodVerse"
+              alt="Gobbl AI"
               width={sm ? 28 : 56}
               height={sm ? 28 : 56}
               className={classes.bg_orare}
@@ -1275,7 +1279,7 @@ export const LandingPage = () => {
             {!sm && (
               <img
                 src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
-                alt="FoodVerse"
+                alt="Gobbl AI"
                 width={96}
                 height={96}
                 className={classes.bg_orare}
@@ -1290,7 +1294,7 @@ export const LandingPage = () => {
             {!sm && (
               <img
                 src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
-                alt="FoodVerse"
+                alt="Gobbl AI"
                 width={72}
                 height={72}
                 className={classes.bg_orare}
@@ -1304,7 +1308,7 @@ export const LandingPage = () => {
             )}
             <img
               src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
-              alt="FoodVerse"
+              alt="Gobbl AI"
               width={sm ? 28 : 56}
               height={sm ? 28 : 56}
               className={classes.bg_orare}
@@ -1317,7 +1321,7 @@ export const LandingPage = () => {
             />
             <img
               src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
-              alt="FoodVerse"
+              alt="Gobbl AI"
               width={sm ? 48 : 96}
               height={sm ? 48 : 96}
               className={classes.bg_orare}
@@ -1331,7 +1335,7 @@ export const LandingPage = () => {
             {!sm && (
               <img
                 src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
-                alt="FoodVerse"
+                alt="Gobbl AI"
                 width={56}
                 height={56}
                 className={classes.bg_orare}
@@ -1371,7 +1375,7 @@ export const LandingPage = () => {
       >
         <img
           src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
-          alt="FoodVerse"
+          alt="Gobbl AI"
           width={2000}
           height={2000}
           style={{
@@ -1388,7 +1392,7 @@ export const LandingPage = () => {
         />
         <img
           src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
-          alt="FoodVerse"
+          alt="Gobbl AI"
           width={2000}
           height={2000}
           style={{
@@ -1435,6 +1439,7 @@ export const LandingPage = () => {
               }}
             >
               <Typography
+                variant="body1"
                 className={classes.sub_heading}
                 style={{
                   maxWidth: 420,
@@ -1644,7 +1649,7 @@ export const LandingPage = () => {
                       >
                         <img
                           src={brand.image}
-                          alt="FoodVerse"
+                          alt="Gobbl AI"
                           width={170}
                           height={175}
                           style={{
@@ -1653,6 +1658,7 @@ export const LandingPage = () => {
                         />
                       </Box>
                       <Typography
+                        variant="body1"
                         style={{
                           fontFamily: "Karla",
                           fontWeight: 700,
@@ -1713,7 +1719,7 @@ export const LandingPage = () => {
                       >
                         <img
                           src={chef.image}
-                          alt="FoodVerse"
+                          alt="Gobbl AI"
                           width={175}
                           height={175}
                           style={{
@@ -1725,6 +1731,7 @@ export const LandingPage = () => {
                         />
                       </Box>
                       <Typography
+                        variant="body1"
                         style={{
                           fontFamily: "Karla",
                           fontWeight: 700,
@@ -1785,7 +1792,7 @@ export const LandingPage = () => {
                       >
                         <img
                           src={restaurant.image}
-                          alt="FoodVerse"
+                          alt="Gobbl AI"
                           width={175}
                           height={175}
                           style={{
@@ -1794,6 +1801,7 @@ export const LandingPage = () => {
                         />
                       </Box>
                       <Typography
+                        variant="body1"
                         style={{
                           fontFamily: "Karla",
                           fontWeight: 700,
@@ -1838,7 +1846,7 @@ export const LandingPage = () => {
       >
         <img
           src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
-          alt="FoodVerse"
+          alt="Gobbl AI"
           width={2000}
           height={2000}
           style={{
@@ -1888,6 +1896,7 @@ export const LandingPage = () => {
               }}
             />
             <Typography
+              variant="body1"
               className={classes.sub_heading}
               style={{
                 maxWidth: 500,
@@ -1923,7 +1932,7 @@ export const LandingPage = () => {
             >
               <img
                 src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/team_frame1.svg"
-                alt="FoodVerse"
+                alt="Gobbl AI"
                 width={260}
                 height={367}
                 style={{
@@ -1942,6 +1951,7 @@ export const LandingPage = () => {
                 }}
               />
               <Typography
+                variant="body1"
                 style={{
                   fontFamily: "'Rubik'",
                   fontWeight: 700,
@@ -1954,6 +1964,7 @@ export const LandingPage = () => {
                 Supreet
               </Typography>
               <Typography
+                variant="body1"
                 style={{
                   fontFamily: "'Rubik'",
                   fontWeight: 400,
@@ -1977,7 +1988,7 @@ export const LandingPage = () => {
                 <a href="https://twitter.com/supreetraju" target="_blank">
                   <img
                     src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/twitter.svg"
-                    alt="FoodVerse"
+                    alt="Gobbl AI"
                     width={md ? 24 : 36}
                     height={md ? 24 : 36}
                     style={{ position: "relative", zIndex: 1 }}
@@ -1989,7 +2000,7 @@ export const LandingPage = () => {
                 >
                   <img
                     src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/linkedIn.svg"
-                    alt="FoodVerse"
+                    alt="Gobbl AI"
                     width={md ? 24 : 36}
                     height={md ? 24 : 36}
                     style={{ position: "relative", zIndex: 1 }}
@@ -2013,7 +2024,7 @@ export const LandingPage = () => {
             >
               <img
                 src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/team_frame1.svg"
-                alt="FoodVerse"
+                alt="Gobbl AI"
                 width={180}
                 height={250}
                 style={{
@@ -2032,6 +2043,7 @@ export const LandingPage = () => {
                 }}
               />
               <Typography
+                variant="body1"
                 style={{
                   fontFamily: "'Rubik'",
                   fontWeight: 700,
@@ -2044,6 +2056,7 @@ export const LandingPage = () => {
                 Gaurav
               </Typography>
               <Typography
+                variant="body1"
                 style={{
                   fontFamily: "'Rubik'",
                   fontWeight: 400,
@@ -2067,7 +2080,7 @@ export const LandingPage = () => {
                 <a href="https://twitter.com/gaurav_gupta9" target="_blank">
                   <img
                     src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/twitter.svg"
-                    alt="FoodVerse"
+                    alt="Gobbl AI"
                     width={md ? 24 : 36}
                     height={md ? 24 : 36}
                     style={{ position: "relative", zIndex: 1 }}
@@ -2079,7 +2092,7 @@ export const LandingPage = () => {
                 >
                   <img
                     src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/linkedIn.svg"
-                    alt="FoodVerse"
+                    alt="Gobbl AI"
                     width={md ? 24 : 36}
                     height={md ? 24 : 36}
                     style={{ position: "relative", zIndex: 1 }}
@@ -2117,7 +2130,7 @@ export const LandingPage = () => {
           >
             <img
               src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/popcorn1.svg"
-              alt="FoodVerse"
+              alt="Gobbl AI"
               width={md ? 90 : 300}
               height={md ? 90 : 300}
             />
@@ -2151,7 +2164,7 @@ export const LandingPage = () => {
           >
             <img
               src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/popcorn2.png"
-              alt="FoodVerse"
+              alt="Gobbl AI"
               width={md ? 105 : 330}
               height={md ? 105 : 330}
             />
@@ -2196,6 +2209,7 @@ export const LandingPage = () => {
             }}
           >
             <Typography
+              variant="body1"
               style={{
                 fontFamily: "'Rubik'",
                 fontWeight: 900,
@@ -2207,6 +2221,7 @@ export const LandingPage = () => {
               Ready or not, AI come!
             </Typography>
             <Typography
+              variant="body1"
               style={{
                 fontFamily: "'Karla'",
                 fontWeight: 600,
