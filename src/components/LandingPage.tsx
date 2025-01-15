@@ -564,7 +564,8 @@ export const LandingPage = () => {
                   AI
                 </h1>
               </Box>
-              <h2
+              <Typography
+                variant="body1"
                 style={{
                   fontWeight: 500,
                   fontSize: md ? 18 : lg ? 20 : 25,
@@ -577,7 +578,7 @@ export const LandingPage = () => {
               >
                 Transform your Restaurant with new employees. Introducing AI for
                 Food.
-              </h2>
+              </Typography>
               <StarSvg
                 size={md ? 12 : 20}
                 color="#66FF99"
@@ -951,14 +952,14 @@ export const LandingPage = () => {
                   // flexDirection: sm ? "column" : "row",
                 }}
               >
-                <h1
+                <h2
                   className={classes.heading2}
                   style={{ color: "#64FF99", height: sm ? 42 : 115 }}
                 >
                   HOW
-                </h1>
+                </h2>
                 <Typography
-                  variant="body1"
+                  variant="h3"
                   className={classes.sub_heading}
                   style={{
                     fontWeight: 600,
@@ -1945,6 +1946,7 @@ export const LandingPage = () => {
               />
               <img
                 src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
+                alt="Gobbl AI"
                 style={{
                   width: md ? 120 : 172,
                   height: md ? 120 : 172,
@@ -2037,6 +2039,7 @@ export const LandingPage = () => {
               />
               <img
                 src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
+                alt="Gobbl AI"
                 style={{
                   width: md ? 120 : 172,
                   height: md ? 120 : 172,
@@ -2295,6 +2298,7 @@ export const LandingPage = () => {
               >
                 <img
                   src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_meet.webp"
+                  alt="Gobbl AI"
                   style={{
                     width: "fit-content",
                     maxHeight: 223,
