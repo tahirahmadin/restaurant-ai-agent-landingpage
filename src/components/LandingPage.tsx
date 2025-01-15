@@ -1893,12 +1893,8 @@ export const LandingPage = () => {
                 maxWidth: 500,
                 textAlign: "left",
                 fontWeight: 400,
-                marginTop: "10px",
               }}
-            >
-              Gobbl is powered by 30+ Web3 Builders, Designers & Marketers on
-              one mission: to revolutionize food through blockchain.
-            </Typography>
+            ></Typography>
           </Box>
           <Box
             style={{
