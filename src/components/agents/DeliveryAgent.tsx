@@ -86,7 +86,7 @@ export const DeliveryAgent: React.FC = () => {
             </div>
             {readyOrders.map((order, index) => (
               <div
-                key={`ready-order-${order.id}`}
+                key={`ready-${order.id}-${order.status}`}
                 className="bg-gray-800/30 backdrop-blur-sm p-2 rounded-lg border border-yellow-500/10 mb-2"
               >
                 <div className="flex items-center justify-between">
@@ -112,7 +112,7 @@ export const DeliveryAgent: React.FC = () => {
             </div>
             {queuedOrders.map((order, index) => (
               <div
-                key={`queued-order-${order.id}`}
+                key={`queued-${order.id}-${order.status}`}
                 className="bg-gray-800/30 backdrop-blur-sm p-2 rounded-lg border border-blue-500/10 mb-2"
               >
                 <div className="flex items-center justify-between">

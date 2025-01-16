@@ -31,16 +31,16 @@ const HouseComponent: React.FC<HouseComponentProps> = ({
 
     switch (houseOrder.status) {
       case "placed":
-        return "Order Placed";
+        return "Placed";
       case "preparing":
-        return `Preparing (${houseOrder.cookingTimeLeft}m)`;
+        return `${houseOrder.cookingTimeLeft}m`;
       case "out_for_delivery":
         const timeLeft = calculateTimeLeft(
           houseOrder.deliveryProgress || 0,
           DELIVERY_PATHS[houseName],
           weather
         );
-        return `Delivering in ${timeLeft}s`;
+        return `${timeLeft}s`;
       default:
         return null;
     }
@@ -50,10 +50,10 @@ const HouseComponent: React.FC<HouseComponentProps> = ({
 
   return (
     <div
-      className={`relative w-20 h-20 flex flex-col items-center justify-center transform hover:scale-105 transition-transform ${className}`}
+      className={`relative w-10 h-10 md:w-20 md:h-20 flex flex-col items-center justify-center transform hover:scale-105 transition-transform ${className}`}
     >
       {statusText && (
-        <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-800/90 text-white px-3 py-1 rounded-full text-xs whitespace-nowrap shadow-lg z-50">
+        <div className="absolute -top-4 md:-top-6 left-1/2 -translate-x-1/2 bg-gray-800/90 text-white px-1.5 md:px-2 py-0.5 rounded-full text-[6px] md:text-[8px] whitespace-nowrap shadow-lg z-50">
           {statusText}
         </div>
       )}
@@ -133,7 +133,7 @@ export const GridMap: React.FC = () => {
             imageSrc="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobblai/home_ashwin.png"
             houseName="Alice House"
           />
-          <p className="absolute -bottom-2 left-1/2 -translate-x-1/2 font-medium text-[13px] text-gray-800 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg border border-gray-200 opacity-90 group-hover:opacity-100 transition-all duration-200 hover:scale-105">
+          <p className="absolute -bottom-2 left-1/2 -translate-x-1/2 font-medium text-[9px] md:text-[13px] text-gray-800 bg-white/95 backdrop-blur-sm px-2 md:px-3 py-0.5 md:py-1 rounded-full shadow-lg border border-gray-200 opacity-90 group-hover:opacity-100 transition-all duration-200 hover:scale-105">
             Alice
           </p>
         </div>
@@ -146,7 +146,7 @@ export const GridMap: React.FC = () => {
             imageSrc="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobblai/home_salman.png"
             houseName="Bob House"
           />
-          <p className="absolute -bottom-2 left-1/2 -translate-x-1/2 font-medium text-[13px] text-gray-800 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg border border-gray-200 opacity-90 group-hover:opacity-100 transition-all duration-200 hover:scale-105">
+          <p className="absolute -bottom-2 left-1/2 -translate-x-1/2 font-medium text-[9px] md:text-[13px] text-gray-800 bg-white/95 backdrop-blur-sm px-2 md:px-3 py-0.5 md:py-1 rounded-full shadow-lg border border-gray-200 opacity-90 group-hover:opacity-100 transition-all duration-200 hover:scale-105">
             Bob
           </p>
         </div>
@@ -159,7 +159,7 @@ export const GridMap: React.FC = () => {
             imageSrc="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobblai/home_habib.png"
             houseName="Charlie House"
           />
-          <p className="absolute -bottom-2 left-1/2 -translate-x-1/2 font-medium text-[13px] text-gray-800 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg border border-gray-200 opacity-90 group-hover:opacity-100 transition-all duration-200 hover:scale-105">
+          <p className="absolute -bottom-2 left-1/2 -translate-x-1/2 font-medium text-[9px] md:text-[13px] text-gray-800 bg-white/95 backdrop-blur-sm px-2 md:px-3 py-0.5 md:py-1 rounded-full shadow-lg border border-gray-200 opacity-90 group-hover:opacity-100 transition-all duration-200 hover:scale-105">
             Charlie
           </p>
         </div>
@@ -178,7 +178,7 @@ export const GridMap: React.FC = () => {
             imageSrc="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobblai/home_gaurav.png"
             houseName="David House"
           />
-          <p className="absolute -bottom-2 left-1/2 -translate-x-1/2 font-medium text-[13px] text-gray-800 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg border border-gray-200 opacity-90 group-hover:opacity-100 transition-all duration-200 hover:scale-105">
+          <p className="absolute -bottom-2 left-1/2 -translate-x-1/2 font-medium text-[9px] md:text-[13px] text-gray-800 bg-white/95 backdrop-blur-sm px-2 md:px-3 py-0.5 md:py-1 rounded-full shadow-lg border border-gray-200 opacity-90 group-hover:opacity-100 transition-all duration-200 hover:scale-105">
             David
           </p>
         </div>
@@ -187,7 +187,7 @@ export const GridMap: React.FC = () => {
       {/* Papa John's Restaurant */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-10">
         <div className="group relative">
-          <div className="w-32 h-32 flex items-center justify-center transform hover:scale-105 transition-transform">
+          <div className="w-16 h-16 md:w-32 md:h-32 flex items-center justify-center transform hover:scale-105 transition-transform">
             <div className="relative w-full h-full">
               {orders.some((order) => order.status === "preparing") && (
                 <CookingAnimation />
@@ -199,7 +199,7 @@ export const GridMap: React.FC = () => {
               />
             </div>
           </div>
-          <p className="absolute -bottom-2 left-1/2 -translate-x-1/2 font-medium text-[11px] text-gray-800 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg border border-gray-200 opacity-90 group-hover:opacity-100 transition-all duration-200 hover:scale-105">
+          <p className="absolute -bottom-2 left-1/2 -translate-x-1/2 font-medium text-[8px] md:text-[11px] text-gray-800 bg-white/95 backdrop-blur-sm px-2 md:px-3 py-0.5 md:py-1 rounded-full shadow-lg border border-gray-200 opacity-90 group-hover:opacity-100 transition-all duration-200 hover:scale-105">
             Agentic Crust
           </p>
         </div>
@@ -207,7 +207,7 @@ export const GridMap: React.FC = () => {
 
       {/* Roads */}
       {/* Horizontal Road */}
-      <div className="absolute left-20 right-20 top-1/2 -translate-y-1/2 h-8 bg-[#1B1B1B] shadow-lg z-5">
+      <div className="absolute left-20 right-20 top-1/2 -translate-y-1/2 h-4 md:h-8 bg-[#1B1B1B] shadow-lg z-5">
         {/* Road texture */}
         <div
           className="absolute inset-0 opacity-10 mix-blend-overlay"
@@ -227,7 +227,7 @@ export const GridMap: React.FC = () => {
             style={{
               backgroundImage:
                 "linear-gradient(90deg, rgba(255, 255, 255, 0.8) 50%, transparent 50%)",
-              backgroundSize: "24px 100%",
+              backgroundSize: "clamp(12px, 3vw, 24px) 100%",
               boxShadow:
                 weather === "sunny"
                   ? "0 0 5px rgba(255, 255, 255, 0.15)"
@@ -238,7 +238,7 @@ export const GridMap: React.FC = () => {
       </div>
 
       {/* Vertical Road */}
-      <div className="absolute top-20 bottom-20 left-1/2 -translate-x-1/2 w-8 bg-[#1B1B1B] shadow-lg z-5">
+      <div className="absolute top-20 bottom-20 left-1/2 -translate-x-1/2 w-4 md:w-8 bg-[#1B1B1B] shadow-lg z-5">
         {/* Road texture */}
         <div
           className="absolute inset-0 opacity-10 mix-blend-overlay"
@@ -258,7 +258,7 @@ export const GridMap: React.FC = () => {
             style={{
               backgroundImage:
                 "linear-gradient(0deg, rgba(255, 255, 255, 0.8) 50%, transparent 50%)",
-              backgroundSize: "100% 24px",
+              backgroundSize: "100% clamp(12px, 3vw, 24px)",
               boxShadow:
                 weather === "sunny"
                   ? "0 0 5px rgba(255, 255, 255, 0.15)"
@@ -269,7 +269,7 @@ export const GridMap: React.FC = () => {
       </div>
 
       {/* Intersection */}
-      <div className="absolute left-1/2 top-1/2 w-8 h-8 -translate-x-1/2 -translate-y-1/2 bg-[#1B1B1B] rounded-full shadow-xl z-6">
+      <div className="absolute left-1/2 top-1/2 w-4 h-4 md:w-8 md:h-8 -translate-x-1/2 -translate-y-1/2 bg-[#1B1B1B] rounded-full shadow-xl z-6">
         {/* Intersection texture */}
         <div
           className="absolute inset-0 rounded-full opacity-10 mix-blend-overlay"

@@ -17,7 +17,7 @@ export const CustomerAgent: React.FC = () => {
       <div className="flex-1 space-y-2 overflow-auto mt-3 pr-2 custom-scrollbar">
         {orders.map((order) => (
           <div
-            key={`customer-order-${order.id}`}
+            key={`customer-${order.id}-${order.status}`}
             className="bg-gray-800/50 backdrop-blur-sm p-2 rounded-lg border border-purple-500/20"
           >
             <div className="flex items-center justify-between mb-1">
