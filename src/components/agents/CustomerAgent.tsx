@@ -42,7 +42,7 @@ export const CustomerAgent: React.FC = () => {
                     : order.status === "out_for_delivery"
                     ? "bg-blue-900/50 text-blue-300"
                     : "bg-gray-900/50 text-gray-300"
-                } whitespace-nowrap`}
+                } whitespace-nowrap text-[9px] md:text-sm`}
               >
                 {order.status === "out_for_delivery"
                   ? "delivering"

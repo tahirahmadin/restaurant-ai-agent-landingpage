@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Bot } from 'lucide-react';
-import { ChatBot } from './chat/ChatBot';
+import React, { useState } from "react";
+import { Bot } from "lucide-react";
+import { ChatBot } from "./chat/ChatBot";
 
 export const OrderBot: React.FC = () => {
   const [showChat, setShowChat] = useState(false);

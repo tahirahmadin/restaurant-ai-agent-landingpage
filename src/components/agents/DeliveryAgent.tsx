@@ -36,7 +36,7 @@ export const DeliveryAgent: React.FC = () => {
                 Order #{parseInt(activeDelivery.id)}
               </span>
               <div
-                className={`px-1.5 py-0.5 rounded-full text-[9px] ${
+                className={`px-1.5 py-0.5 rounded-full text-[9px] md:text-sm ${
                   activeDelivery.status === "out_for_delivery"
                     ? "bg-blue-500/20 text-blue-300"
                     : "bg-green-500/20 text-green-300"
@@ -93,7 +93,7 @@ export const DeliveryAgent: React.FC = () => {
                   <span className="text-xs text-yellow-300">
                     Order #{parseInt(order.id)}
                   </span>
-                  <span className="text-[11px] text-yellow-400/60">
+                  <span className="text-[9px] md:text-sm text-yellow-400/60">
                     Ready for delivery
                   </span>
                 </div>
@@ -119,7 +119,7 @@ export const DeliveryAgent: React.FC = () => {
                   <span className="text-xs text-blue-300">
                     Order #{parseInt(order.id)}
                   </span>
-                  <span className="text-[11px] text-blue-400/60">
+                  <span className="text-[9px] md:text-sm text-blue-400/60">
                     Waiting in queue
                   </span>
                 </div>

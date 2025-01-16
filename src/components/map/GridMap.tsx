@@ -53,7 +53,7 @@ const HouseComponent: React.FC<HouseComponentProps> = ({
       className={`relative w-10 h-10 md:w-20 md:h-20 flex flex-col items-center justify-center transform hover:scale-105 transition-transform ${className}`}
     >
       {statusText && (
-        <div className="absolute -top-4 md:-top-6 left-1/2 -translate-x-1/2 bg-gray-800/90 text-white px-1.5 md:px-2 py-0.5 rounded-full text-[6px] md:text-[8px] whitespace-nowrap shadow-lg z-50">
+        <div className="absolute -top-4 md:-top-8 left-1/2 -translate-x-1/2 bg-gray-800/90 text-white px-1.5 md:px-3 py-0.5 md:py-1 rounded-full text-[6px] md:text-xs whitespace-nowrap shadow-lg z-50">
           {statusText}
         </div>
       )}
@@ -167,12 +167,12 @@ export const GridMap: React.FC = () => {
 
       {/* Gaurav House */}
       <div className="absolute right-0 top-[50%] -translate-y-1/2 text-center z-20">
-        <button
+        {/* <button
           onClick={() => useStore.setState({ showGauravChat: true })}
           className="absolute -top-10 left-1/2 -translate-x-1/2 p-2 bg-purple-500 hover:bg-purple-600 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-110 z-20"
         >
           <MessageSquare className="w-5 h-5 text-white" />
-        </button>
+        </button> */}
         <div className="group relative">
           <HouseComponent
             imageSrc="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobblai/home_gaurav.png"

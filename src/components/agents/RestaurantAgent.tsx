@@ -89,7 +89,7 @@ export const RestaurantAgent: React.FC = () => {
                       : currentOrder.cookingTimeLeft > 5
                       ? "bg-yellow-500/20 text-yellow-300"
                       : "bg-green-500/20 text-green-300"
-                  }`}
+                  } text-[9px] md:text-sm`}
                 >
                   {currentOrder.cookingTimeLeft}m {isPaused && "(paused)"}
                 </div>
