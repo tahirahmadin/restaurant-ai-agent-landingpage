@@ -10,7 +10,7 @@ export const CustomerAgent: React.FC = () => {
     <div className="flex flex-col p-2 bg-gradient-to-br from-gray-800 to-gray-900/80 rounded-xl shadow-lg border border-purple-500/20 h-[280px]">
       <div className="flex items-center gap-2">
         <Users className="w-4 h-4 text-purple-500" aria-hidden="true" />
-        <h2 className="text-base font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
+        <h2 className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
           Customer Agent
         </h2>
       </div>
@@ -22,19 +22,19 @@ export const CustomerAgent: React.FC = () => {
           >
             <div className="flex items-center justify-between mb-1">
               <div className="flex items-center gap-2">
-                <span className="text-xs text-purple-300">
+                <span className="text-sm text-purple-300">
                   {format(order.orderTime, "HH:mm")} -{" "}
                   {order.destination.replace(" House", "")}
                 </span>
                 <div className="flex items-center gap-1 bg-purple-500/20 px-2 py-0.5 rounded-full">
                   <Home className="w-3 h-3 text-purple-400" />
-                  <span className="text-[10px] text-purple-300">
+                  <span className="text-xs text-purple-300">
                     {order.destination.replace(" House", "")}
                   </span>
                 </div>
               </div>
               <span
-                className={`px-1.5 py-0.5 rounded ${
+                className={`px-2 py-0.5 rounded text-[10px] ${
                   order.status === "delivered"
                     ? "bg-green-900/50 text-green-300"
                     : order.status === "preparing"
@@ -42,7 +42,7 @@ export const CustomerAgent: React.FC = () => {
                     : order.status === "out_for_delivery"
                     ? "bg-blue-900/50 text-blue-300"
                     : "bg-gray-900/50 text-gray-300"
-                } text-[9px] whitespace-nowrap`}
+                } whitespace-nowrap`}
               >
                 {order.status === "out_for_delivery"
                   ? "delivering"
@@ -58,10 +58,10 @@ export const CustomerAgent: React.FC = () => {
                 />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-[10px] font-medium text-purple-300 truncate">
+                <h3 className="text-sm font-medium text-purple-300 truncate">
                   {order.items[0].name}
                 </h3>
-                <div className="flex items-center gap-2 text-[9px] text-purple-400/80">
+                <div className="flex items-center gap-2 text-xs text-purple-400/80">
                   <div className="flex items-center gap-1">
                     <Pizza className="w-3 h-3" />
                     <span>{order.items[0].size}</span>

@@ -190,6 +190,15 @@ export const useStore = create<StoreState>((set, get) => ({
 
   simulateOrder: () => {
     const state = get();
+    const activeOrders = state.orders.filter(
+      (order) => order.status !== "completed" && order.status !== "delivered"
+    );
+
+    // Don't create new orders if we have too many active ones
+    if (activeOrders.length >= 4) {
+      return;
+    }
+
     const availableItems = state.inventory.filter((item) => item.quantity > 0);
     if (availableItems.length === 0) {
       return;
@@ -257,11 +266,6 @@ export const useStore = create<StoreState>((set, get) => ({
     // Start cooking timer
     const cookingInterval = setInterval(() => {
       const currentOrder = get().orders.find((o) => o.id === order.id);
-      const hasActiveDelivery = get().orders.some(
-        (o) =>
-          o.status === "out_for_delivery" ||
-          (o.status === "delivered" && o.isReturning)
-      );
       const hasPreparingOrder = get().orders.some(
         (o) => o.status === "preparing" && o.id !== order.id
       );
@@ -285,11 +289,13 @@ export const useStore = create<StoreState>((set, get) => ({
           state.updateCookingTime();
 
           // When cooking is done, only start delivery if no other delivery is active
-          if (currentOrder.cookingTimeLeft <= 0 && !get().isPaused) {
-            if (!hasActiveDelivery) {
-              state.updateOrderStatus(order.id, "out_for_delivery");
-              clearInterval(cookingInterval);
-            }
+          if (
+            currentOrder.cookingTimeLeft <= 0 &&
+            !get().isPaused &&
+            !hasPreparingOrder
+          ) {
+            state.updateOrderStatus(order.id, "out_for_delivery");
+            clearInterval(cookingInterval);
           }
         }
       } else if (currentOrder.status === "placed" && !hasPreparingOrder) {

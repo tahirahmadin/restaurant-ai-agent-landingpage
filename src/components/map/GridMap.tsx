@@ -1,10 +1,11 @@
 import React from "react";
 import { WeatherBar } from "./WeatherBar";
 import { DeliveryBike } from "./DeliveryBike";
-import { Home, Store, MessageSquare } from "lucide-react";
+import { Home, Store, MessageSquare, Microwave } from "lucide-react";
 import { RainEffect } from "../effects/RainEffect";
 import { SunnyEffect } from "../effects/SunnyEffect";
 import { StormyEffect } from "../effects/StormyEffect";
+import { CookingAnimation } from "../effects/CookingAnimation";
 import { CoinAnimation } from "../effects/CoinAnimation";
 import { useStore } from "../../store/useStore";
 import { SimulationControls } from "../SimulationControls";
@@ -166,12 +167,12 @@ export const GridMap: React.FC = () => {
 
       {/* Gaurav House */}
       <div className="absolute right-0 top-[50%] -translate-y-1/2 text-center z-20">
-        {/* <button
+        <button
           onClick={() => useStore.setState({ showGauravChat: true })}
           className="absolute -top-10 left-1/2 -translate-x-1/2 p-2 bg-purple-500 hover:bg-purple-600 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-110 z-20"
         >
           <MessageSquare className="w-5 h-5 text-white" />
-        </button> */}
+        </button>
         <div className="group relative">
           <HouseComponent
             imageSrc="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobblai/home_gaurav.png"
@@ -185,12 +186,22 @@ export const GridMap: React.FC = () => {
 
       {/* Papa John's Restaurant */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-10">
-        <div className="w-32 h-32 flex items-center justify-center transform hover:scale-105 transition-transform">
-          <img
-            src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobblai/restaurant.png"
-            alt="Papa John's"
-            className="w-full h-full object-contain rounded-lg"
-          />
+        <div className="group relative">
+          <div className="w-32 h-32 flex items-center justify-center transform hover:scale-105 transition-transform">
+            <div className="relative w-full h-full">
+              {orders.some((order) => order.status === "preparing") && (
+                <CookingAnimation />
+              )}
+              <img
+                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobblai/restaurant.png"
+                alt="Agentic Crust"
+                className="w-full h-full object-contain rounded-lg"
+              />
+            </div>
+          </div>
+          <p className="absolute -bottom-2 left-1/2 -translate-x-1/2 font-medium text-[11px] text-gray-800 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg border border-gray-200 opacity-90 group-hover:opacity-100 transition-all duration-200 hover:scale-105">
+            Agentic Crust
+          </p>
         </div>
       </div>
 

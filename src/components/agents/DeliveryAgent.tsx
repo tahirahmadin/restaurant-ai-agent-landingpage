@@ -20,7 +20,7 @@ export const DeliveryAgent: React.FC = () => {
     <div className="bg-gradient-to-br from-gray-800 to-gray-900/80 p-2 rounded-xl shadow-lg border border-blue-500/20 h-[180px]">
       <div className="flex items-center gap-2 mb-3">
         <Bike className="w-4 h-4 text-blue-500" />
-        <h2 className="text-base font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-600">
+        <h2 className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-600">
           Delivery Agent
         </h2>
       </div>
@@ -32,7 +32,7 @@ export const DeliveryAgent: React.FC = () => {
             className="bg-gray-800/50 backdrop-blur-sm p-3 rounded-lg border border-blue-500/20"
           >
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-medium text-blue-300">
+              <span className="text-sm font-medium text-blue-300">
                 Order #{parseInt(activeDelivery.id)}
               </span>
               <div
@@ -60,14 +60,14 @@ export const DeliveryAgent: React.FC = () => {
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <h3 className="text-xs font-medium text-blue-300 truncate">
+                  <h3 className="text-sm font-medium text-blue-300 truncate">
                     {activeDelivery.items[0].name}
                   </h3>
                   <span className="text-[9px] text-blue-400/80">
                     {activeDelivery.destination}
                   </span>
                 </div>
-                <div className="flex items-center gap-2 text-[11px] text-blue-400/80">
+                <div className="flex items-center gap-2 text-xs text-blue-400/80">
                   <div className="flex items-center gap-1">
                     <Pizza className="w-3 h-3" />
                     <span>{activeDelivery.items[0].size}</span>
@@ -81,7 +81,7 @@ export const DeliveryAgent: React.FC = () => {
         {/* Queued Orders */}
         {readyOrders.length > 0 && (
           <div className="mt-2">
-            <div className="text-[10px] text-yellow-400/80 mb-2 pl-1">
+            <div className="text-xs text-yellow-400/80 mb-2 pl-1">
               Ready for Delivery ({readyOrders.length})
             </div>
             {readyOrders.map((order, index) => (
@@ -90,10 +90,10 @@ export const DeliveryAgent: React.FC = () => {
                 className="bg-gray-800/30 backdrop-blur-sm p-2 rounded-lg border border-yellow-500/10 mb-2"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-[9px] text-yellow-300">
+                  <span className="text-xs text-yellow-300">
                     Order #{parseInt(order.id)}
                   </span>
-                  <span className="text-[8px] text-yellow-400/60">
+                  <span className="text-[11px] text-yellow-400/60">
                     Ready for delivery
                   </span>
                 </div>
@@ -105,7 +105,7 @@ export const DeliveryAgent: React.FC = () => {
         {queuedOrders.length > 0 && (
           <div className="mt-2">
             <div
-              className="text-[10px] text-blue-400/80 mb-2 pl-1"
+              className="text-xs text-blue-400/80 mb-2 pl-1"
               aria-label="Queue status"
             >
               Waiting ({queuedOrders.length})
@@ -116,10 +116,10 @@ export const DeliveryAgent: React.FC = () => {
                 className="bg-gray-800/30 backdrop-blur-sm p-2 rounded-lg border border-blue-500/10 mb-2"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-[9px] text-blue-300">
+                  <span className="text-xs text-blue-300">
                     Order #{parseInt(order.id)}
                   </span>
-                  <span className="text-[8px] text-blue-400/60">
+                  <span className="text-[11px] text-blue-400/60">
                     Waiting in queue
                   </span>
                 </div>
