@@ -98,29 +98,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Navbar: React.FC = () => {
   const classes = useStyles();
   const { pathname } = useLocation();
-  const navigate = useNavigate();
   const theme = useTheme();
 
   // Responsive
-  const matches = useMediaQuery("(min-width:1153px)");
   const md = useMediaQuery(theme.breakpoints.down("md"));
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
 
   // States
   const [loaded, setLoaded] = useState(false);
-  const [textCopied, setTextCopied] = useState(false);
-  const [navLinks, setNavLinks] = useState<StateBooleanProps>({
-    market: false,
-    kitchen: false,
-  });
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [marketOpen, setMarketOpen] = useState(false);
-  const [kitchenOpen, setKitchenOpen] = useState(false);
-  const [gamesOpen, setGamesOpen] = useState(false);
-
-  const [playOpen, setPlayOpen] = useState(false);
-  const [projectOpen, setProjectOpen] = useState(false);
-  const [chainOpen, setChainOpen] = useState(false);
 
   //Local:: Hook to update loaded
   useEffect(() => {
@@ -210,7 +195,6 @@ const Navbar: React.FC = () => {
               height={28}
             />
             <Typography
-              variant=""
               style={{
                 fontSize: md ? 9 : 12,
                 lineHeight: "90%",
@@ -238,7 +222,6 @@ const Navbar: React.FC = () => {
               height={28}
             />
             <Typography
-              variant=""
               style={{
                 fontSize: md ? 9 : 12,
                 lineHeight: "90%",
@@ -266,7 +249,6 @@ const Navbar: React.FC = () => {
               height={28}
             />
             <Typography
-              variant=""
               style={{
                 fontSize: md ? 9 : 12,
                 lineHeight: "90%",
@@ -296,7 +278,6 @@ const Navbar: React.FC = () => {
               height={28}
             />
             <Typography
-              variant=""
               style={{
                 fontSize: md ? 9 : 12,
                 lineHeight: "90%",

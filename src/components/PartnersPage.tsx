@@ -131,7 +131,7 @@ const Partners = () => {
               maxWidth: "100%",
             }}
           >
-            <Typography
+            <Box
               sx={{
                 whiteSpace: "nowrap",
                 fontFamily: "'Rubik'",
@@ -154,7 +154,7 @@ const Partners = () => {
               }}
             >
               Meet our
-            </Typography>
+            </Box>
             <Box
               style={{
                 width: "100%",
@@ -187,7 +187,7 @@ const Partners = () => {
                   fill="#0000FF"
                 />
               </svg>
-              <Typography
+              <Box
                 sx={{
                   whiteSpace: "nowrap",
                   fontFamily: "'Rubik'",
@@ -210,7 +210,7 @@ const Partners = () => {
                 }}
               >
                 Partners
-              </Typography>
+              </Box>
               <svg
                 width={sm ? "22" : "31"}
                 height={sm ? "23" : "32"}
@@ -227,15 +227,20 @@ const Partners = () => {
           </Box>
           <p
             className="partners_description"
-            style={{ width: "100%", fontSize: sm ? 16 : 24, opacity: 0.8 }}
+            style={{
+              width: "100%",
+              fontSize: sm ? 16 : 22,
+              opacity: 0.8,
+              textAlign: "left",
+            }}
           >
-            OneRare is proud to collaborate with the Best of the Best, creating
-            quality partnerships to help grow our Foodverse.
+            Gobbl AI is proud to collaborate with the best of the best, creating
+            quality partnerships to help us grow.
             <br />
             <br />
-            We are a Proud Partner to Top Brands & Celebrity Chefs from around
-            the world, alongside Strategic Partnerships with Angels, VCs &
-            Projects in Web3.
+            We are a proud partner to top brands and celebrity chefs from around
+            the world, alongside strategic partnerships with angels, VCs, and
+            projects in Web3.
           </p>
         </Box>
         <div className="partners_partners">
@@ -299,7 +304,7 @@ const Partners = () => {
               fill="#0000FF"
             />
           </svg>
-          <Typography
+          <Box
             sx={{
               whiteSpace: "nowrap",
               fontFamily: "'Rubik'",
@@ -322,7 +327,7 @@ const Partners = () => {
             }}
           >
             Chef Partners
-          </Typography>
+          </Box>
           <svg
             width={sm ? "22" : "31"}
             height={sm ? "23" : "32"}
@@ -397,7 +402,7 @@ const Partners = () => {
               fill="#0000FF"
             />
           </svg>
-          <Typography
+          <Box
             sx={{
               whiteSpace: "nowrap",
               fontFamily: "'Rubik'",
@@ -420,7 +425,7 @@ const Partners = () => {
             }}
           >
             Partners
-          </Typography>
+          </Box>
           <svg
             width={sm ? "22" : "31"}
             height={sm ? "23" : "32"}
@@ -485,7 +490,7 @@ const Partners = () => {
               fill="#0000FF"
             />
           </svg>
-          <Typography
+          <Box
             sx={{
               textAlign: "left",
               whiteSpace: "nowrap",
@@ -508,7 +513,7 @@ const Partners = () => {
             }}
           >
             Food Partners
-          </Typography>
+          </Box>
           <svg
             width={sm ? "22" : "31"}
             height={sm ? "23" : "32"}

@@ -86,7 +86,7 @@ const MediaPage = () => {
                 maxWidth: "100%",
               }}
             >
-              <Typography
+              <Box
                 sx={{
                   whiteSpace: "nowrap",
                   fontFamily: "'Rubik'",
@@ -109,7 +109,7 @@ const MediaPage = () => {
                 }}
               >
                 Watch our
-              </Typography>
+              </Box>
               <Box
                 style={{
                   width: "100%",
@@ -141,7 +141,7 @@ const MediaPage = () => {
                     fill="#0000FF"
                   />
                 </svg>
-                <Typography
+                <Box
                   sx={{
                     whiteSpace: "nowrap",
                     fontFamily: "'Rubik'",
@@ -164,7 +164,7 @@ const MediaPage = () => {
                   }}
                 >
                   Media Interactions
-                </Typography>
+                </Box>
                 <svg
                   width={sm ? "22" : "31"}
                   height={sm ? "23" : "32"}
@@ -301,7 +301,7 @@ const MediaPage = () => {
                 fill="#0000FF"
               />
             </svg>
-            <Typography
+            <Box
               sx={{
                 whiteSpace: "nowrap",
                 fontFamily: "'Rubik'",
@@ -324,7 +324,7 @@ const MediaPage = () => {
               }}
             >
               News Updates
-            </Typography>
+            </Box>
             <svg
               width={sm ? "22" : "31"}
               height={sm ? "23" : "32"}

@@ -338,7 +338,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
       />
       <Typography
         style={{
-          width: "85%",
+          width: "100%",
           maxWidth: sm ? 150 : "100%",
           fontFamily: "Rubik",
           fontWeight: 700,
@@ -356,7 +356,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
         style={{
           textAlign: "center",
           lineHeight: "120%",
-          fontSize: sm ? 12 : 18,
+          fontSize: sm ? 12 : 20,
           color: "#FF9CFF",
           fontWeight: 500,
           marginTop: sm ? "-5px" : "-10px",
@@ -369,7 +369,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
         style={{
           textAlign: "center",
           lineHeight: "120%",
-          fontSize: sm ? 12 : 18,
+          fontSize: sm ? 12 : 20,
           height: sm ? 75 : 127,
         }}
       >
@@ -782,7 +782,7 @@ export const LandingPage = () => {
               </motion.div>
             </motion.div>
             <img
-              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/food_with_ai.svg"
+              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/food_with_deAi.svg"
               alt="Gobbl AI - Powering food with AI"
               width={600}
               height={450}
@@ -806,12 +806,16 @@ export const LandingPage = () => {
                   fontWeight: 400,
                 }}
               >
-                Gobbl is creating essential AI infrastructure for restaurants
-                that thinks like your best manager.
+                Gobbl is transforming how restaurants connect with customers-
+                making food discovery personal, intuitive, and effortless.
                 <br />
                 <br />
-                We are replacing static systems across the board with self
-                learning systems that will reshape the modern restaurant.
+                Our technology powers the world’s first autonomous food network,
+                with AI agents working like your best employees- from ordering
+                to analytics.
+                <br />
+                <br />
+                Get ready for the Agentic era in Food.
               </Typography>
             </Box>
             <StarSvg style={{ top: 0, right: 0, animationDuration: "1.2s" }} />
@@ -956,24 +960,24 @@ export const LandingPage = () => {
               >
                 <h2
                   className={classes.heading2}
-                  style={{ color: "#64FF99", height: sm ? 42 : 115 }}
+                  style={{ color: "#fff", height: sm ? 42 : 115 }}
                 >
-                  HOW
+                  De<span style={{ color: "#64FF99" }}>AI</span>
                 </h2>
                 <Typography
                   variant="h3"
                   className={classes.sub_heading}
                   style={{
                     fontWeight: 600,
-                    fontSize: sm ? 16 : 32,
+                    fontSize: sm ? 16 : 24,
                     lineHeight: "100%",
                     maxWidth: 390,
                     textAlign: "left",
                   }}
                 >
-                  does AI make your
+                  The Future of Food
                   <br />
-                  restaurant <span style={{ color: "#FF9CFF" }}>better?</span>
+                  Ordering is here
                 </Typography>
               </Box>
               <Box
@@ -984,7 +988,7 @@ export const LandingPage = () => {
                 }}
               >
                 <img
-                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/how_ai.webp"
+                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/deAi_fries.webp"
                   alt="Gobbl AI"
                   width={1440}
                   height={517}
@@ -1012,23 +1016,7 @@ export const LandingPage = () => {
           overflow: "hidden",
         }}
       >
-        <img
-          src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
-          alt="Gobbl AI"
-          width={2000}
-          height={2000}
-          style={{
-            pointerEvents: "none",
-            objectFit: "cover",
-            position: "absolute",
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            width: "100%",
-            height: "100%",
-          }}
-        />
+        
         <Box
           style={{
             width: "100%",
@@ -1088,7 +1076,7 @@ export const LandingPage = () => {
             <ExploreCard
               img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/roadmap1.png"
               imgSize={sm ? 95 : 170}
-              title="ORDER"
+              title="ORDERING"
               sub_title="Intuitive food ordering"
               description1="Deploy self-learning"
               description2="voice & chat agents to"
@@ -1098,27 +1086,27 @@ export const LandingPage = () => {
             <ExploreCard
               img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap2.png"
               imgSize={sm ? 110 : 200}
-              title="OPERATE"
-              sub_title="Kitchen AI Cockpit"
-              description1="Transform backend ops"
-              description2="into a synchronized dance"
-              description3="of preparation, cooking,"
-              description4="and dispatch"
+              title="ANALYTICS"
+              sub_title="Cultivate Customers"
+              description1="Recieve actionable"
+              description2="insights into sales and"
+              description3="trends to create strategies"
+              description4="for customer retention"
             />
             <ExploreCard
               img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap3.png"
               imgSize={sm ? 100 : 200}
-              title="DELIVER"
-              sub_title="Managing the last mile"
-              description1="Slash delivery costs with"
-              description2="AI-powered route"
-              description3="optimization that learns"
-              description4="and adapts in real-time"
+              title="MARKETING"
+              sub_title="Automate Campaigns"
+              description1="Run targeted campaigns"
+              description2="and promotions to attract"
+              description3="users, based on trends &"
+              description4="inventory"
             />
             <ExploreCard
               img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap4.png"
               imgSize={sm ? 110 : 200}
-              title="INTEGRATE"
+              title="INTEGRATIONS"
               sub_title="with partner systems"
               description1="Connect to any platform,"
               description2="anywhere, through"
@@ -1161,27 +1149,11 @@ export const LandingPage = () => {
             pointerEvents: "none",
             objectFit: "cover",
             position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            width: "100%",
-            height: "50%",
-          }}
-        />
-        <img
-          src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
-          alt="Gobbl AI"
-          width={2000}
-          height={2000}
-          style={{
-            pointerEvents: "none",
-            objectFit: "cover",
-            position: "absolute",
             bottom: 0,
             left: 0,
             right: 0,
             width: "100%",
-            height: "50%",
+            height: "100%",
           }}
         />
         <Box
@@ -1247,7 +1219,7 @@ export const LandingPage = () => {
               }}
             >
               <img
-                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/meet_gobbl.webp"
+                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/meet_gobbl_new.webp"
                 alt="Gobbl AI"
                 width={1150}
                 height={600}
@@ -1376,40 +1348,6 @@ export const LandingPage = () => {
           zIndex: 2,
         }}
       >
-        <img
-          src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
-          alt="Gobbl AI"
-          width={2000}
-          height={2000}
-          style={{
-            pointerEvents: "none",
-            objectFit: "cover",
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            width: "100%",
-            height: "50%",
-            // zIndex: 3
-          }}
-        />
-        <img
-          src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
-          alt="Gobbl AI"
-          width={2000}
-          height={2000}
-          style={{
-            pointerEvents: "none",
-            objectFit: "cover",
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            width: "100%",
-            height: "50%",
-            // zIndex: 3,
-          }}
-        />
         <Box
           style={{
             width: "100%",
@@ -1887,7 +1825,7 @@ export const LandingPage = () => {
           >
             <TitleComponent
               title1="Meet the"
-              title2="Foodies"
+              title2="Gobblins"
               titleStyle={{
                 paddingLeft: "25px",
               }}
@@ -2237,7 +2175,8 @@ export const LandingPage = () => {
                 color: "#FFFFFF",
               }}
             >
-              Shape the future of your restaurant with the our Co-Pilot
+              Make your restaurant future-ready with Gobbl Smart operations,
+              smarter profits.
             </Typography>
             <a href="https://forms.gle/VuR6zz3kxB4skbep6" target="_blank">
               <CommonButton
