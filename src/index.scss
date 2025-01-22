@@ -85,6 +85,42 @@
   }
 }
 
+@keyframes steam {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(var(--steam-distance)) scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes spin-cooking {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-roadStripe {
+  animation: roadStripe 1.5s linear infinite;
+}
+
+.animate-float-3 {
+  animation: floatAnimation3 5s ease-in-out infinite;
+}
+
+.animate-steam {
+  animation: steam 1.5s ease-out infinite;
+}
+
+.animate-spin-cooking {
+  animation: spin-cooking 4s linear infinite;
+}
+
 /* Heading */
 .heading {
   font-family: "Rubik";

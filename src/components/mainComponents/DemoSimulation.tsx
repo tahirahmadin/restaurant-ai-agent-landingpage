@@ -9,20 +9,44 @@ import { GauravChat } from "../chat/GauravChat";
 import { useStore } from "../../store/useStore";
 import { Play } from "lucide-react";
 
+const MobileLayout: React.FC = () => {
+  const [isVideoPlaying, setIsVideoPlaying] = React.useState(false);
+  const showGauravChat = useStore((state) => state.showGauravChat);
+
+  return (
+    <div className="flex flex-col gap-4 h-full">
+      {/* Controls */}
+      <div className="flex items-center justify-between gap-2 px-2">
+        <WeatherControls />
+        <SimulationControls isMobile={true} />
+      </div>
+
+      {/* Map */}
+      <div className="h-[300px] bg-gray-800 rounded-lg overflow-hidden">
+        <Map />
+      </div>
+
+      {/* Agents */}
+      <div className="flex-1 overflow-y-auto">
+        <AgentsPanel />
+      </div>
+
+      {showGauravChat && <GauravChat />}
+    </div>
+  );
+};
+
 export const DemoSimulation: React.FC = () => {
   const showGauravChat = useStore((state) => state.showGauravChat);
   const [isVideoPlaying, setIsVideoPlaying] = React.useState(false);
 
-  // Check if screen is mobile
-  const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
+  // Check if screen is mobile or tablet
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth < 1024);
 
   React.useEffect(() => {
     const handleResize = () => {
       const isMobileOrTablet = window.innerWidth < 1024;
       setIsMobile(isMobileOrTablet);
-      if (!isMobileOrTablet) {
-        setIsVideoPlaying(false);
-      }
     };
 
     window.addEventListener("resize", handleResize);
@@ -32,28 +56,7 @@ export const DemoSimulation: React.FC = () => {
   return (
     <div className="h-full bg-transparent p-4">
       {isMobile ? (
-        // Mobile/Tablet View with Video
-        <div className="h-[200px] rounded-xl overflow-hidden relative bg-gray-900">
-          {isVideoPlaying ? (
-            <video
-              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/Restaurant_Demo.mp4"
-              className="w-full h-full object-contain"
-              autoPlay
-              controls
-              playsInline
-            />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
-              <button
-                onClick={() => setIsVideoPlaying(true)}
-                className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-full hover:from-purple-700 hover:to-blue-700 transition-all transform hover:scale-105 shadow-xl"
-              >
-                <Play className="w-5 h-5" />
-                <span>Watch Demo</span>
-              </button>
-            </div>
-          )}
-        </div>
+        <MobileLayout />
       ) : (
         // Desktop View with Interactive Simulation
         <div className="flex gap-4 h-full">
@@ -76,7 +79,7 @@ export const DemoSimulation: React.FC = () => {
           </div>
         </div>
       )}
-      {/* {showGauravChat && <GauravChat />} */}
+      {showGauravChat && <GauravChat />}
     </div>
   );
 };

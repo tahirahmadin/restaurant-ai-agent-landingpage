@@ -21,13 +21,13 @@ export const SunnyEffect: React.FC = () => {
   return (
     <>
       {/* Sun */}
-      <div className="absolute top-8 right-8 z-20 pointer-events-none animate-float-1">
+      <div className="absolute top-4 md:top-8 right-4 md:right-8 z-20 pointer-events-none animate-float-1">
         {/* Sun rays */}
-        <div className="absolute -inset-4 animate-spin-slow">
+        <div className="absolute -inset-2 md:-inset-4 animate-spin-slow">
           {[...Array(12)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-0.5 h-16 bg-gradient-to-t from-transparent to-yellow-200/30"
+              className="absolute w-0.5 h-8 md:h-16 bg-gradient-to-t from-transparent to-yellow-200/30"
               style={{
                 left: "50%",
                 top: "50%",
@@ -41,7 +41,7 @@ export const SunnyEffect: React.FC = () => {
         {/* Sun core */}
         <div
           ref={sunRef}
-          className="relative w-12 h-12 bg-gradient-to-r from-yellow-300 to-orange-300 rounded-full animate-pulse"
+          className="relative w-6 h-6 md:w-12 md:h-12 bg-gradient-to-r from-yellow-300 to-orange-300 rounded-full animate-pulse"
           style={{
             boxShadow:
               "0 0 30px rgba(255, 215, 0, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.5)",

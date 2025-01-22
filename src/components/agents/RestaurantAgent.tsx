@@ -22,7 +22,7 @@ export const RestaurantAgent: React.FC = () => {
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <ChefHat className="w-4 h-4 text-red-500" />
-          <h2 className="text-base font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-orange-600">
+          <h2 className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-orange-600">
             Restaurant Agent
           </h2>
           <button
@@ -57,7 +57,7 @@ export const RestaurantAgent: React.FC = () => {
       {currentOrder && (
         <div className="bg-gray-800/50 backdrop-blur-sm p-3 rounded-xl border border-red-500/20">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-medium text-red-300">
+            <span className="text-sm font-medium text-red-300">
               Order #{parseInt(currentOrder.id)}
             </span>
             <Timer
@@ -74,10 +74,10 @@ export const RestaurantAgent: React.FC = () => {
               />
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="text-xs font-medium text-red-300 truncate">
+              <h3 className="text-sm font-medium text-red-300 truncate">
                 {currentOrder.items[0].name}
               </h3>
-              <div className="flex items-center gap-2 text-[11px] text-red-400/80">
+              <div className="flex items-center gap-2 text-xs text-red-400/80">
                 <div className="flex items-center gap-2">
                   <Pizza className="w-3 h-3" />
                   <span>{currentOrder.items[0].size}</span>
@@ -89,7 +89,7 @@ export const RestaurantAgent: React.FC = () => {
                       : currentOrder.cookingTimeLeft > 5
                       ? "bg-yellow-500/20 text-yellow-300"
                       : "bg-green-500/20 text-green-300"
-                  }`}
+                  } text-[9px] md:text-sm`}
                 >
                   {currentOrder.cookingTimeLeft}m {isPaused && "(paused)"}
                 </div>
