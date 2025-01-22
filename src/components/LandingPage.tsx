@@ -1014,7 +1014,6 @@ export const LandingPage = () => {
           overflow: "hidden",
         }}
       >
-        
         <Box
           style={{
             width: "100%",
@@ -1883,11 +1882,12 @@ export const LandingPage = () => {
                 }}
               />
               <img
-                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
+                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/team/supreet.png"
                 alt="Gobbl AI"
                 style={{
                   width: md ? 120 : 172,
                   height: md ? 120 : 172,
+                  borderRadius: "50%",
                 }}
               />
               <Typography
@@ -1976,11 +1976,12 @@ export const LandingPage = () => {
                 }}
               />
               <img
-                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
+                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/team/gaurav.png"
                 alt="Gobbl AI"
                 style={{
                   width: md ? 120 : 172,
                   height: md ? 120 : 172,
+                  borderRadius: "50%",
                 }}
               />
               <Typography
