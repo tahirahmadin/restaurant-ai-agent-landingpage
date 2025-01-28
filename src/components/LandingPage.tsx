@@ -312,7 +312,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: sm ? "10px" : "20px",
+        gap: sm ? "5px" : "20px",
         padding: sm ? "5% 5% 8%" : "75px 20px",
         transition: "all 0.3s ease",
         transform: "translateY(0)",
@@ -381,7 +381,6 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
         <br />
         {description4}
       </Typography>
-      \
     </Box>
   );
 };
@@ -538,7 +537,7 @@ export const LandingPage = () => {
               <Box
                 style={{
                   display: "flex",
-                  gap: sm ? "15px" : "35px",
+                  gap: sm ? "10px" : "35px",
                   marginBottom: "15px",
                 }}
               >
@@ -951,7 +950,7 @@ export const LandingPage = () => {
                   display: "flex",
                   alignItems: "flex-end",
                   justifyContent: "center",
-                  gap: "5px",
+                  gap: sm ? "3px" : "5px",
                   padding: sm ? "0 5%" : 0,
                   // flexDirection: sm ? "column" : "row",
                 }}
@@ -1000,6 +999,117 @@ export const LandingPage = () => {
             </Box>
           </Box>
         </Box>
+
+        {/* how we gobbl */}
+        <Box
+          style={{
+            width: "100%",
+            height: "100%",
+            background: "#000",
+            padding: md ? (sm ? "0 5% 25px" : "0 5%") : "0 0 2%",
+            position: "relative",
+            zIndex: 2,
+          }}
+        >
+          <Box
+            style={{
+              width: "100%",
+              maxWidth: "1440px",
+              margin: "0 auto",
+              // minHeight: "100vh",
+              height: "100%",
+              position: "relative",
+            }}
+          >
+            <Box
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                position: "absolute",
+                marginTop: sm ? "-25px" : md ? "-50px" : "-78px",
+              }}
+            >
+              <Typography
+                style={{
+                  fontFamily: "'Rubik'",
+                  fontWeight: 900,
+                  fontSize: sm ? 48 : md ? 90 : lg ? 120 : 140,
+                  lineHeight: "120%",
+                  textAlign: "center",
+                  textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                  WebkitTextFillColor: "#161810",
+                  WebkitTextStrokeWidth: "1px",
+                  WebkitTextStrokeColor: "rgba(255, 255, 255, 0.7)",
+                }}
+              >
+                how we gobbl
+              </Typography>
+            </Box>
+            <Box
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                paddingTop: sm ? "15px" : md ? "25px" : "35px",
+                position: "relative",
+                zIndex: 1,
+              }}
+            >
+              <img
+                src="/how_we_gobbl.png"
+                alt="Gobbl AI"
+                style={{
+                  width: "fit-content",
+                  height: "100%",
+                  maxHeight: 700,
+                  objectFit: "contain",
+                  marginRight: "-5%",
+                  zIndex: 2,
+                }}
+              />
+              <img
+                src="/user_gobbl.png"
+                alt="Gobbl AI"
+                style={{
+                  width: "fit-content",
+                  maxHeight: sm ? 80 : md ? 160 : lg ? 220 : 380,
+                  height: "fit-content",
+                  objectFit: "contain",
+                  position: "absolute",
+                  left: sm ? -42 : md ? -80 : lg ? -60 : -100,
+                  top: lg ? "5%" : "15%",
+                }}
+              />
+              <img
+                src="/restro_gobbl.png"
+                alt="Gobbl AI"
+                style={{
+                  width: "fit-content",
+                  maxHeight: sm ? 90 : md ? 180 : lg ? 240 : 360,
+                  height: "fit-content",
+                  objectFit: "contain",
+                  position: "absolute",
+                  right: lg ? "2%" : "8%",
+                  bottom: sm ? -30 : md ? "-2%" : "-7%",
+                }}
+              />
+            </Box>
+            {/* <Box
+              style={{
+                position: "absolute",
+                width: lg ? (sm ? 160 : 250) : 318,
+                height: lg ? (sm ? 160 : 250) : 318,
+                right: "-25%",
+                bottom: "-20%",
+                background: "#40FFF4",
+                opacity: 0.6,
+                filter: "blur(212px)",
+              }}
+            /> */}
+          </Box>
+        </Box>
       </Box>
 
       {/* the ai_agent */}
@@ -1007,13 +1117,30 @@ export const LandingPage = () => {
         style={{
           width: "100%",
           height: "100%",
-          background: "#000",
+          background: "#161810",
           padding: md ? (sm ? "50px 5%" : "75px 5%") : "7%",
           position: "relative",
           zIndex: 2,
           overflow: "hidden",
         }}
       >
+        <img
+          src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/htp/noisebg.png"
+          alt="Gobbl AI"
+          width={2000}
+          height={2000}
+          style={{
+            pointerEvents: "none",
+            objectFit: "cover",
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            width: "100%",
+            height: "100%",
+          }}
+        />
         <Box
           style={{
             width: "100%",
@@ -1123,6 +1250,723 @@ export const LandingPage = () => {
               filter: "blur(212px)",
             }}
           />
+        </Box>
+      </Box>
+
+      {/* architecture */}
+      <Box
+        style={{
+          width: "100%",
+          height: "100%",
+          background: "#000",
+          padding: md ? (sm ? "50px 5%" : "75px 5%") : "7%",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <Box
+          style={{
+            width: "100%",
+            maxWidth: "1440px",
+            margin: "0 auto",
+            // minHeight: "100vh",
+            height: "100%",
+            position: "relative",
+          }}
+        >
+          <Box
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              zIndex: 1,
+              gap: "15px",
+            }}
+          >
+            <Typography
+              style={{
+                width: "fit-content",
+                height: sm ? 42 : 60,
+                background: "#FF9CFF",
+                borderRadius: "50px",
+                fontFamily: "'Rubik'",
+                fontWeight: 900,
+                fontSize: sm ? 24 : 32,
+                lineHeight: "120%",
+                fontVariant: "all-small-caps",
+                color: "#000000",
+                padding: "0 25px 5px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                marginBottom: sm ? "10px" : "25px",
+              }}
+            >
+              ARCHITECTURE
+            </Typography>
+
+            <Box
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: sm ? "10px" : "25px",
+              }}
+            >
+              <Box
+                style={{
+                  minWidth: 65,
+                  width: sm ? 60 : 145,
+                  height: sm ? 70 : 120,
+                }}
+              >
+                <img
+                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/base_arc.webp"
+                  alt="Gobbl AI"
+                  style={{
+                    width: "fit-content",
+                    maxHeight: 130,
+                    objectFit: "contain",
+                  }}
+                />
+              </Box>
+              <Box
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  gap: sm ? "3px" : "5px",
+                }}
+              >
+                <Box
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-end",
+                    justifyContent: "space-between",
+                    gap: "15px",
+                    padding: "0 15px",
+                  }}
+                >
+                  <Typography
+                    style={{
+                      fontFamily: "'Rubik'",
+                      fontWeight: 900,
+                      fontSize: sm ? 18 : 30,
+                      lineHeight: "120%",
+                      fontVariant: "all-small-caps",
+                      color: "#FFFFFF",
+                    }}
+                  >
+                    APPLICATION
+                  </Typography>
+                  <Typography
+                    style={{
+                      fontFamily: "'Rubik'",
+                      fontWeight: 700,
+                      fontSize: sm ? 12 : 20,
+                      lineHeight: "120%",
+                      textAlign: "right",
+                      fontVariant: "all-small-caps",
+                      color: "#64FF99",
+                    }}
+                  >
+                    USER INTERACTION LAYER
+                  </Typography>
+                </Box>
+                <Box
+                  style={{
+                    width: "100%",
+                    height: sm ? "fit-content" : 70,
+                    background: "#161810",
+                    borderRadius: sm ? "20px" : "35px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    // flexDirection: sm ? "column" : "row",
+                    gap: sm ? "5px" : "25px",
+                    padding: sm ? "10px" : "0 20px",
+                  }}
+                >
+                  <Typography
+                    style={{
+                      width: "100%",
+                      height: sm ? 30 : 41,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "8px",
+                      background:
+                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                      border: "1px solid rgba(255, 255, 255, 0.5)",
+                      borderRadius: sm ? "24px" : "32px",
+                      fontFamily: "'Figtree'",
+                      fontWeight: 400,
+                      fontSize: sm ? 12 : 24,
+                      textAlign: "center",
+                      lineHeight: sm ? "100%" : "120%",
+                      fontVariant: "all-small-caps",
+                      color: "#EDEDED",
+                    }}
+                  >
+                    Customer Interface
+                  </Typography>
+                  <Typography
+                    style={{
+                      width: "100%",
+                      height: sm ? 30 : 41,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "8px",
+                      background:
+                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                      border: "1px solid rgba(255, 255, 255, 0.5)",
+                      borderRadius: sm ? "24px" : "32px",
+                      fontFamily: "'Figtree'",
+                      fontWeight: 400,
+                      fontSize: sm ? 12 : 24,
+                      textAlign: "center",
+                      lineHeight: sm ? "100%" : "120%",
+                      fontVariant: "all-small-caps",
+                      color: "#EDEDED",
+                    }}
+                  >
+                    Restaurant Interface
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+            <Box
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: sm ? "10px" : "25px",
+              }}
+            >
+              <Box
+                style={{
+                  minWidth: 65,
+                  width: sm ? 60 : 145,
+                  height: sm ? 70 : 120,
+                }}
+              >
+                <img
+                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/protein.webp"
+                  alt="Gobbl AI"
+                  style={{
+                    width: "fit-content",
+                    maxHeight: 116,
+                    objectFit: "contain",
+                  }}
+                />
+              </Box>
+              <Box
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  gap: sm ? "3px" : "5px",
+                }}
+              >
+                <Box
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-end",
+                    justifyContent: "space-between",
+                    gap: "15px",
+                    padding: "0 15px",
+                  }}
+                >
+                  <Typography
+                    style={{
+                      fontFamily: "'Rubik'",
+                      fontWeight: 900,
+                      fontSize: sm ? 18 : 30,
+                      lineHeight: "120%",
+                      fontVariant: "all-small-caps",
+                      color: "#FFFFFF",
+                    }}
+                  >
+                    INTELLIGENCE
+                  </Typography>
+                  <Typography
+                    style={{
+                      fontFamily: "'Rubik'",
+                      fontWeight: 700,
+                      fontSize: sm ? 12 : 20,
+                      lineHeight: "120%",
+                      textAlign: "right",
+                      fontVariant: "all-small-caps",
+                      color: "#64FF99",
+                    }}
+                  >
+                    LLM PROCESSING LAYER
+                  </Typography>
+                </Box>
+                <Box
+                  style={{
+                    width: "100%",
+                    height: sm ? "fit-content" : 70,
+                    background: "#161810",
+                    borderRadius: sm ? "20px" : "35px",
+                    display: sm ? "grid" : "flex",
+                    gridTemplateColumns: "1fr 1fr",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: sm ? "5px" : "20px",
+                    padding: sm ? "10px" : "0 20px",
+                  }}
+                >
+                  <Typography
+                    style={{
+                      width: "100%",
+                      height: sm ? 30 : 41,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "8px",
+                      background:
+                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                      border: "1px solid rgba(255, 255, 255, 0.5)",
+                      borderRadius: sm ? "24px" : "32px",
+                      fontFamily: "'Figtree'",
+                      fontWeight: 400,
+                      fontSize: sm ? 12 : 24,
+                      textAlign: "center",
+                      lineHeight: sm ? "100%" : "120%",
+                      fontVariant: "all-small-caps",
+                      color: "#EDEDED",
+                      gridColumn: "1/4",
+                    }}
+                  >
+                    Food Domain LLMs
+                  </Typography>
+                  <Typography
+                    style={{
+                      width: "100%",
+                      height: sm ? 30 : 41,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "8px",
+                      background:
+                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                      border: "1px solid rgba(255, 255, 255, 0.5)",
+                      borderRadius: sm ? "24px" : "32px",
+                      fontFamily: "'Figtree'",
+                      fontWeight: 400,
+                      fontSize: sm ? 12 : 24,
+                      textAlign: "center",
+                      lineHeight: sm ? "100%" : "120%",
+                      fontVariant: "all-small-caps",
+                      color: "#EDEDED",
+                    }}
+                  >
+                    Restaurant LLMs
+                  </Typography>
+                  <Typography
+                    style={{
+                      width: "100%",
+                      height: sm ? 30 : 41,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "8px",
+                      background:
+                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                      border: "1px solid rgba(255, 255, 255, 0.5)",
+                      borderRadius: sm ? "24px" : "32px",
+                      fontFamily: "'Figtree'",
+                      fontWeight: 400,
+                      fontSize: sm ? 12 : 24,
+                      textAlign: "center",
+                      lineHeight: sm ? "100%" : "120%",
+                      fontVariant: "all-small-caps",
+                      color: "#EDEDED",
+                    }}
+                  >
+                    Network LLMs
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+            <Box
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: sm ? "10px" : "25px",
+              }}
+            >
+              <Box
+                style={{
+                  minWidth: 65,
+                  width: sm ? 60 : 145,
+                  height: sm ? 70 : 120,
+                }}
+              >
+                <img
+                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/veggies.webp"
+                  alt="Gobbl AI"
+                  style={{
+                    width: "fit-content",
+                    maxHeight: 116,
+                    objectFit: "contain",
+                  }}
+                />
+              </Box>
+              <Box
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  gap: sm ? "3px" : "5px",
+                }}
+              >
+                <Box
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-end",
+                    justifyContent: "space-between",
+                    gap: "15px",
+                    padding: "0 15px",
+                  }}
+                >
+                  <Typography
+                    style={{
+                      fontFamily: "'Rubik'",
+                      fontWeight: 900,
+                      fontSize: sm ? 18 : 30,
+                      lineHeight: "120%",
+                      fontVariant: "all-small-caps",
+                      color: "#FFFFFF",
+                    }}
+                  >
+                    MODELS
+                  </Typography>
+                  <Typography
+                    style={{
+                      fontFamily: "'Rubik'",
+                      fontWeight: 700,
+                      fontSize: sm ? 12 : 20,
+                      lineHeight: "120%",
+                      textAlign: "right",
+                      fontVariant: "all-small-caps",
+                      color: "#64FF99",
+                    }}
+                  >
+                    MODEL INFRASTRUCTURE
+                  </Typography>
+                </Box>
+                <Box
+                  style={{
+                    width: "100%",
+                    height: sm ? "fit-content" : 70,
+                    background: "#161810",
+                    borderRadius: sm ? "20px" : "35px",
+                    display: sm ? "grid" : "flex",
+                    gridTemplateColumns: "1fr 1fr",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: sm ? "5px" : "20px",
+                    padding: sm ? "10px" : "0 20px",
+                  }}
+                >
+                  <Typography
+                    style={{
+                      width: "100%",
+                      height: sm ? 30 : 41,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "8px",
+                      background:
+                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                      border: "1px solid rgba(255, 255, 255, 0.5)",
+                      borderRadius: sm ? "24px" : "32px",
+                      fontFamily: "'Figtree'",
+                      fontWeight: 400,
+                      fontSize: sm ? 12 : 24,
+                      textAlign: "center",
+                      lineHeight: sm ? "100%" : "120%",
+                      fontVariant: "all-small-caps",
+                      color: "#EDEDED",
+                    }}
+                  >
+                    Edge Intelligence
+                  </Typography>
+                  <Typography
+                    style={{
+                      width: "100%",
+                      height: sm ? 30 : 41,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "8px",
+                      background:
+                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                      border: "1px solid rgba(255, 255, 255, 0.5)",
+                      borderRadius: sm ? "24px" : "32px",
+                      fontFamily: "'Figtree'",
+                      fontWeight: 400,
+                      fontSize: sm ? 12 : 24,
+                      textAlign: "center",
+                      lineHeight: sm ? "100%" : "120%",
+                      fontVariant: "all-small-caps",
+                      color: "#EDEDED",
+                    }}
+                  >
+                    Model Registry
+                  </Typography>
+                  <Typography
+                    style={{
+                      width: "100%",
+                      height: sm ? 30 : 41,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "8px",
+                      background:
+                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                      border: "1px solid rgba(255, 255, 255, 0.5)",
+                      borderRadius: sm ? "24px" : "32px",
+                      fontFamily: "'Figtree'",
+                      fontWeight: 400,
+                      fontSize: sm ? 12 : 24,
+                      textAlign: "center",
+                      lineHeight: sm ? "100%" : "120%",
+                      fontVariant: "all-small-caps",
+                      color: "#EDEDED",
+                    }}
+                  >
+                    Training
+                  </Typography>
+                  <Typography
+                    style={{
+                      width: "100%",
+                      height: sm ? 30 : 41,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "8px",
+                      background:
+                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                      border: "1px solid rgba(255, 255, 255, 0.5)",
+                      borderRadius: sm ? "24px" : "32px",
+                      fontFamily: "'Figtree'",
+                      fontWeight: 400,
+                      fontSize: sm ? 12 : 24,
+                      textAlign: "center",
+                      lineHeight: sm ? "100%" : "120%",
+                      fontVariant: "all-small-caps",
+                      color: "#EDEDED",
+                    }}
+                  >
+                    Inference
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+            <Box
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: sm ? "10px" : "25px",
+              }}
+            >
+              <Box
+                style={{
+                  minWidth: 65,
+                  width: sm ? 60 : 145,
+                  height: sm ? 70 : 120,
+                }}
+              >
+                <img
+                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/sauce.webp"
+                  alt="Gobbl AI"
+                  style={{
+                    width: "fit-content",
+                    maxHeight: 116,
+                    objectFit: "contain",
+                  }}
+                />
+              </Box>
+              <Box
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  gap: sm ? "3px" : "5px",
+                }}
+              >
+                <Box
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-end",
+                    justifyContent: "space-between",
+                    gap: "15px",
+                    padding: "0 15px",
+                  }}
+                >
+                  <Typography
+                    style={{
+                      fontFamily: "'Rubik'",
+                      fontWeight: 900,
+                      fontSize: sm ? 18 : 30,
+                      lineHeight: "120%",
+                      fontVariant: "all-small-caps",
+                      color: "#FFFFFF",
+                    }}
+                  >
+                    DATA
+                  </Typography>
+                  <Typography
+                    style={{
+                      fontFamily: "'Rubik'",
+                      fontWeight: 700,
+                      fontSize: sm ? 12 : 20,
+                      lineHeight: "120%",
+                      textAlign: "right",
+                      fontVariant: "all-small-caps",
+                      color: "#64FF99",
+                    }}
+                  >
+                    VECTOR DATABASE LAYER
+                  </Typography>
+                </Box>
+                <Box
+                  style={{
+                    width: "100%",
+                    height: sm ? "fit-content" : 70,
+                    background: "#161810",
+                    borderRadius: sm ? "20px" : "35px",
+                    display: sm ? "grid" : "flex",
+                    gridTemplateColumns: "1fr 1fr",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: sm ? "5px" : "20px",
+                    padding: sm ? "10px" : "0 20px",
+                  }}
+                >
+                  <Typography
+                    style={{
+                      width: "100%",
+                      height: sm ? 30 : 41,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "8px",
+                      background:
+                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                      border: "1px solid rgba(255, 255, 255, 0.5)",
+                      borderRadius: sm ? "24px" : "32px",
+                      fontFamily: "'Figtree'",
+                      fontWeight: 400,
+                      fontSize: sm ? 12 : 24,
+                      textAlign: "center",
+                      lineHeight: sm ? "100%" : "120%",
+                      fontVariant: "all-small-caps",
+                      color: "#EDEDED",
+                    }}
+                  >
+                    Customer Vectors
+                  </Typography>
+                  <Typography
+                    style={{
+                      width: "100%",
+                      height: sm ? 30 : 41,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "8px",
+                      background:
+                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                      border: "1px solid rgba(255, 255, 255, 0.5)",
+                      borderRadius: sm ? "24px" : "32px",
+                      fontFamily: "'Figtree'",
+                      fontWeight: 400,
+                      fontSize: sm ? 12 : 24,
+                      textAlign: "center",
+                      lineHeight: sm ? "100%" : "120%",
+                      fontVariant: "all-small-caps",
+                      color: "#EDEDED",
+                    }}
+                  >
+                    Restaurant Vectors
+                  </Typography>
+                  <Typography
+                    style={{
+                      width: "100%",
+                      height: sm ? 30 : 41,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "8px",
+                      background:
+                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                      border: "1px solid rgba(255, 255, 255, 0.5)",
+                      borderRadius: sm ? "24px" : "32px",
+                      fontFamily: "'Figtree'",
+                      fontWeight: 400,
+                      fontSize: sm ? 12 : 24,
+                      textAlign: "center",
+                      lineHeight: sm ? "100%" : "120%",
+                      fontVariant: "all-small-caps",
+                      color: "#EDEDED",
+                    }}
+                  >
+                    Network Vectors
+                  </Typography>
+                  <Typography
+                    style={{
+                      width: "100%",
+                      height: sm ? 30 : 41,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "8px",
+                      background:
+                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                      border: "1px solid rgba(255, 255, 255, 0.5)",
+                      borderRadius: sm ? "24px" : "32px",
+                      fontFamily: "'Figtree'",
+                      fontWeight: 400,
+                      fontSize: sm ? 12 : 24,
+                      textAlign: "center",
+                      lineHeight: sm ? "100%" : "120%",
+                      fontVariant: "all-small-caps",
+                      color: "#EDEDED",
+                    }}
+                  >
+                    Training Sets
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+          {/* <Box
+              style={{
+                position: "absolute",
+                width: lg ? (sm ? 160 : 250) : 318,
+                height: lg ? (sm ? 160 : 250) : 318,
+                right: "-25%",
+                bottom: "-20%",
+                background: "#40FFF4",
+                opacity: 0.6,
+                filter: "blur(212px)",
+              }}
+            /> */}
         </Box>
       </Box>
 
