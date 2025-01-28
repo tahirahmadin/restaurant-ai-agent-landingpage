@@ -1066,7 +1066,7 @@ export const LandingPage = () => {
               }}
             >
               <img
-                src="/how_we_gobbl.png"
+                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/how_we_gobbl.webp"
                 alt="Gobbl AI"
                 style={{
                   width: "fit-content",
@@ -1078,7 +1078,7 @@ export const LandingPage = () => {
                 }}
               />
               <img
-                src="/user_gobbl.png"
+                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/user_gobbl.webp"
                 alt="Gobbl AI"
                 style={{
                   width: "fit-content",
@@ -1091,7 +1091,7 @@ export const LandingPage = () => {
                 }}
               />
               <img
-                src="/restro_gobbl.png"
+                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/restro_gobbl.webp"
                 alt="Gobbl AI"
                 style={{
                   width: "fit-content",
