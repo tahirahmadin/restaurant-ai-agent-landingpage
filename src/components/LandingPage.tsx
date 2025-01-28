@@ -1045,6 +1045,14 @@ export const LandingPage = () => {
               >
                 how we gobbl
               </Typography>
+              <StarSvg
+                size={sm ? 16 : 28}
+                style={{
+                  top: sm ? -15 : 0,
+                  right: sm ? "0%" : "10%",
+                  animationDuration: "1.2s",
+                }}
+              />
             </Box>
             <Box
               style={{
@@ -1079,7 +1087,7 @@ export const LandingPage = () => {
                   objectFit: "contain",
                   position: "absolute",
                   left: sm ? -42 : md ? -80 : lg ? -60 : -100,
-                  top: lg ? "5%" : "15%",
+                  top: sm ? "20%" : lg ? "5%" : "15%",
                 }}
               />
               <img
