@@ -1077,33 +1077,33 @@ export const LandingPage = () => {
                   zIndex: 2,
                 }}
               />
-              <img
-                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/user_gobbl.webp"
-                alt="Gobbl AI"
-                style={{
-                  width: "fit-content",
-                  maxHeight: sm ? 80 : md ? 160 : lg ? 220 : 380,
-                  height: "fit-content",
-                  objectFit: "contain",
-                  position: "absolute",
-                  left: sm ? -42 : md ? -80 : lg ? -60 : -100,
-                  top: sm ? "20%" : lg ? "5%" : "15%",
-                }}
-              />
-              <img
-                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/restro_gobbl.webp"
-                alt="Gobbl AI"
-                style={{
-                  width: "fit-content",
-                  maxHeight: sm ? 90 : md ? 180 : lg ? 240 : 360,
-                  height: "fit-content",
-                  objectFit: "contain",
-                  position: "absolute",
-                  right: lg ? "2%" : "8%",
-                  bottom: sm ? -30 : md ? "-2%" : "-7%",
-                }}
-              />
             </Box>
+            <img
+              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/user_gobbl.webp"
+              alt="Gobbl AI"
+              style={{
+                maxWidth: "fit-content",
+                maxHeight: sm ? 80 : md ? 160 : lg ? 220 : 350,
+                height: "fit-content",
+                objectFit: "contain",
+                position: "absolute",
+                left: sm ? -42 : md ? -80 : lg ? -60 : -80,
+                top: sm ? "20%" : lg ? "5%" : "15%",
+              }}
+            />
+            <img
+              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/restro_gobbl.webp"
+              alt="Gobbl AI"
+              style={{
+                maxWidth: "fit-content",
+                maxHeight: sm ? 90 : md ? 180 : lg ? 240 : 360,
+                height: "fit-content",
+                objectFit: "contain",
+                position: "absolute",
+                right: lg ? "2%" : "8%",
+                bottom: sm ? -30 : md ? "-2%" : "-7%",
+              }}
+            />
             {/* <Box
               style={{
                 position: "absolute",
