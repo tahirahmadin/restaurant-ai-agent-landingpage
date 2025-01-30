@@ -577,7 +577,7 @@ export const LandingPage = () => {
                   marginBottom: sm ? "50px" : "75px",
                 }}
               >
-                Transform your Restaurant with new employees. Introducing AI for
+                Transform Food Ordering with new employees. Introducing AI for
                 Food.
               </Typography>
               <StarSvg
