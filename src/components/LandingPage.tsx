@@ -1,5 +1,5 @@
 import { DemoSimulation } from "./mainComponents/DemoSimulation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Box from "@mui/material/Box";
 import { Button, Fade, Typography, useMediaQuery } from "@mui/material";
 import { makeStyles, useTheme } from "@mui/styles";
@@ -9,7 +9,7 @@ import {
   home_brands,
   chef_partners,
 } from "./homepageComponents/data/partnersData";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import CommonButton from "./homepageComponents/CommonButton";
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -87,12 +87,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down("md")]: {
       fontSize: 72,
-    },
-    [theme.breakpoints.down("sm")]: {
-      fontSize: 56,
-    },
-    [theme.breakpoints.down(400)]: {
-      fontSize: 50,
     },
   },
   sub_heading: {
@@ -467,6 +461,21 @@ const PrevArrow: React.FC<ArrowProps> = (props) => {
     </div>
   );
 };
+
+const draw = {
+  offscreen: { pathLength: 0, opacity: 0 },
+  onscreen: (i: number) => {
+    const delay = i * 0.5;
+    return {
+      pathLength: 1,
+      opacity: 1,
+      transition: {
+        pathLength: { delay, type: "spring", duration: 1.5, bounce: 0 },
+        opacity: { delay, duration: 0.01 },
+      },
+    };
+  },
+};
 export const LandingPage = () => {
   const classes = useStyles();
 
@@ -475,6 +484,7 @@ export const LandingPage = () => {
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
   const md = useMediaQuery(theme.breakpoints.down("md"));
   const lg = useMediaQuery(theme.breakpoints.down("lg"));
+  const xl = useMediaQuery(theme.breakpoints.down(1370));
 
   const [playVideo, setPlayVideo] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -486,18 +496,8 @@ export const LandingPage = () => {
   const [web3Toggle, setWeb3Toggle] = useState(false);
   const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    autoplay: true,
-    speed: 500,
-    slidesToShow: sm ? 2 : lg ? 4 : 6,
-    rows: sm ? 2 : 1,
-    slidesToScroll: 2,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-  };
-
+  const friesRef = useRef(null);
+  const friesIsInView = useInView(friesRef);
   useEffect(() => setLoaded(true), []);
 
   return (
@@ -929,7 +929,13 @@ export const LandingPage = () => {
               width: "100%",
               height: "100%",
               position: "relative",
-              padding: md ? (sm ? "50px 0" : "75px 5%") : "7%",
+              padding: md
+                ? sm
+                  ? "50px 0"
+                  : "75px 5% 0"
+                : lg
+                ? "7%"
+                : "7% 7% 10%",
             }}
           >
             <Box
@@ -948,16 +954,16 @@ export const LandingPage = () => {
                 style={{
                   width: "100%",
                   display: "flex",
-                  alignItems: "flex-end",
+                  alignItems: sm ? "center" : "flex-end",
                   justifyContent: "center",
-                  gap: sm ? "3px" : "5px",
+                  gap: sm ? 0 : "5px",
                   padding: sm ? "0 5%" : 0,
-                  // flexDirection: sm ? "column" : "row",
+                  flexDirection: sm ? "column" : "row",
                 }}
               >
                 <h2
                   className={classes.heading2}
-                  style={{ color: "#fff", height: sm ? 42 : 115 }}
+                  style={{ color: "#fff", height: md ? 60 : 115 }}
                 >
                   De<span style={{ color: "#64FF99" }}>AI</span>
                 </h2>
@@ -966,8 +972,8 @@ export const LandingPage = () => {
                   className={classes.sub_heading}
                   style={{
                     fontWeight: 600,
-                    fontSize: sm ? 16 : 24,
-                    lineHeight: "100%",
+                    fontSize: sm ? 18 : 24,
+                    lineHeight: sm ? "110%" : "100%",
                     maxWidth: 390,
                     textAlign: "left",
                   }}
@@ -977,25 +983,777 @@ export const LandingPage = () => {
                   Ordering is here
                 </Typography>
               </Box>
-              <Box
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <img
-                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/deAi_fries.webp"
-                  alt="Gobbl AI"
-                  width={1440}
-                  height={517}
-                  loading="eager"
+              {sm && (
+                <Box
                   style={{
-                    pointerEvents: "none",
-                    userSelect: "none",
+                    width: "100%",
+                    height: 400,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    position: "relative",
                   }}
-                />
-              </Box>
+                >
+                  <motion.div
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 0.7 }}
+                    style={{
+                      position: "absolute",
+                      marginTop: "-140px",
+                      zIndex: 1,
+                    }}
+                  >
+                    <motion.div
+                      variants={{
+                        offscreen: {
+                          x: 0,
+                          y: 50,
+                          scale: 0,
+                        },
+                        onscreen: {
+                          x: -85,
+                          y: -95,
+                          scale: 1,
+                          transition: {
+                            type: "spring",
+                            bounce: 0.35,
+                            duration: 3,
+                            delay: 0.5,
+                          },
+                        },
+                      }}
+                      style={{
+                        width: 148,
+                        height: 76,
+                        background: "#000000",
+                        border: "0.5px solid rgba(255, 255, 255, 0.5)",
+                        boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.5)",
+                        borderRadius: "12px",
+                        padding: "5px 3px",
+                      }}
+                    >
+                      <Typography
+                        style={{
+                          fontFamily: "'Karla'",
+                          fontWeight: 900,
+                          fontSize: "14px",
+                          lineHeight: "114%",
+                          textTransform: "uppercase",
+                          color: "#64FF99",
+                          textAlign: "center",
+                        }}
+                      >
+                        AI AGENTIC FRAMEWORK
+                      </Typography>
+                      <Typography
+                        style={{
+                          fontFamily: "'Karla'",
+                          fontStyle: "normal",
+                          fontWeight: 400,
+                          fontSize: "10px",
+                          lineHeight: "110%",
+                          color: "#FFFCF5",
+                          opacity: 0.8,
+                          textAlign: "center",
+                        }}
+                      >
+                        Connecting users & restaurants with a simple chat
+                        interface
+                      </Typography>
+                    </motion.div>
+                  </motion.div>
+                  <motion.div
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 0.7 }}
+                    style={{
+                      position: "absolute",
+                      marginTop: "-140px",
+                      zIndex: 1,
+                    }}
+                  >
+                    <motion.div
+                      variants={{
+                        offscreen: {
+                          x: 0,
+                          y: 50,
+                          scale: 0,
+                        },
+                        onscreen: {
+                          x: 85,
+                          y: -95,
+                          scale: 1,
+                          transition: {
+                            type: "spring",
+                            bounce: 0.35,
+                            duration: 3,
+                            delay: 0.5,
+                          },
+                        },
+                      }}
+                      style={{
+                        width: 148,
+                        height: 76,
+                        background: "#000000",
+                        border: "0.5px solid rgba(255, 255, 255, 0.5)",
+                        boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.5)",
+                        borderRadius: "12px",
+                        padding: "5px 3px",
+                      }}
+                    >
+                      <Typography
+                        style={{
+                          fontFamily: "'Karla'",
+                          fontWeight: 900,
+                          fontSize: "14px",
+                          lineHeight: "114%",
+                          textTransform: "uppercase",
+                          color: "#64FF99",
+                          textAlign: "center",
+                        }}
+                      >
+                        RECLAIMING THE CUSTOMER
+                      </Typography>
+                      <Typography
+                        style={{
+                          fontFamily: "'Karla'",
+                          fontStyle: "normal",
+                          fontWeight: 400,
+                          fontSize: "10px",
+                          lineHeight: "110%",
+                          color: "#FFFCF5",
+                          opacity: 0.8,
+                          textAlign: "center",
+                        }}
+                      >
+                        Restaurants reclaim the customer from aggregators for
+                        more profits, more control
+                      </Typography>
+                    </motion.div>
+                  </motion.div>
+                  <motion.div
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 0.7 }}
+                    style={{
+                      position: "absolute",
+                      marginTop: "-140px",
+                      zIndex: 1,
+                    }}
+                  >
+                    <motion.div
+                      variants={{
+                        offscreen: {
+                          x: 0,
+                          y: 50,
+                          scale: 0,
+                        },
+                        onscreen: {
+                          x: -85,
+                          y: 240,
+                          scale: 1,
+                          transition: {
+                            type: "spring",
+                            bounce: 0.35,
+                            duration: 3,
+                            delay: 0.5,
+                          },
+                        },
+                      }}
+                      style={{
+                        width: 148,
+                        height: 76,
+                        background: "#000000",
+                        border: "0.5px solid rgba(255, 255, 255, 0.5)",
+                        boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.5)",
+                        borderRadius: "12px",
+                        padding: "5px 3px",
+                      }}
+                    >
+                      <Typography
+                        style={{
+                          fontFamily: "'Karla'",
+                          fontWeight: 900,
+                          fontSize: "14px",
+                          lineHeight: "114%",
+                          textTransform: "uppercase",
+                          color: "#64FF99",
+                          textAlign: "center",
+                        }}
+                      >
+                        DIRECT
+                        <br />
+                        DISCOVERY
+                      </Typography>
+                      <Typography
+                        style={{
+                          fontFamily: "'Karla'",
+                          fontStyle: "normal",
+                          fontWeight: 400,
+                          fontSize: "10px",
+                          lineHeight: "110%",
+                          color: "#FFFCF5",
+                          opacity: 0.8,
+                          textAlign: "center",
+                        }}
+                      >
+                        Discover new customers as they search for food suited to
+                        their preferences
+                      </Typography>
+                    </motion.div>
+                  </motion.div>
+                  <motion.div
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 0.7 }}
+                    style={{
+                      position: "absolute",
+                      marginTop: "-140px",
+                      zIndex: 1,
+                    }}
+                  >
+                    <motion.div
+                      variants={{
+                        offscreen: {
+                          x: 0,
+                          y: 50,
+                          scale: 0,
+                        },
+                        onscreen: {
+                          x: 85,
+                          y: 240,
+                          scale: 1,
+                          transition: {
+                            type: "spring",
+                            bounce: 0.35,
+                            duration: 3,
+                            delay: 0.5,
+                          },
+                        },
+                      }}
+                      style={{
+                        width: 148,
+                        height: 76,
+                        background: "#000000",
+                        border: "0.5px solid rgba(255, 255, 255, 0.5)",
+                        boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.5)",
+                        borderRadius: "12px",
+                        padding: "5px 3px",
+                      }}
+                    >
+                      <Typography
+                        style={{
+                          fontFamily: "'Karla'",
+                          fontWeight: 900,
+                          fontSize: "14px",
+                          lineHeight: "114%",
+                          textTransform: "uppercase",
+                          color: "#64FF99",
+                          textAlign: "center",
+                        }}
+                      >
+                        personalized
+                        <br />
+                        for the user
+                      </Typography>
+                      <Typography
+                        style={{
+                          fontFamily: "'Karla'",
+                          fontStyle: "normal",
+                          fontWeight: 400,
+                          fontSize: "10px",
+                          lineHeight: "110%",
+                          color: "#FFFCF5",
+                          opacity: 0.8,
+                          textAlign: "center",
+                        }}
+                      >
+                        Orders suggestions tailored for the user, killing
+                        endless scrolling
+                      </Typography>
+                    </motion.div>
+                  </motion.div>
+
+                  <img
+                    src="/images/fries.png"
+                    alt="Gobbl AI"
+                    width={190}
+                    height={190}
+                    loading="eager"
+                    style={{
+                      pointerEvents: "none",
+                      userSelect: "none",
+                      position: "relative",
+                      zIndex: 1,
+                    }}
+                  />
+
+                  <motion.svg
+                    width="29"
+                    height="46"
+                    viewBox="0 0 29 46"
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 1 }}
+                    style={{
+                      position: "absolute",
+                      top: 80,
+                      marginLeft: "-200px",
+                    }}
+                  >
+                    <motion.path
+                      d="M0.666667 2C0.666667 1.26362 1.26362 0.666668 2 0.666668C2.73638 0.666668 3.33333 1.26362 3.33333 2C3.33333 2.73638 2.73638 3.33333 2 3.33333C1.26362 3.33333 0.666667 2.73638 0.666667 2ZM2 32.9785L1.89508 33.2054L1.75 33.1383V32.9785H2ZM2.25 2V32.9785H1.75V2H2.25ZM2.10492 32.7516L28.1049 44.7731L27.8951 45.2269L1.89508 33.2054L2.10492 32.7516Z"
+                      stroke="rgba(255, 255, 255, 0.4)"
+                      variants={draw}
+                      custom={4}
+                    />
+                  </motion.svg>
+
+                  <motion.svg
+                    width="37"
+                    height="87"
+                    viewBox="0 0 37 87"
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 1 }}
+                    style={{
+                      position: "absolute",
+                      top: 80,
+                      marginLeft: "200px",
+                    }}
+                  >
+                    <motion.path
+                      d="M36.3333 2C36.3333 1.26362 35.7364 0.666664 35 0.666664C34.2636 0.666664 33.6667 1.26362 33.6667 2C33.6667 2.73638 34.2636 3.33334 35 3.33334C35.7364 3.33334 36.3333 2.73638 36.3333 2ZM35 75.7333L35.0723 75.9727L35.25 75.919V75.7333H35ZM0.927734 85.7607C0.795555 85.8006 0.72076 85.9401 0.760674 86.0723C0.800587 86.2044 0.94009 86.2792 1.07227 86.2393L0.927734 85.7607ZM34.75 2V75.7333H35.25V2H34.75ZM34.9277 75.494L0.927734 85.7607L1.07227 86.2393L35.0723 75.9727L34.9277 75.494Z"
+                      stroke="rgba(255, 255, 255, 0.4)"
+                      variants={draw}
+                      custom={4.5}
+                    />
+                  </motion.svg>
+
+                  <motion.svg
+                    width="41"
+                    height="93"
+                    viewBox="0 0 41 93"
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 1 }}
+                    style={{
+                      position: "absolute",
+                      bottom: 75,
+                      marginLeft: "-188px",
+                    }}
+                  >
+                    <motion.path
+                      d="M0.666667 91C0.666667 91.7364 1.26362 92.3333 2 92.3333C2.73638 92.3333 3.33333 91.7364 3.33333 91C3.33333 90.2636 2.73638 89.6667 2 89.6667C1.26362 89.6667 0.666667 90.2636 0.666667 91ZM2 17L1.90152 16.7702L1.75 16.8352V17H2ZM2.25 91V17H1.75V91H2.25ZM2.09848 17.2298L40.5985 0.729786L40.4015 0.270214L1.90152 16.7702L2.09848 17.2298Z"
+                      stroke="rgba(255, 255, 255, 0.4)"
+                      variants={draw}
+                      custom={5}
+                    />
+                  </motion.svg>
+
+                  <motion.svg
+                    width="43"
+                    height="59"
+                    viewBox="0 0 43 59"
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 1 }}
+                    style={{
+                      position: "absolute",
+                      bottom: 75,
+                      marginLeft: "188px",
+                    }}
+                  >
+                    <motion.path
+                      d="M42.3333 57C42.3333 57.7364 41.7364 58.3333 41 58.3333C40.2636 58.3333 39.6667 57.7364 39.6667 57C39.6667 56.2636 40.2636 55.6667 41 55.6667C41.7364 55.6667 42.3333 56.2636 42.3333 57ZM41 19.5L41.1049 19.2731L41.25 19.3402V19.5H41ZM40.75 57V19.5H41.25V57H40.75ZM40.8951 19.7269L0.895054 1.22691L1.10495 0.773093L41.1049 19.2731L40.8951 19.7269Z"
+                      stroke="rgba(255, 255, 255, 0.4)"
+                      variants={draw}
+                      custom={5.5}
+                    />
+                  </motion.svg>
+                </Box>
+              )}
+              {!sm && (
+                <Box
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    position: "relative",
+                    transform: md
+                      ? "scale(0.55)"
+                      : lg
+                      ? "scale(0.7)"
+                      : xl
+                      ? "scale(0.85)"
+                      : "none",
+                    marginTop: md ? "-125px" : lg ? "-10%" : xl ? "-5%" : 0,
+                  }}
+                >
+                  <motion.div
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 0.7 }}
+                    style={{
+                      position: "absolute",
+                      marginTop: "-140px",
+                      zIndex: 1,
+                    }}
+                  >
+                    <motion.div
+                      variants={{
+                        offscreen: {
+                          x: 0,
+                          scale: 0,
+                        },
+                        onscreen: {
+                          x: -480,
+                          scale: 1,
+                          transition: {
+                            type: "spring",
+                            bounce: 0.35,
+                            duration: 3,
+                            delay: 0.5,
+                          },
+                        },
+                      }}
+                      style={{
+                        width: "330px",
+                        height: "176px",
+                        background: "#000000",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
+                        boxShadow: "0px 11px 11px rgba(0, 0, 0, 0.55)",
+                        borderRadius: "25px",
+                        padding: "20px 16px",
+                      }}
+                    >
+                      <Typography
+                        style={{
+                          fontFamily: "'Karla'",
+                          fontWeight: 400,
+                          fontSize: "28px",
+                          lineHeight: "114%",
+                          textTransform: "uppercase",
+                          color: "#64FF99",
+                        }}
+                      >
+                        AI AGENTIC FRAMEWORK
+                      </Typography>
+                      <Typography
+                        style={{
+                          fontFamily: "'Karla'",
+                          fontStyle: "normal",
+                          fontWeight: 400,
+                          fontSize: "20px",
+                          lineHeight: "130%",
+                          color: "#FFFCF5",
+                          opacity: 0.8,
+                          marginTop: "10px",
+                        }}
+                      >
+                        Connecting users & restaurants with a simple chat
+                        interface
+                      </Typography>
+                    </motion.div>
+                  </motion.div>
+
+                  <motion.div
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 0.7 }}
+                    style={{
+                      position: "absolute",
+                      marginTop: "-65px",
+                      zIndex: 1,
+                    }}
+                  >
+                    <motion.div
+                      variants={{
+                        offscreen: {
+                          x: 0,
+                          scale: 0,
+                        },
+                        onscreen: {
+                          x: 447,
+                          scale: 1,
+                          transition: {
+                            type: "spring",
+                            bounce: 0.35,
+                            duration: 3,
+                            delay: 0.5,
+                          },
+                        },
+                      }}
+                      style={{
+                        width: "330px",
+                        height: "200px",
+                        background: "#000000",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
+                        boxShadow: "0px 11px 11px rgba(0, 0, 0, 0.55)",
+                        borderRadius: "25px",
+                        padding: "20px 16px",
+                      }}
+                    >
+                      <Typography
+                        style={{
+                          fontFamily: "'Karla'",
+                          fontWeight: 400,
+                          fontSize: "28px",
+                          lineHeight: "114%",
+                          textTransform: "uppercase",
+                          color: "#64FF99",
+                        }}
+                      >
+                        RECLAIMING THE CUSTOMER
+                      </Typography>
+                      <Typography
+                        style={{
+                          fontFamily: "'Karla'",
+                          fontStyle: "normal",
+                          fontWeight: 400,
+                          fontSize: "20px",
+                          lineHeight: "130%",
+                          color: "#FFFCF5",
+                          opacity: 0.8,
+                          marginTop: "10px",
+                        }}
+                      >
+                        Restaurants reclaim the customer from aggregators for
+                        more profits, more control
+                      </Typography>
+                    </motion.div>
+                  </motion.div>
+
+                  <motion.div
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 0.7 }}
+                    style={{
+                      position: "absolute",
+                      marginTop: "290px",
+                      zIndex: 1,
+                    }}
+                  >
+                    <motion.div
+                      variants={{
+                        offscreen: {
+                          x: 0,
+                          scale: 0,
+                        },
+                        onscreen: {
+                          x: -380,
+                          scale: 1,
+                          transition: {
+                            type: "spring",
+                            bounce: 0.35,
+                            duration: 3,
+                            delay: 0.5,
+                          },
+                        },
+                      }}
+                      style={{
+                        width: "330px",
+                        height: "170px",
+                        background: "#000000",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
+                        boxShadow: "0px 11px 11px rgba(0, 0, 0, 0.55)",
+                        borderRadius: "25px",
+                        padding: "20px 16px",
+                      }}
+                    >
+                      <Typography
+                        style={{
+                          fontFamily: "'Karla'",
+                          fontWeight: 400,
+                          fontSize: "28px",
+                          lineHeight: "114%",
+                          textTransform: "uppercase",
+                          color: "#64FF99",
+                        }}
+                      >
+                        DIRECT DISCOVERY
+                      </Typography>
+                      <Typography
+                        style={{
+                          fontFamily: "'Karla'",
+                          fontStyle: "normal",
+                          fontWeight: 400,
+                          fontSize: "20px",
+                          lineHeight: "130%",
+                          color: "#FFFCF5",
+                          opacity: 0.8,
+                          marginTop: "10px",
+                        }}
+                      >
+                        Discover new customers as they search for food suited to
+                        their preferences
+                      </Typography>
+                    </motion.div>
+                  </motion.div>
+
+                  <motion.div
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 0.7 }}
+                    style={{
+                      position: "absolute",
+                      marginTop: "410px",
+                      zIndex: 1,
+                    }}
+                  >
+                    <motion.div
+                      variants={{
+                        offscreen: {
+                          x: 0,
+                          scale: 0,
+                        },
+                        onscreen: {
+                          x: 355,
+                          scale: 1,
+                          transition: {
+                            type: "spring",
+                            bounce: 0.35,
+                            duration: 3,
+                            delay: 0.5,
+                          },
+                        },
+                      }}
+                      style={{
+                        width: "330px",
+                        height: "190px",
+                        background: "#000000",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
+                        boxShadow: "0px 11px 11px rgba(0, 0, 0, 0.55)",
+                        borderRadius: "25px",
+                        padding: "20px 15px",
+                      }}
+                    >
+                      <Typography
+                        style={{
+                          fontFamily: "'Karla'",
+                          fontWeight: 400,
+                          fontSize: "28px",
+                          lineHeight: "114%",
+                          textTransform: "uppercase",
+                          color: "#64FF99",
+                        }}
+                      >
+                        personalised for the user
+                      </Typography>
+                      <Typography
+                        style={{
+                          fontFamily: "'Karla'",
+                          fontStyle: "normal",
+                          fontWeight: 400,
+                          fontSize: "20px",
+                          lineHeight: "130%",
+                          color: "#FFFCF5",
+                          opacity: 0.8,
+                          marginTop: "10px",
+                        }}
+                      >
+                        Orders suggestions tailored for the user, killing
+                        endless scrolling
+                      </Typography>
+                    </motion.div>
+                  </motion.div>
+                  <img
+                    src="/images/fries.png"
+                    alt="Gobbl AI"
+                    width={400}
+                    height={400}
+                    loading="eager"
+                    style={{
+                      pointerEvents: "none",
+                      userSelect: "none",
+                      position: "relative",
+                      zIndex: 1,
+                    }}
+                  />
+                  <motion.svg
+                    width="152"
+                    height="63"
+                    viewBox="0 0 152 63"
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 1 }}
+                    style={{
+                      position: "absolute",
+                      top: 170,
+                      marginLeft: "-470px",
+                    }}
+                  >
+                    <motion.path
+                      d="M108.355 3V2.5H108.612L108.761 2.70872L108.355 3ZM5.66667 3C5.66667 4.47276 4.47276 5.66667 3 5.66667C1.52724 5.66667 0.333328 4.47276 0.333328 3C0.333328 1.52724 1.52724 0.333333 3 0.333333C4.47276 0.333333 5.66667 1.52724 5.66667 3ZM150.594 62.7913L107.948 3.29128L108.761 2.70872L151.406 62.2087L150.594 62.7913ZM108.355 3.5H3V2.5H108.355V3.5Z"
+                      stroke="rgba(255, 255, 255, 0.4)"
+                      variants={draw}
+                      custom={4}
+                    />
+                  </motion.svg>
+                  <motion.svg
+                    width="109"
+                    height="43"
+                    viewBox="0 0 109 43"
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 1 }}
+                    style={{
+                      position: "absolute",
+                      top: 190,
+                      marginRight: "-440px",
+                    }}
+                  >
+                    <motion.path
+                      d="M28.0968 3V2.5H27.8353L27.6862 2.71471L28.0968 3ZM103.333 3C103.333 4.47276 104.527 5.66667 106 5.66667C107.473 5.66667 108.667 4.47276 108.667 3C108.667 1.52724 107.473 0.333333 106 0.333333C104.527 0.333333 103.333 1.52724 103.333 3ZM1.41062 42.2853L28.5074 3.28529L27.6862 2.71471L0.589381 41.7147L1.41062 42.2853ZM28.0968 3.5H106V2.5H28.0968V3.5Z"
+                      stroke="rgba(255, 255, 255, 0.4)"
+                      variants={draw}
+                      custom={4.5}
+                    />
+                  </motion.svg>
+                  <motion.svg
+                    width="58"
+                    height="27"
+                    viewBox="0 0 58 27"
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 1 }}
+                    style={{
+                      position: "absolute",
+                      top: 395,
+                      marginLeft: "-360px",
+                    }}
+                  >
+                    <motion.path
+                      d="M40.4143 24L40.8198 24.2925L40.6702 24.5H40.4143V24ZM5.66666 24C5.66666 25.4728 4.47276 26.6667 3 26.6667C1.52724 26.6667 0.333332 25.4728 0.333332 24C0.333332 22.5272 1.52724 21.3333 3 21.3333C4.47276 21.3333 5.66666 22.5272 5.66666 24ZM57.4056 1.29245L40.8198 24.2925L40.0087 23.7076L56.5944 0.707549L57.4056 1.29245ZM40.4143 24.5H3V23.5H40.4143V24.5Z"
+                      stroke="rgba(255, 255, 255, 0.4)"
+                      variants={draw}
+                      custom={5}
+                    />
+                  </motion.svg>
+                  <motion.svg
+                    width="196"
+                    height="44"
+                    viewBox="0 0 196 44"
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 1 }}
+                    style={{
+                      position: "absolute",
+                      top: 455,
+                      marginRight: "-170px",
+                    }}
+                  >
+                    <motion.path
+                      d="M43 41L42.6529 41.3599L42.7982 41.5H43V41ZM190.333 41C190.333 42.4728 191.527 43.6667 193 43.6667C194.473 43.6667 195.667 42.4728 195.667 41C195.667 39.5272 194.473 38.3333 193 38.3333C191.527 38.3333 190.333 39.5272 190.333 41ZM0.652932 0.859922L42.6529 41.3599L43.3471 40.6401L1.34707 0.140078L0.652932 0.859922ZM43 41.5H193V40.5H43V41.5Z"
+                      stroke="rgba(255, 255, 255, 0.3)"
+                      variants={draw}
+                      custom={5.5}
+                    />
+                  </motion.svg>
+                </Box>
+              )}
             </Box>
           </Box>
         </Box>
