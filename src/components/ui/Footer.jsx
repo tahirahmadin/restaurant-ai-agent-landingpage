@@ -18,24 +18,24 @@ const Footer = () => {
     <Box
       style={{
         width: "100%",
-        height: sm ? 260 : 220,
+        height: 200,
         background: "#161810",
         borderTop: "5px solid #fff",
         borderBottom: "5px solid #fff",
-        padding: md ? "0 5%" : "0 7%",
+        padding: md ? "5%" : "0 7%",
         display: "flex",
         alignItems: "center",
-        justifyContent: sm ? "center" : "space-between",
+        justifyContent: sm ? "space-around" : "space-between",
         flexDirection: sm ? "column" : "row",
         gap: sm ? "25px" : "0",
       }}
     >
-      <Link to="/">
+      <Link to="/" style={{ width: sm ? 156: "100%" }}>
         <img
           src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_logo.svg"
           alt="FoodVerse Gobbl"
-          width={143}
-          height={50}
+          width={156}
+          height={56}
           style={{
             objectFit: "contain",
           }}
@@ -44,53 +44,61 @@ const Footer = () => {
 
       <Box
         style={{
+          width: "100%",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "10px",
+          justifyContent: "space-between",
+          alignItems: "flex-end",
         }}
       >
-        <a href="https://x.com/gobblfood" target="_blank">
-          <img
-            src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/xIcon.svg"
-            alt="Gobbl"
-            width={40}
-            height={40}
-          />
-        </a>
-        <a href="https://t.me/gobblnews" target="_blank">
-          <img
-            src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/footer_icons/telegramIcon.svg"
-            alt="Gobbl"
-            width={40}
-            height={40}
-          />
-        </a>
+        <Box
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "10px",
+          }}
+        >
+          <a href="https://x.com/gobblfood" target="_blank">
+            <img
+              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/xIcon.svg"
+              alt="Gobbl"
+              width={sm ? 28 : 40}
+              height={sm ? 28 : 40}
+            />
+          </a>
+          <a href="https://t.me/gobblnews" target="_blank">
+            <img
+              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/footer_icons/telegramIcon.svg"
+              alt="Gobbl"
+              width={sm ? 28 : 40}
+              height={sm ? 28 : 40}
+            />
+          </a>
 
-        <a href="https://www.linkedin.com/company/gobbl" target="_blank">
-          <img
-            src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/linkedInIcon.svg"
-            alt="FoodVerse"
-            width={40}
-            height={40}
-          />
-        </a>
+          <a href="https://www.linkedin.com/company/gobbl" target="_blank">
+            <img
+              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/linkedInIcon.svg"
+              alt="FoodVerse"
+              width={sm ? 28 : 40}
+              height={sm ? 28 : 40}
+            />
+          </a>
+        </Box>
+        <Typography
+          style={{
+            fontFamily: "'Karla'",
+            fontWeight: 600,
+            fontSize: sm ? 12 : 20,
+            lineHeight: "110%",
+            textAlign: "right",
+            color: "#FFFFFF",
+          }}
+        >
+          Copyright © 2025.
+          <br />
+          All rights reserved by Gobbl
+        </Typography>
       </Box>
-      <Typography
-        variant=""
-        style={{
-          fontFamily: "'Karla'",
-          fontWeight: 600,
-          fontSize: "20px",
-          lineHeight: "110%",
-          textAlign: sm ? "center" : "right",
-          color: "#FFFFFF",
-        }}
-      >
-        Copyright © 2025.
-        <br />
-        All rights reserved by Gobbl
-      </Typography>
     </Box>
   );
 };

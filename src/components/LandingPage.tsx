@@ -44,6 +44,7 @@ interface ExploreCardProps {
   description4: string;
   color?: string;
   url?: string;
+  delay?: number;
 }
 
 interface StarSvgProps {
@@ -274,6 +275,27 @@ const TitleComponent: React.FC<TitleComponentProps> = ({
   );
 };
 
+const StarSvg: React.FC<StarSvgProps> = ({ color, size, style }) => {
+  const theme: Theme = useTheme();
+  const md = useMediaQuery(theme.breakpoints.down("md"));
+  return (
+    <svg
+      className="star"
+      width={size ? size : md ? "16" : "32"}
+      height={size ? size : md ? "16" : "32"}
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ position: "absolute", zIndex: 0, ...style }}
+    >
+      <path
+        d="M15.9972 32C15.6561 31.9998 15.3225 31.9002 15.0371 31.7134C14.7517 31.5265 14.5269 31.2605 14.3903 30.9479L11.9855 25.4252C10.9306 22.9978 8.99416 21.0611 6.56709 20.006L1.05202 17.6037C0.739339 17.4672 0.473261 17.2425 0.286397 16.957C0.0995322 16.6715 1.35528e-07 16.3377 1.32697e-07 15.9966C1.29867e-07 15.6554 0.0995321 15.3216 0.286397 15.0361C0.473261 14.7506 0.739339 14.5259 1.05202 14.3894L6.57399 11.9843C8.99687 10.9304 10.9305 8.99746 11.9855 6.57479L14.3903 1.05208C14.5269 0.739479 14.7517 0.473481 15.0371 0.286628C15.3225 0.0997753 15.6561 0.000168638 15.9972 -1.32703e-07C16.3385 7.57583e-05 16.6724 0.0996276 16.9581 0.286476C17.2437 0.473324 17.4687 0.73937 17.6055 1.05208L20.009 6.57479C21.0643 8.99981 23.0002 10.9341 25.426 11.9871L30.948 14.3922C31.2607 14.5287 31.5267 14.7534 31.7136 15.0389C31.9005 15.3243 32 15.6581 32 15.9993C32 16.3405 31.9005 16.6743 31.7136 16.9598C31.5267 17.2452 31.2607 17.47 30.948 17.6064L25.426 20.0102C22.9994 21.0647 21.0634 23.001 20.009 25.428L17.6055 30.9507C17.4683 31.2629 17.2431 31.5283 16.9575 31.7147C16.6719 31.901 16.3382 32.0002 15.9972 32Z"
+        fill={color ? color : "#D1FF19"}
+      />
+    </svg>
+  );
+};
+
 const ExploreCard: React.FC<ExploreCardProps> = ({
   img,
   imgSize,
@@ -283,8 +305,6 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
   description2,
   description3,
   description4,
-  color,
-  url,
 }) => {
   const classes = useStyles();
   const theme: Theme = useTheme();
@@ -300,7 +320,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
         background:
           "linear-gradient(241.27deg, rgba(255, 255, 255, 0.08) -5.59%, rgba(255, 255, 255, 0) 100%)",
         filter: "drop-shadow(0px 8px 28px rgba(0, 0, 0, 0.25))",
-        borderRadius: sm ? "20px" : "24px",
+        borderRadius: sm ? "12px" : "24px",
         border: `1px solid #686868`,
         position: "relative",
         display: "flex",
@@ -311,7 +331,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
         transition: "all 0.3s ease",
         transform: "translateY(0)",
         "&:hover": {
-          transform: sm ? "translateY(-15px)" : "translateY(-30px)",
+          transform: sm ? "translateY(0px)" : "translateY(-50px)",
           border: `1px solid #695204`,
           boxShadow: `0 3px 20px 1px #695204`,
         },
@@ -325,7 +345,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
         style={{
           minWidth: imgSize,
           minHeight: imgSize,
-          top: sm ? -60 : -140,
+          top: sm ? -20 : -140,
           zIndex: 1,
           position: "absolute",
         }}
@@ -379,93 +399,1386 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
   );
 };
 
-const StarSvg: React.FC<StarSvgProps> = ({ color, size, style }) => {
-  const theme: Theme = useTheme();
-  const md = useMediaQuery(theme.breakpoints.down("md"));
+const ExploreCardsComponent = () => {
+  const classes = useStyles();
+  const [animation, setAnimation] = useState({
+    card1: false,
+    card2: false,
+    card3: false,
+    card4: false,
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAnimation((prevState) => {
+        if (
+          (!prevState.card1 &&
+            !prevState.card2 &&
+            !prevState.card3 &&
+            !prevState.card4) ||
+          prevState.card4
+        ) {
+          return { card1: true, card2: false, card3: false, card4: false };
+        } else if (prevState.card1) {
+          return { card1: false, card2: true, card3: false, card4: false };
+        } else if (prevState.card2) {
+          return { card1: false, card2: false, card3: true, card4: false };
+        } else if (prevState.card3) {
+          return { card1: false, card2: false, card3: false, card4: true };
+        }
+
+        return prevState;
+      });
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <svg
-      className="star"
-      width={size ? size : md ? "16" : "32"}
-      height={size ? size : md ? "16" : "32"}
-      viewBox="0 0 32 32"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ position: "absolute", zIndex: 0, ...style }}
+    <Box
+      style={{
+        width: "100%",
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        placeItems: "center",
+        gap: "10px",
+        rowGap: "35px",
+        paddingTop: 50,
+      }}
     >
-      <path
-        d="M15.9972 32C15.6561 31.9998 15.3225 31.9002 15.0371 31.7134C14.7517 31.5265 14.5269 31.2605 14.3903 30.9479L11.9855 25.4252C10.9306 22.9978 8.99416 21.0611 6.56709 20.006L1.05202 17.6037C0.739339 17.4672 0.473261 17.2425 0.286397 16.957C0.0995322 16.6715 1.35528e-07 16.3377 1.32697e-07 15.9966C1.29867e-07 15.6554 0.0995321 15.3216 0.286397 15.0361C0.473261 14.7506 0.739339 14.5259 1.05202 14.3894L6.57399 11.9843C8.99687 10.9304 10.9305 8.99746 11.9855 6.57479L14.3903 1.05208C14.5269 0.739479 14.7517 0.473481 15.0371 0.286628C15.3225 0.0997753 15.6561 0.000168638 15.9972 -1.32703e-07C16.3385 7.57583e-05 16.6724 0.0996276 16.9581 0.286476C17.2437 0.473324 17.4687 0.73937 17.6055 1.05208L20.009 6.57479C21.0643 8.99981 23.0002 10.9341 25.426 11.9871L30.948 14.3922C31.2607 14.5287 31.5267 14.7534 31.7136 15.0389C31.9005 15.3243 32 15.6581 32 15.9993C32 16.3405 31.9005 16.6743 31.7136 16.9598C31.5267 17.2452 31.2607 17.47 30.948 17.6064L25.426 20.0102C22.9994 21.0647 21.0634 23.001 20.009 25.428L17.6055 30.9507C17.4683 31.2629 17.2431 31.5283 16.9575 31.7147C16.6719 31.901 16.3382 32.0002 15.9972 32Z"
-        fill={color ? color : "#D1FF19"}
-      />
-    </svg>
+      <Box
+        sx={{
+          width: 150,
+          height: 125,
+          background:
+            "linear-gradient(241.27deg, rgba(255, 255, 255, 0.08) -5.59%, rgba(255, 255, 255, 0) 100%)",
+          filter: "drop-shadow(0px 8px 28px rgba(0, 0, 0, 0.25))",
+          borderRadius: "20px",
+          border: `1px solid #686868`,
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "5px",
+          transition: "all 0.3s ease",
+        }}
+        onClick={() =>
+          setAnimation((prevState) => ({
+            ...prevState,
+            card1: true,
+            card2: false,
+            card3: false,
+            card4: false,
+          }))
+        }
+      >
+        <Box
+          style={{
+            width: "100%",
+            height: animation.card1 ? 33 : 110,
+            display: "flex",
+            justifyContent: "center",
+            transition: "height 0.3s linear",
+          }}
+        >
+          <img
+            src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/roadmap1.png"
+            alt="Gobbl AI"
+            width={95}
+            height={110}
+            style={{
+              minWidth: 95,
+              minHeight: 110,
+              objectFit: "contain",
+              zIndex: 1,
+              marginTop: "-25px",
+              transform: animation.card1
+                ? "scale(0.6) translateY(-50px)"
+                : "scale(1) translateY(0px)",
+              transition: "all 0.3s linear",
+            }}
+          />
+        </Box>
+        <Box
+          style={{
+            width: "100%",
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            overflow: "hidden",
+          }}
+        >
+          <Typography
+            style={{
+              width: "100%",
+              maxWidth: 140,
+              fontFamily: "Rubik",
+              fontWeight: 700,
+              fontSize: 18,
+              lineHeight: "100%",
+              textAlign: "center",
+              color: "#fff",
+              margin: "0 auto",
+            }}
+          >
+            ORDERING
+          </Typography>
+          <Typography
+            className={classes.description}
+            style={{
+              textAlign: "center",
+              lineHeight: "100%",
+              fontSize: 12,
+              color: "#FF9CFF",
+              fontWeight: 500,
+              transform: animation.card1
+                ? "translateY(0px)"
+                : "translateY(25px)",
+            }}
+          >
+            Intuitive food ordering
+          </Typography>
+          <Typography
+            className={classes.description}
+            style={{
+              textAlign: "center",
+              lineHeight: "100%",
+              fontSize: 10,
+              height: 75,
+              transform: animation.card1
+                ? "translateY(0px)"
+                : "translateY(25px)",
+            }}
+          >
+            Deploy self-learning
+            <br />
+            voice & chat agents to
+            <br />
+            accept orders using
+            <br />
+            natural language
+          </Typography>
+        </Box>
+      </Box>
+
+      <Box
+        sx={{
+          width: 150,
+          height: 125,
+          background:
+            "linear-gradient(241.27deg, rgba(255, 255, 255, 0.08) -5.59%, rgba(255, 255, 255, 0) 100%)",
+          filter: "drop-shadow(0px 8px 28px rgba(0, 0, 0, 0.25))",
+          borderRadius: "20px",
+          border: `1px solid #686868`,
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "5px",
+          transition: "all 0.3s ease",
+        }}
+        onClick={() =>
+          setAnimation((prevState) => ({
+            ...prevState,
+            card1: false,
+            card2: true,
+            card3: false,
+            card4: false,
+          }))
+        }
+      >
+        <Box
+          style={{
+            width: "100%",
+            height: animation.card2 ? 33 : 110,
+            display: "flex",
+            justifyContent: "center",
+            transition: "height 0.3s linear",
+          }}
+        >
+          <img
+            src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap2.png"
+            alt="Gobbl AI"
+            width={110}
+            height={110}
+            style={{
+              minWidth: 110,
+              minHeight: 110,
+              objectFit: "contain",
+              zIndex: 1,
+              marginTop: "-25px",
+              transform: animation.card2
+                ? "scale(0.6) translateY(-50px)"
+                : "scale(1) translateY(0px)",
+              transition: "all 0.3s linear",
+            }}
+          />
+        </Box>
+
+        <Box
+          style={{
+            width: "100%",
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            overflow: "hidden",
+          }}
+        >
+          <Typography
+            style={{
+              width: "100%",
+              maxWidth: 140,
+              fontFamily: "Rubik",
+              fontWeight: 700,
+              fontSize: 18,
+              lineHeight: "100%",
+              textAlign: "center",
+              color: "#fff",
+              margin: "0 auto",
+            }}
+          >
+            ANALYTICS
+          </Typography>
+          <Typography
+            className={classes.description}
+            style={{
+              textAlign: "center",
+              lineHeight: "100%",
+              fontSize: 12,
+              color: "#FF9CFF",
+              fontWeight: 500,
+              transform: animation.card2
+                ? "translateY(0px)"
+                : "translateY(25px)",
+            }}
+          >
+            Cultivate Customers
+          </Typography>
+          <Typography
+            className={classes.description}
+            style={{
+              textAlign: "center",
+              lineHeight: "100%",
+              fontSize: 10,
+              height: 75,
+              transform: animation.card2
+                ? "translateY(0px)"
+                : "translateY(25px)",
+            }}
+          >
+            Recieve actionable
+            <br />
+            insights into sales and
+            <br />
+            trends to create strategies
+            <br />
+            for customer retention
+          </Typography>
+        </Box>
+      </Box>
+
+      <Box
+        sx={{
+          width: 150,
+          height: 125,
+          background:
+            "linear-gradient(241.27deg, rgba(255, 255, 255, 0.08) -5.59%, rgba(255, 255, 255, 0) 100%)",
+          filter: "drop-shadow(0px 8px 28px rgba(0, 0, 0, 0.25))",
+          borderRadius: "20px",
+          border: `1px solid #686868`,
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "5px",
+          transition: "all 0.3s ease",
+        }}
+        onClick={() =>
+          setAnimation((prevState) => ({
+            ...prevState,
+            card1: false,
+            card2: false,
+            card3: true,
+            card4: false,
+          }))
+        }
+      >
+        <Box
+          style={{
+            width: "100%",
+            height: animation.card3 ? 33 : 110,
+            display: "flex",
+            justifyContent: "center",
+            transition: "height 0.3s linear",
+          }}
+        >
+          <img
+            src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap3.png"
+            alt="Gobbl AI"
+            width={110}
+            height={110}
+            style={{
+              minWidth: 110,
+              minHeight: 110,
+              objectFit: "contain",
+              zIndex: 1,
+              marginTop: "-25px",
+              transform: animation.card3
+                ? "scale(0.6) translateY(-50px)"
+                : "scale(1) translateY(0px)",
+              transition: "all 0.3s linear",
+            }}
+          />
+        </Box>
+
+        <Box
+          style={{
+            width: "100%",
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            overflow: "hidden",
+          }}
+        >
+          <Typography
+            style={{
+              width: "100%",
+              maxWidth: 140,
+              fontFamily: "Rubik",
+              fontWeight: 700,
+              fontSize: 18,
+              lineHeight: "100%",
+              textAlign: "center",
+              color: "#fff",
+              margin: "0 auto",
+            }}
+          >
+            MARKETING
+          </Typography>
+          <Typography
+            className={classes.description}
+            style={{
+              textAlign: "center",
+              lineHeight: "100%",
+              fontSize: 12,
+              color: "#FF9CFF",
+              fontWeight: 500,
+              transform: animation.card3
+                ? "translateY(0px)"
+                : "translateY(25px)",
+            }}
+          >
+            Automate Campaigns
+          </Typography>
+          <Typography
+            className={classes.description}
+            style={{
+              textAlign: "center",
+              lineHeight: "100%",
+              fontSize: 10,
+              height: 75,
+              transform: animation.card3
+                ? "translateY(0px)"
+                : "translateY(25px)",
+            }}
+          >
+            Run targeted campaigns
+            <br />
+            and promotions to attrct
+            <br />
+            users, based on trends&
+            <br />
+            inventory
+          </Typography>
+        </Box>
+      </Box>
+
+      <Box
+        sx={{
+          width: 150,
+          height: 125,
+          background:
+            "linear-gradient(241.27deg, rgba(255, 255, 255, 0.08) -5.59%, rgba(255, 255, 255, 0) 100%)",
+          filter: "drop-shadow(0px 8px 28px rgba(0, 0, 0, 0.25))",
+          borderRadius: "20px",
+          border: `1px solid #686868`,
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "5px",
+          transition: "all 0.3s ease",
+        }}
+        onClick={() =>
+          setAnimation((prevState) => ({
+            ...prevState,
+            card1: false,
+            card2: false,
+            card3: false,
+            card4: true,
+          }))
+        }
+      >
+        <Box
+          style={{
+            width: "100%",
+            height: animation.card4 ? 33 : 110,
+            display: "flex",
+            justifyContent: "center",
+            transition: "height 0.3s linear",
+          }}
+        >
+          <img
+            src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap4.png"
+            alt="Gobbl AI"
+            width={110}
+            height={110}
+            style={{
+              minWidth: 110,
+              minHeight: 110,
+              objectFit: "contain",
+              zIndex: 1,
+              marginTop: "-25px",
+              transform: animation.card4
+                ? "scale(0.6) translateY(-50px)"
+                : "scale(1) translateY(0px)",
+              transition: "all 0.3s linear",
+            }}
+          />
+        </Box>
+        <Box
+          style={{
+            width: "100%",
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            overflow: "hidden",
+          }}
+        >
+          <Typography
+            style={{
+              width: "100%",
+              maxWidth: 140,
+              fontFamily: "Rubik",
+              fontWeight: 700,
+              fontSize: 18,
+              lineHeight: "100%",
+              textAlign: "center",
+              color: "#fff",
+              margin: "0 auto",
+            }}
+          >
+            INTEGRATIONS
+          </Typography>
+          <Typography
+            className={classes.description}
+            style={{
+              textAlign: "center",
+              lineHeight: "100%",
+              fontSize: 12,
+              color: "#FF9CFF",
+              fontWeight: 500,
+              transform: animation.card4
+                ? "translateY(0px)"
+                : "translateY(25px)",
+            }}
+          >
+            with partner systems
+          </Typography>
+          <Typography
+            className={classes.description}
+            style={{
+              textAlign: "center",
+              lineHeight: "100%",
+              fontSize: 10,
+              height: 75,
+              transform: animation.card4
+                ? "translateY(0px)"
+                : "translateY(25px)",
+            }}
+          >
+            Connect to any platform,
+            <br />
+            anywhere, through
+            <br />
+            intelligent APIs that speak
+            <br />
+            every system's language
+          </Typography>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 
-const NextArrow: React.FC<ArrowProps> = (props) => {
-  const theme: Theme = useTheme();
-  const md = useMediaQuery(theme.breakpoints.down("md"));
-  const { className, onClick } = props;
-  return (
-    <div className={className} onClick={onClick}>
-      <Button
-        style={{
-          position: "absolute",
-          top: -5,
-          right: md ? -5 : -15,
-          minWidth: md ? 30 : 40,
-          maxWidth: md ? 30 : 40,
-          minHeight: md ? 30 : 40,
-          maxHeight: md ? 30 : 40,
-          background: "#2B2D25",
-          borderRadius: "50%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          filter: "drop-shadow(0px 8px 28px rgba(0, 0, 0, 0.25))",
-          border: "1px solid #fff",
-          zIndex: 5,
-        }}
-      >
-        <ArrowRightIcon style={{ fontSize: 32, color: "#fff" }} />
-      </Button>
-    </div>
-  );
-};
+const ArchitectureComponent = () => {
+  const [animation, setAnimation] = useState({
+    tab1: false,
+    tab2: false,
+    tab3: false,
+    tab4: false,
+  });
 
-const PrevArrow: React.FC<ArrowProps> = (props) => {
-  const theme: Theme = useTheme();
-  const md = useMediaQuery(theme.breakpoints.down("md"));
-  const { className, style, onClick } = props;
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAnimation((prevState) => {
+        if (
+          (!prevState.tab1 &&
+            !prevState.tab2 &&
+            !prevState.tab3 &&
+            !prevState.tab4) ||
+          prevState.tab4
+        ) {
+          return { tab1: true, tab2: false, tab3: false, tab4: false };
+        } else if (prevState.tab1) {
+          return { tab1: false, tab2: true, tab3: false, tab4: false };
+        } else if (prevState.tab2) {
+          return { tab1: false, tab2: false, tab3: true, tab4: false };
+        } else if (prevState.tab3) {
+          return { tab1: false, tab2: false, tab3: false, tab4: true };
+        }
+
+        return prevState;
+      });
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className={className} onClick={onClick}>
-      <Button
+    <Box
+      style={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        zIndex: 1,
+        gap: "15px",
+      }}
+    >
+      <Typography
         style={{
-          position: "absolute",
-          top: -5,
-          left: md ? -5 : -15,
-          minWidth: md ? 30 : 40,
-          maxWidth: md ? 30 : 40,
-          minHeight: md ? 30 : 40,
-          maxHeight: md ? 30 : 40,
-          background: "#2B2D25",
-          borderRadius: "50%",
+          width: "fit-content",
+          height: 42,
+          background: "#FF9CFF",
+          borderRadius: "50px",
+          fontFamily: "'Rubik'",
+          fontWeight: 900,
+          fontSize: 24,
+          lineHeight: "120%",
+          fontVariant: "all-small-caps",
+          color: "#000000",
+          padding: "0 25px 5px",
           display: "flex",
-          justifyContent: "center",
           alignItems: "center",
-          filter: "drop-shadow(0px 8px 28px rgba(0, 0, 0, 0.25))",
-          border: "1px solid #fff",
-          zIndex: 5,
+          justifyContent: "center",
+          marginBottom: "10px",
         }}
       >
-        <ArrowLeftIcon style={{ fontSize: 32, color: "#fff" }} />
-      </Button>
-    </div>
+        ARCHITECTURE
+      </Typography>
+
+      <Box
+        style={{
+          width: 330,
+          height: 150,
+          overflow: "hidden",
+          paddingTop: "5px",
+        }}
+      >
+        {/* tabs */}
+        <Box style={{ width: "100%", height: 80, display: "flex" }}>
+          <Box
+            style={{
+              width: "100%",
+              height: 80,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              position: "relative",
+            }}
+            onClick={() =>
+              setAnimation((prevState) => ({
+                ...prevState,
+                tab1: true,
+                tab2: false,
+                tab3: false,
+                tab4: false,
+              }))
+            }
+          >
+            <img
+              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/base_arc_mobile.webp"
+              alt="Gobbl AI"
+              style={{
+                width: 43,
+                height: 45,
+                objectFit: "contain",
+                position: "absolute",
+                transform: animation.tab1
+                  ? "scale(1.6) translateY(-2px)"
+                  : "scale(1)",
+                transition: "all 0.3s linear",
+                zIndex: 1,
+              }}
+            />
+            {animation.tab1 && (
+              <svg
+                width="96"
+                height="99"
+                viewBox="0 0 96 99"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{
+                  position: "absolute",
+                  top: -2,
+                  right: -16,
+                }}
+              >
+                <path
+                  d="M0.00108594 21.6206C0.00108596 16.7974 3.44387 12.6615 8.18705 11.7865L67.626 0.822206C73.0738 -0.182721 78.3005 3.43267 79.2818 8.8848L95.5026 99.0018L0.00108574 96.5004L0.00108594 21.6206Z"
+                  fill="#161810"
+                />
+              </svg>
+            )}
+          </Box>
+          <Box
+            style={{
+              width: "100%",
+              height: 80,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              position: "relative",
+            }}
+            onClick={() =>
+              setAnimation((prevState) => ({
+                ...prevState,
+                tab1: false,
+                tab2: true,
+                tab3: false,
+                tab4: false,
+              }))
+            }
+          >
+            <img
+              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/protein_mobile.webp"
+              alt="Gobbl AI"
+              style={{
+                width: 57,
+                height: 45,
+                objectFit: "contain",
+                position: "absolute",
+                transform: animation.tab2
+                  ? "scale(1.5) translateY(-5px)"
+                  : "scale(1)",
+                transition: "all 0.3s linear",
+                zIndex: 1,
+              }}
+            />
+            {animation.tab2 && (
+              <svg
+                width="109"
+                height="99"
+                viewBox="0 0 109 99"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{
+                  position: "absolute",
+                  top: -2,
+                  right: -21,
+                }}
+              >
+                <path
+                  d="M0.00212581 22.8945C0.00209476 18.0398 3.48895 13.8863 8.27037 13.0456L81.1934 0.223362C86.6173 -0.73033 91.7915 2.88079 92.767 8.30078L109.003 98.5001L0.00260946 98.4997L0.00212581 22.8945Z"
+                  fill="#161810"
+                />
+              </svg>
+            )}
+          </Box>
+          <Box
+            style={{
+              width: "100%",
+              height: 80,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              position: "relative",
+            }}
+            onClick={() =>
+              setAnimation((prevState) => ({
+                ...prevState,
+                tab1: false,
+                tab2: false,
+                tab3: true,
+                tab4: false,
+              }))
+            }
+          >
+            <img
+              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/veggies_mobile.webp"
+              alt="Gobbl AI"
+              style={{
+                width: 58,
+                height: 45,
+                objectFit: "contain",
+                position: "absolute",
+                transform: animation.tab3
+                  ? "scale(1.5) translateY(-5px)"
+                  : "scale(1)",
+                transition: "all 0.3s linear",
+                zIndex: 1,
+              }}
+            />
+            {animation.tab3 && (
+              <svg
+                width="113"
+                height="99"
+                viewBox="0 0 113 99"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{
+                  position: "absolute",
+                  top: -2,
+                  right: -24,
+                }}
+              >
+                <path
+                  d="M0.00112453 23.6522C0.00112392 18.815 3.46345 14.6712 8.22365 13.8114L83.2957 0.251634C88.6773 -0.720412 93.8416 2.81083 94.8883 8.17842L112.501 98.4985L0.00113405 98.5005L0.00112453 23.6522Z"
+                  fill="#161810"
+                />
+              </svg>
+            )}
+          </Box>
+          <Box
+            style={{
+              width: "100%",
+              height: 80,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              position: "relative",
+            }}
+            onClick={() =>
+              setAnimation((prevState) => ({
+                ...prevState,
+                tab1: false,
+                tab2: false,
+                tab3: false,
+                tab4: true,
+              }))
+            }
+          >
+            <img
+              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/sauce_mobile.webp"
+              alt="Gobbl AI"
+              style={{
+                width: 48,
+                height: 45,
+                objectFit: "contain",
+                position: "absolute",
+                transform: animation.tab4
+                  ? "scale(1.6) translateY(-2px)"
+                  : "scale(1)",
+                transition: "all 0.3s linear",
+                zIndex: 1,
+              }}
+            />
+            {animation.tab4 && (
+              <svg
+                width="106"
+                height="92"
+                viewBox="0 0 106 92"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{
+                  position: "absolute",
+                  top: -2,
+                  right: -4,
+                }}
+              >
+                <path
+                  d="M105.995 10.9566C105.995 4.72551 100.358 0.0117955 94.2256 1.11438L23.556 13.8198C19.5841 14.5339 16.4306 17.5655 15.5606 21.5062L-0.00275755 92.001L105.995 92.0007L105.995 10.9566Z"
+                  fill="#161810"
+                />
+              </svg>
+            )}
+          </Box>
+        </Box>
+        {/* content */}
+        {animation.tab1 && (
+          <Box
+            style={{
+              width: "100%",
+              height: 60,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-end",
+              background: "#161810",
+              borderRadius: "12px",
+            }}
+          >
+            <Box
+              style={{
+                display: "flex",
+                alignItems: "flex-end",
+                justifyContent: "space-between",
+                gap: "15px",
+                padding: "0 15px",
+                position: "relative",
+                zIndex: 2,
+              }}
+            >
+              <Typography
+                style={{
+                  fontFamily: "'Rubik'",
+                  fontWeight: 900,
+                  fontSize: 16,
+                  lineHeight: "120%",
+                  fontVariant: "all-small-caps",
+                  color: "#FFFFFF",
+                }}
+              >
+                APPLICATION
+              </Typography>
+              <Typography
+                style={{
+                  fontFamily: "'Rubik'",
+                  fontWeight: 700,
+                  fontSize: 10,
+                  lineHeight: "120%",
+                  textAlign: "right",
+                  fontVariant: "all-small-caps",
+                  color: "#64FF99",
+                }}
+              >
+                USER INTERACTION LAYER
+              </Typography>
+            </Box>
+            <Box
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "5px",
+                padding: "5px 10px 10px",
+              }}
+            >
+              <Typography
+                style={{
+                  width: "100%",
+                  height: 22,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "8px",
+                  background:
+                    "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                  border: "1px solid rgba(255, 255, 255, 0.5)",
+                  borderRadius: "14px",
+                  fontFamily: "'Figtree'",
+                  fontWeight: 400,
+                  fontSize: 10,
+                  textAlign: "center",
+                  lineHeight: "90%",
+                  padding: "0 3px",
+                  fontVariant: "all-small-caps",
+                  color: "#EDEDED",
+                }}
+              >
+                Customer Interface
+              </Typography>
+              <Typography
+                style={{
+                  width: "100%",
+                  height: 22,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "8px",
+                  background:
+                    "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                  border: "1px solid rgba(255, 255, 255, 0.5)",
+                  borderRadius: "14px",
+                  fontFamily: "'Figtree'",
+                  fontWeight: 400,
+                  fontSize: 10,
+                  textAlign: "center",
+                  lineHeight: "90%",
+                  padding: "0 3px",
+                  fontVariant: "all-small-caps",
+                  color: "#EDEDED",
+                }}
+              >
+                Restaurant Interface
+              </Typography>
+            </Box>
+          </Box>
+        )}
+        {animation.tab2 && (
+          <Box
+            style={{
+              width: "100%",
+              height: 60,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-end",
+              background: "#161810",
+              borderRadius: "12px",
+            }}
+          >
+            <Box
+              style={{
+                display: "flex",
+                alignItems: "flex-end",
+                justifyContent: "space-between",
+                gap: "15px",
+                padding: "0 15px",
+                position: "relative",
+                zIndex: 2,
+              }}
+            >
+              <Typography
+                style={{
+                  fontFamily: "'Rubik'",
+                  fontWeight: 900,
+                  fontSize: 16,
+                  lineHeight: "120%",
+                  fontVariant: "all-small-caps",
+                  color: "#FFFFFF",
+                }}
+              >
+                INTELLIGENCE
+              </Typography>
+              <Typography
+                style={{
+                  fontFamily: "'Rubik'",
+                  fontWeight: 700,
+                  fontSize: 10,
+                  lineHeight: "120%",
+                  textAlign: "right",
+                  fontVariant: "all-small-caps",
+                  color: "#64FF99",
+                }}
+              >
+                LLM PROCESSING LAYER
+              </Typography>
+            </Box>
+            <Box
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "5px",
+                padding: "5px 10px 10px",
+              }}
+            >
+              <Typography
+                style={{
+                  width: "100%",
+                  height: 22,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "8px",
+                  background:
+                    "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                  border: "1px solid rgba(255, 255, 255, 0.5)",
+                  borderRadius: "14px",
+                  fontFamily: "'Figtree'",
+                  fontWeight: 400,
+                  fontSize: 10,
+                  textAlign: "center",
+                  lineHeight: "90%",
+                  padding: "0 3px",
+                  fontVariant: "all-small-caps",
+                  color: "#EDEDED",
+                }}
+              >
+                Food Domain LLMs
+              </Typography>
+              <Typography
+                style={{
+                  width: "100%",
+                  height: 22,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "8px",
+                  background:
+                    "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                  border: "1px solid rgba(255, 255, 255, 0.5)",
+                  borderRadius: "14px",
+                  fontFamily: "'Figtree'",
+                  fontWeight: 400,
+                  fontSize: 10,
+                  textAlign: "center",
+                  lineHeight: "90%",
+                  padding: "0 3px",
+                  fontVariant: "all-small-caps",
+                  color: "#EDEDED",
+                }}
+              >
+                Restaurant LLMs
+              </Typography>
+              <Typography
+                style={{
+                  width: "100%",
+                  height: 22,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "8px",
+                  background:
+                    "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                  border: "1px solid rgba(255, 255, 255, 0.5)",
+                  borderRadius: "14px",
+                  fontFamily: "'Figtree'",
+                  fontWeight: 400,
+                  fontSize: 10,
+                  textAlign: "center",
+                  lineHeight: "90%",
+                  padding: "0 3px",
+                  fontVariant: "all-small-caps",
+                  color: "#EDEDED",
+                }}
+              >
+                Network LLMs
+              </Typography>
+            </Box>
+          </Box>
+        )}
+        {animation.tab3 && (
+          <Box
+            style={{
+              width: "100%",
+              height: 60,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-end",
+              background: "#161810",
+              borderRadius: "12px",
+            }}
+          >
+            <Box
+              style={{
+                display: "flex",
+                alignItems: "flex-end",
+                justifyContent: "space-between",
+                gap: "15px",
+                padding: "0 15px",
+                position: "relative",
+                zIndex: 2,
+              }}
+            >
+              <Typography
+                style={{
+                  fontFamily: "'Rubik'",
+                  fontWeight: 900,
+                  fontSize: 16,
+                  lineHeight: "120%",
+                  fontVariant: "all-small-caps",
+                  color: "#FFFFFF",
+                }}
+              >
+                MODELS
+              </Typography>
+              <Typography
+                style={{
+                  fontFamily: "'Rubik'",
+                  fontWeight: 700,
+                  fontSize: 10,
+                  lineHeight: "120%",
+                  textAlign: "right",
+                  fontVariant: "all-small-caps",
+                  color: "#64FF99",
+                }}
+              >
+                MODEL INFRASTRUCTURE
+              </Typography>
+            </Box>
+            <Box
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "5px",
+                padding: "5px 10px 10px",
+              }}
+            >
+              <Typography
+                style={{
+                  width: "100%",
+                  height: 22,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "8px",
+                  background:
+                    "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                  border: "1px solid rgba(255, 255, 255, 0.5)",
+                  borderRadius: "14px",
+                  fontFamily: "'Figtree'",
+                  fontWeight: 400,
+                  fontSize: 10,
+                  textAlign: "center",
+                  lineHeight: "90%",
+                  padding: "0 3px",
+                  fontVariant: "all-small-caps",
+                  color: "#EDEDED",
+                }}
+              >
+                Edge Intelligence
+              </Typography>
+              <Typography
+                style={{
+                  width: "100%",
+                  height: 22,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "8px",
+                  background:
+                    "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                  border: "1px solid rgba(255, 255, 255, 0.5)",
+                  borderRadius: "14px",
+                  fontFamily: "'Figtree'",
+                  fontWeight: 400,
+                  fontSize: 10,
+                  textAlign: "center",
+                  lineHeight: "90%",
+                  padding: "0 3px",
+                  fontVariant: "all-small-caps",
+                  color: "#EDEDED",
+                }}
+              >
+                Model Registry
+              </Typography>
+              <Typography
+                style={{
+                  width: "100%",
+                  height: 22,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "8px",
+                  background:
+                    "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                  border: "1px solid rgba(255, 255, 255, 0.5)",
+                  borderRadius: "14px",
+                  fontFamily: "'Figtree'",
+                  fontWeight: 400,
+                  fontSize: 10,
+                  textAlign: "center",
+                  lineHeight: "90%",
+                  padding: "0 3px",
+                  fontVariant: "all-small-caps",
+                  color: "#EDEDED",
+                }}
+              >
+                Training
+              </Typography>
+              <Typography
+                style={{
+                  width: "100%",
+                  height: 22,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "8px",
+                  background:
+                    "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                  border: "1px solid rgba(255, 255, 255, 0.5)",
+                  borderRadius: "14px",
+                  fontFamily: "'Figtree'",
+                  fontWeight: 400,
+                  fontSize: 10,
+                  textAlign: "center",
+                  lineHeight: "90%",
+                  padding: "0 3px",
+                  fontVariant: "all-small-caps",
+                  color: "#EDEDED",
+                }}
+              >
+                Inference
+              </Typography>
+            </Box>
+          </Box>
+        )}
+        {animation.tab4 && (
+          <Box
+            style={{
+              width: "100%",
+              height: 60,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-end",
+              background: "#161810",
+              borderRadius: "12px",
+            }}
+          >
+            <Box
+              style={{
+                display: "flex",
+                alignItems: "flex-end",
+                justifyContent: "space-between",
+                gap: "15px",
+                padding: "0 15px",
+                position: "relative",
+                zIndex: 2,
+              }}
+            >
+              <Typography
+                style={{
+                  fontFamily: "'Rubik'",
+                  fontWeight: 900,
+                  fontSize: 16,
+                  lineHeight: "120%",
+                  fontVariant: "all-small-caps",
+                  color: "#FFFFFF",
+                }}
+              >
+                DATA
+              </Typography>
+              <Typography
+                style={{
+                  fontFamily: "'Rubik'",
+                  fontWeight: 700,
+                  fontSize: 10,
+                  lineHeight: "120%",
+                  textAlign: "right",
+                  fontVariant: "all-small-caps",
+                  color: "#64FF99",
+                }}
+              >
+                VECTOR DATABASE LAYER
+              </Typography>
+            </Box>
+            <Box
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "5px",
+                padding: "5px 10px 10px",
+              }}
+            >
+              <Typography
+                style={{
+                  width: "100%",
+                  height: 22,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "8px",
+                  background:
+                    "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                  border: "1px solid rgba(255, 255, 255, 0.5)",
+                  borderRadius: "14px",
+                  fontFamily: "'Figtree'",
+                  fontWeight: 400,
+                  fontSize: 10,
+                  textAlign: "center",
+                  lineHeight: "90%",
+                  padding: "0 3px",
+                  fontVariant: "all-small-caps",
+                  color: "#EDEDED",
+                }}
+              >
+                Customer Vectors
+              </Typography>
+              <Typography
+                style={{
+                  width: "100%",
+                  height: 22,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "8px",
+                  background:
+                    "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                  border: "1px solid rgba(255, 255, 255, 0.5)",
+                  borderRadius: "14px",
+                  fontFamily: "'Figtree'",
+                  fontWeight: 400,
+                  fontSize: 10,
+                  textAlign: "center",
+                  lineHeight: "90%",
+                  padding: "0 3px",
+                  fontVariant: "all-small-caps",
+                  color: "#EDEDED",
+                }}
+              >
+                Restaurant Vectors
+              </Typography>
+              <Typography
+                style={{
+                  width: "100%",
+                  height: 22,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "8px",
+                  background:
+                    "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                  border: "1px solid rgba(255, 255, 255, 0.5)",
+                  borderRadius: "14px",
+                  fontFamily: "'Figtree'",
+                  fontWeight: 400,
+                  fontSize: 10,
+                  textAlign: "center",
+                  lineHeight: "90%",
+                  padding: "0 3px",
+                  fontVariant: "all-small-caps",
+                  color: "#EDEDED",
+                }}
+              >
+                Network Vectors
+              </Typography>
+              <Typography
+                style={{
+                  width: "100%",
+                  height: 22,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "8px",
+                  background:
+                    "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                  border: "1px solid rgba(255, 255, 255, 0.5)",
+                  borderRadius: "14px",
+                  fontFamily: "'Figtree'",
+                  fontWeight: 400,
+                  fontSize: 10,
+                  textAlign: "center",
+                  lineHeight: "90%",
+                  padding: "0 3px",
+                  fontVariant: "all-small-caps",
+                  color: "#EDEDED",
+                }}
+              >
+                Training Sets
+              </Typography>
+            </Box>
+          </Box>
+        )}
+      </Box>
+    </Box>
   );
 };
 
 const draw = {
   offscreen: { pathLength: 0, opacity: 0 },
   onscreen: (i: number) => {
-    const delay = i * 0.5;
+    const delay = i * 0;
     return {
       pathLength: 1,
       opacity: 1,
@@ -1007,9 +2320,11 @@ export const LandingPage = () => {
                     <motion.div
                       variants={{
                         offscreen: {
-                          x: 0,
-                          y: 50,
-                          scale: 0,
+                          // x: 0,
+                          // y: 50,
+                          // scale: 0,
+                          x: -85,
+                          y: -95,
                         },
                         onscreen: {
                           x: -85,
@@ -1076,9 +2391,11 @@ export const LandingPage = () => {
                     <motion.div
                       variants={{
                         offscreen: {
-                          x: 0,
-                          y: 50,
-                          scale: 0,
+                          // x: 0,
+                          // y: 50,
+                          // scale: 0,
+                          x: 85,
+                          y: -95,
                         },
                         onscreen: {
                           x: 85,
@@ -1145,9 +2462,11 @@ export const LandingPage = () => {
                     <motion.div
                       variants={{
                         offscreen: {
-                          x: 0,
-                          y: 50,
-                          scale: 0,
+                          // x: 0,
+                          // y: 50,
+                          // scale: 0,
+                          x: -85,
+                          y: 240,
                         },
                         onscreen: {
                           x: -85,
@@ -1216,9 +2535,11 @@ export const LandingPage = () => {
                     <motion.div
                       variants={{
                         offscreen: {
-                          x: 0,
-                          y: 50,
-                          scale: 0,
+                          // x: 0,
+                          // y: 50,
+                          // scale: 0,
+                          x: 85,
+                          y: 240,
                         },
                         onscreen: {
                           x: 85,
@@ -1276,7 +2597,7 @@ export const LandingPage = () => {
                   </motion.div>
 
                   <img
-                    src="/images/fries.png"
+                    src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/fries.webp"
                     alt="Gobbl AI"
                     width={190}
                     height={190}
@@ -1383,7 +2704,7 @@ export const LandingPage = () => {
                     justifyContent: "center",
                     position: "relative",
                     transform: md
-                      ? "scale(0.55)"
+                      ? "scale(0.6)"
                       : lg
                       ? "scale(0.7)"
                       : xl
@@ -1405,12 +2726,14 @@ export const LandingPage = () => {
                     <motion.div
                       variants={{
                         offscreen: {
-                          x: 0,
-                          scale: 0,
+                          // x: 0,
+                          // scale: 0,
+                          opacity: 0,
+                          x: -480,
                         },
                         onscreen: {
-                          x: -480,
-                          scale: 1,
+                          opacity: 1,
+                          // scale: 1,
                           transition: {
                             type: "spring",
                             bounce: 0.35,
@@ -1472,12 +2795,14 @@ export const LandingPage = () => {
                     <motion.div
                       variants={{
                         offscreen: {
-                          x: 0,
-                          scale: 0,
+                          // x: 0,
+                          // scale: 0,
+                          opacity: 0,
+                          x: 447,
                         },
                         onscreen: {
-                          x: 447,
-                          scale: 1,
+                          opacity: 1,
+                          // scale: 1,
                           transition: {
                             type: "spring",
                             bounce: 0.35,
@@ -1539,12 +2864,14 @@ export const LandingPage = () => {
                     <motion.div
                       variants={{
                         offscreen: {
-                          x: 0,
-                          scale: 0,
+                          // x: 0,
+                          // scale: 0,
+                          opacity: 0,
+                          x: -380,
                         },
                         onscreen: {
-                          x: -380,
-                          scale: 1,
+                          opacity: 1,
+                          // scale: 1,
                           transition: {
                             type: "spring",
                             bounce: 0.35,
@@ -1606,12 +2933,14 @@ export const LandingPage = () => {
                     <motion.div
                       variants={{
                         offscreen: {
-                          x: 0,
-                          scale: 0,
+                          // x: 0,
+                          // scale: 0,
+                          opacity: 0,
+                          x: 355,
                         },
                         onscreen: {
-                          x: 355,
-                          scale: 1,
+                          opacity: 1,
+                          // scale: 1,
                           transition: {
                             type: "spring",
                             bounce: 0.35,
@@ -1660,7 +2989,7 @@ export const LandingPage = () => {
                     </motion.div>
                   </motion.div>
                   <img
-                    src="/images/fries.png"
+                    src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/fries.webp"
                     alt="Gobbl AI"
                     width={400}
                     height={400}
@@ -1774,7 +3103,6 @@ export const LandingPage = () => {
               width: "100%",
               maxWidth: "1440px",
               margin: "0 auto",
-              // minHeight: "100vh",
               height: "100%",
               position: "relative",
             }}
@@ -1812,68 +3140,244 @@ export const LandingPage = () => {
                 }}
               />
             </Box>
-            <Box
-              style={{
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                paddingTop: sm ? "15px" : md ? "25px" : "35px",
-                position: "relative",
-                zIndex: 1,
-              }}
-            >
-              <img
-                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/how_we_gobbl.webp"
-                alt="Gobbl AI"
+            {/* {sm && (
+              <Box
                 style={{
-                  width: "fit-content",
-                  height: "100%",
-                  maxHeight: 700,
-                  objectFit: "contain",
-                  marginRight: "-5%",
-                  zIndex: 2,
+                  width: "100%",
+                  height: 450,
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
-              />
-            </Box>
-            <img
-              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/user_gobbl.webp"
-              alt="Gobbl AI"
-              style={{
-                maxWidth: "fit-content",
-                maxHeight: sm ? 80 : md ? 160 : lg ? 220 : 350,
-                height: "fit-content",
-                objectFit: "contain",
-                position: "absolute",
-                left: sm ? -42 : md ? -80 : lg ? -60 : -80,
-                top: sm ? "20%" : lg ? "5%" : "15%",
-              }}
-            />
-            <img
-              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/restro_gobbl.webp"
-              alt="Gobbl AI"
-              style={{
-                maxWidth: "fit-content",
-                maxHeight: sm ? 90 : md ? 180 : lg ? 240 : 360,
-                height: "fit-content",
-                objectFit: "contain",
-                position: "absolute",
-                right: lg ? "2%" : "8%",
-                bottom: sm ? -30 : md ? "-2%" : "-7%",
-              }}
-            />
-            {/* <Box
-              style={{
-                position: "absolute",
-                width: lg ? (sm ? 160 : 250) : 318,
-                height: lg ? (sm ? 160 : 250) : 318,
-                right: "-25%",
-                bottom: "-20%",
-                background: "#40FFF4",
-                opacity: 0.6,
-                filter: "blur(212px)",
-              }}
-            /> */}
+              >
+                <motion.div
+                  initial="offscreen"
+                  whileInView="onscreen"
+                  viewport={{ once: true, amount: 0.7 }}
+                  style={{
+                    position: "absolute",
+                    top: 130,
+                    zIndex: 1,
+                  }}
+                >
+                  <motion.div
+                    variants={{
+                      offscreen: {
+                        rotate: -7,
+                      },
+                      onscreen: {
+                        rotate: 7,
+                        transition: {
+                          type: "spring",
+                          bounce: 0.35,
+                          duration: 3,
+                          delay: 0.5,
+                        },
+                      },
+                    }}
+                  >
+                    <img
+                      src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/hwg_chat.webp"
+                      alt="Gobbl AI"
+                      style={{
+                        width: 140,
+                        height: 280,
+                        objectFit: "contain",
+                      }}
+                    />
+                  </motion.div>
+                </motion.div>
+                <motion.div
+                  initial="offscreen"
+                  whileInView="onscreen"
+                  viewport={{ once: true, amount: 0.7 }}
+                  style={{
+                    position: "absolute",
+                    marginLeft: "-180px",
+                    top: 50,
+                    zIndex: 1,
+                  }}
+                >
+                  <motion.div
+                    variants={{
+                      offscreen: {
+                        opacity: 0,
+                      },
+                      onscreen: {
+                        opacity: 1,
+                        transition: {
+                          bounce: 0.35,
+                          duration: 3,
+                          delay: 0.5,
+                        },
+                      },
+                    }}
+                  >
+                    <img
+                      src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/user_gobbl_mobile.webp"
+                      alt="Gobbl AI"
+                      style={{
+                        maxWidth: "fit-content",
+                        maxHeight: 112,
+                        height: "fit-content",
+                        objectFit: "contain",
+                      }}
+                    />
+                  </motion.div>
+                </motion.div>
+                <motion.div
+                  initial="offscreen"
+                  whileInView="onscreen"
+                  viewport={{ once: true, amount: 0.7 }}
+                  style={{
+                    position: "absolute",
+                    marginRight: "-200px",
+                    bottom: 0,
+                    zIndex: 1,
+                  }}
+                >
+                  <motion.div
+                    variants={{
+                      offscreen: {
+                        opacity: 0,
+                      },
+                      onscreen: {
+                        opacity: 1,
+                        transition: {
+                          bounce: 0.35,
+                          duration: 3,
+                          delay: 0.5,
+                        },
+                      },
+                    }}
+                  >
+                    <img
+                      src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/restro_gobbl_mobile.webp"
+                      alt="Gobbl AI"
+                      style={{
+                        maxWidth: "fit-content",
+                        height: 113,
+                        objectFit: "contain",
+                      }}
+                    />
+                  </motion.div>
+                </motion.div>
+                <motion.svg
+                  width="89"
+                  height="348"
+                  viewBox="0 0 95 394"
+                  fill="none"
+                  initial="offscreen"
+                  whileInView="onscreen"
+                  viewport={{ once: true, amount: 1 }}
+                  style={{
+                    position: "absolute",
+                    marginBottom: "-80px",
+                  }}
+                >
+                  <motion.path
+                    d="M0.113249 3L3 5.88675L5.88675 3L3 0.113249L0.113249 3ZM94.8868 391L92 388.113L89.1132 391L92 393.887L94.8868 391ZM45.6064 3H46.1064C46.1064 2.72386 45.8825 2.5 45.6064 2.5V3ZM45.6064 391H45.1064C45.1064 391.276 45.3302 391.5 45.6064 391.5V391ZM4.59774 3.5C4.87388 3.5 5.09774 3.27614 5.09774 3C5.09774 2.72386 4.87388 2.5 4.59774 2.5V3.5ZM9.92354 2.5C9.64739 2.5 9.42354 2.72386 9.42354 3C9.42354 3.27614 9.64739 3.5 9.92354 3.5V2.5ZM13.119 3.5C13.3952 3.5 13.619 3.27614 13.619 3C13.619 2.72386 13.3952 2.5 13.119 2.5V3.5ZM18.4448 2.5C18.1687 2.5 17.9448 2.72386 17.9448 3C17.9448 3.27614 18.1687 3.5 18.4448 3.5V2.5ZM21.6403 3.5C21.9164 3.5 22.1403 3.27614 22.1403 3C22.1403 2.72386 21.9164 2.5 21.6403 2.5V3.5ZM26.9661 2.5C26.6899 2.5 26.4661 2.72386 26.4661 3C26.4661 3.27614 26.6899 3.5 26.9661 3.5V2.5ZM30.1616 3.5C30.4377 3.5 30.6616 3.27614 30.6616 3C30.6616 2.72386 30.4377 2.5 30.1616 2.5V3.5ZM35.4874 2.5C35.2112 2.5 34.9874 2.72386 34.9874 3C34.9874 3.27614 35.2112 3.5 35.4874 3.5V2.5ZM38.6828 3.5C38.959 3.5 39.1828 3.27614 39.1828 3C39.1828 2.72386 38.959 2.5 38.6828 2.5V3.5ZM44.0086 2.5C43.7325 2.5 43.5086 2.72386 43.5086 3C43.5086 3.27614 43.7325 3.5 44.0086 3.5V2.5ZM45.1064 4.48469C45.1064 4.76084 45.3302 4.98469 45.6064 4.98469C45.8825 4.98469 46.1064 4.76084 46.1064 4.48469H45.1064ZM46.1064 9.43367C46.1064 9.15753 45.8825 8.93367 45.6064 8.93367C45.3302 8.93367 45.1064 9.15753 45.1064 9.43367H46.1064ZM45.1064 12.4031C45.1064 12.6792 45.3302 12.9031 45.6064 12.9031C45.8825 12.9031 46.1064 12.6792 46.1064 12.4031H45.1064ZM46.1064 17.352C46.1064 17.0759 45.8825 16.852 45.6064 16.852C45.3302 16.852 45.1064 17.0759 45.1064 17.352H46.1064ZM45.1064 20.3214C45.1064 20.5976 45.3302 20.8214 45.6064 20.8214C45.8825 20.8214 46.1064 20.5976 46.1064 20.3214H45.1064ZM46.1064 25.2704C46.1064 24.9943 45.8825 24.7704 45.6064 24.7704C45.3302 24.7704 45.1064 24.9943 45.1064 25.2704H46.1064ZM45.1064 28.2398C45.1064 28.5159 45.3302 28.7398 45.6064 28.7398C45.8825 28.7398 46.1064 28.5159 46.1064 28.2398H45.1064ZM46.1064 33.1888C46.1064 32.9126 45.8825 32.6888 45.6064 32.6888C45.3302 32.6888 45.1064 32.9126 45.1064 33.1888H46.1064ZM45.1064 36.1582C45.1064 36.4343 45.3302 36.6582 45.6064 36.6582C45.8825 36.6582 46.1064 36.4343 46.1064 36.1582H45.1064ZM46.1064 41.1071C46.1064 40.831 45.8825 40.6071 45.6064 40.6071C45.3302 40.6071 45.1064 40.831 45.1064 41.1071H46.1064ZM45.1064 44.0765C45.1064 44.3527 45.3302 44.5765 45.6064 44.5765C45.8825 44.5765 46.1064 44.3527 46.1064 44.0765H45.1064ZM46.1064 49.0255C46.1064 48.7494 45.8825 48.5255 45.6064 48.5255C45.3302 48.5255 45.1064 48.7494 45.1064 49.0255H46.1064ZM45.1064 51.9949C45.1064 52.271 45.3302 52.4949 45.6064 52.4949C45.8825 52.4949 46.1064 52.271 46.1064 51.9949H45.1064ZM46.1064 56.9439C46.1064 56.6677 45.8825 56.4439 45.6064 56.4439C45.3302 56.4439 45.1064 56.6677 45.1064 56.9439H46.1064ZM45.1064 59.9133C45.1064 60.1894 45.3302 60.4133 45.6064 60.4133C45.8825 60.4133 46.1064 60.1894 46.1064 59.9133H45.1064ZM46.1064 64.8622C46.1064 64.5861 45.8825 64.3622 45.6064 64.3622C45.3302 64.3622 45.1064 64.5861 45.1064 64.8622H46.1064ZM45.1064 67.8316C45.1064 68.1078 45.3302 68.3316 45.6064 68.3316C45.8825 68.3316 46.1064 68.1078 46.1064 67.8316H45.1064ZM46.1064 72.7806C46.1064 72.5045 45.8825 72.2806 45.6064 72.2806C45.3302 72.2806 45.1064 72.5045 45.1064 72.7806H46.1064ZM45.1064 75.75C45.1064 76.0261 45.3302 76.25 45.6064 76.25C45.8825 76.25 46.1064 76.0261 46.1064 75.75H45.1064ZM46.1064 80.699C46.1064 80.4228 45.8825 80.199 45.6064 80.199C45.3302 80.199 45.1064 80.4228 45.1064 80.699H46.1064ZM45.1064 83.6684C45.1064 83.9445 45.3302 84.1684 45.6064 84.1684C45.8825 84.1684 46.1064 83.9445 46.1064 83.6684H45.1064ZM46.1064 88.6174C46.1064 88.3412 45.8825 88.1174 45.6064 88.1174C45.3302 88.1174 45.1064 88.3412 45.1064 88.6174H46.1064ZM45.1064 91.5867C45.1064 91.8629 45.3302 92.0867 45.6064 92.0867C45.8825 92.0867 46.1064 91.8629 46.1064 91.5867H45.1064ZM46.1064 96.5357C46.1064 96.2596 45.8825 96.0357 45.6064 96.0357C45.3302 96.0357 45.1064 96.2596 45.1064 96.5357H46.1064ZM45.1064 99.5051C45.1064 99.7813 45.3302 100.005 45.6064 100.005C45.8825 100.005 46.1064 99.7813 46.1064 99.5051H45.1064ZM46.1064 104.454C46.1064 104.178 45.8825 103.954 45.6064 103.954C45.3302 103.954 45.1064 104.178 45.1064 104.454H46.1064ZM45.1064 107.423C45.1064 107.7 45.3302 107.923 45.6064 107.923C45.8825 107.923 46.1064 107.7 46.1064 107.423H45.1064ZM46.1064 112.372C46.1064 112.096 45.8825 111.872 45.6064 111.872C45.3302 111.872 45.1064 112.096 45.1064 112.372H46.1064ZM45.1064 115.342C45.1064 115.618 45.3302 115.842 45.6064 115.842C45.8825 115.842 46.1064 115.618 46.1064 115.342H45.1064ZM46.1064 120.291C46.1064 120.015 45.8825 119.791 45.6064 119.791C45.3302 119.791 45.1064 120.015 45.1064 120.291H46.1064ZM45.1064 123.26C45.1064 123.536 45.3302 123.76 45.6064 123.76C45.8825 123.76 46.1064 123.536 46.1064 123.26H45.1064ZM46.1064 128.209C46.1064 127.933 45.8825 127.709 45.6064 127.709C45.3302 127.709 45.1064 127.933 45.1064 128.209H46.1064ZM45.1064 131.179C45.1064 131.455 45.3302 131.679 45.6064 131.679C45.8825 131.679 46.1064 131.455 46.1064 131.179H45.1064ZM46.1064 136.128C46.1064 135.851 45.8825 135.628 45.6064 135.628C45.3302 135.628 45.1064 135.851 45.1064 136.128H46.1064ZM45.1064 139.097C45.1064 139.373 45.3302 139.597 45.6064 139.597C45.8825 139.597 46.1064 139.373 46.1064 139.097H45.1064ZM46.1064 144.046C46.1064 143.77 45.8825 143.546 45.6064 143.546C45.3302 143.546 45.1064 143.77 45.1064 144.046H46.1064ZM45.1064 147.015C45.1064 147.291 45.3302 147.515 45.6064 147.515C45.8825 147.515 46.1064 147.291 46.1064 147.015H45.1064ZM46.1064 151.964C46.1064 151.688 45.8825 151.464 45.6064 151.464C45.3302 151.464 45.1064 151.688 45.1064 151.964H46.1064ZM45.1064 154.934C45.1064 155.21 45.3302 155.434 45.6064 155.434C45.8825 155.434 46.1064 155.21 46.1064 154.934H45.1064ZM46.1064 159.883C46.1064 159.607 45.8825 159.383 45.6064 159.383C45.3302 159.383 45.1064 159.607 45.1064 159.883H46.1064ZM45.1064 162.852C45.1064 163.128 45.3302 163.352 45.6064 163.352C45.8825 163.352 46.1064 163.128 46.1064 162.852H45.1064ZM46.1064 167.801C46.1064 167.525 45.8825 167.301 45.6064 167.301C45.3302 167.301 45.1064 167.525 45.1064 167.801H46.1064ZM45.1064 170.77C45.1064 171.047 45.3302 171.27 45.6064 171.27C45.8825 171.27 46.1064 171.047 46.1064 170.77H45.1064ZM46.1064 175.719C46.1064 175.443 45.8825 175.219 45.6064 175.219C45.3302 175.219 45.1064 175.443 45.1064 175.719H46.1064ZM45.1064 178.689C45.1064 178.965 45.3302 179.189 45.6064 179.189C45.8825 179.189 46.1064 178.965 46.1064 178.689H45.1064ZM46.1064 183.638C46.1064 183.362 45.8825 183.138 45.6064 183.138C45.3302 183.138 45.1064 183.362 45.1064 183.638H46.1064ZM45.1064 186.607C45.1064 186.883 45.3302 187.107 45.6064 187.107C45.8825 187.107 46.1064 186.883 46.1064 186.607H45.1064ZM46.1064 191.556C46.1064 191.28 45.8825 191.056 45.6064 191.056C45.3302 191.056 45.1064 191.28 45.1064 191.556H46.1064ZM45.1064 194.526C45.1064 194.802 45.3302 195.026 45.6064 195.026C45.8825 195.026 46.1064 194.802 46.1064 194.526H45.1064ZM46.1064 199.475C46.1064 199.198 45.8825 198.975 45.6064 198.975C45.3302 198.975 45.1064 199.198 45.1064 199.475H46.1064ZM45.1064 202.444C45.1064 202.72 45.3302 202.944 45.6064 202.944C45.8825 202.944 46.1064 202.72 46.1064 202.444H45.1064ZM46.1064 207.393C46.1064 207.117 45.8825 206.893 45.6064 206.893C45.3302 206.893 45.1064 207.117 45.1064 207.393H46.1064ZM45.1064 210.362C45.1064 210.638 45.3302 210.862 45.6064 210.862C45.8825 210.862 46.1064 210.638 46.1064 210.362H45.1064ZM46.1064 215.311C46.1064 215.035 45.8825 214.811 45.6064 214.811C45.3302 214.811 45.1064 215.035 45.1064 215.311H46.1064ZM45.1064 218.281C45.1064 218.557 45.3302 218.781 45.6064 218.781C45.8825 218.781 46.1064 218.557 46.1064 218.281H45.1064ZM46.1064 223.23C46.1064 222.953 45.8825 222.73 45.6064 222.73C45.3302 222.73 45.1064 222.953 45.1064 223.23H46.1064ZM45.1064 226.199C45.1064 226.475 45.3302 226.699 45.6064 226.699C45.8825 226.699 46.1064 226.475 46.1064 226.199H45.1064ZM46.1064 231.148C46.1064 230.872 45.8825 230.648 45.6064 230.648C45.3302 230.648 45.1064 230.872 45.1064 231.148H46.1064ZM45.1064 234.117C45.1064 234.394 45.3302 234.617 45.6064 234.617C45.8825 234.617 46.1064 234.394 46.1064 234.117H45.1064ZM46.1064 239.066C46.1064 238.79 45.8825 238.566 45.6064 238.566C45.3302 238.566 45.1064 238.79 45.1064 239.066H46.1064ZM45.1064 242.036C45.1064 242.312 45.3302 242.536 45.6064 242.536C45.8825 242.536 46.1064 242.312 46.1064 242.036H45.1064ZM46.1064 246.985C46.1064 246.709 45.8825 246.485 45.6064 246.485C45.3302 246.485 45.1064 246.709 45.1064 246.985H46.1064ZM45.1064 249.954C45.1064 250.23 45.3302 250.454 45.6064 250.454C45.8825 250.454 46.1064 250.23 46.1064 249.954H45.1064ZM46.1064 254.903C46.1064 254.627 45.8825 254.403 45.6064 254.403C45.3302 254.403 45.1064 254.627 45.1064 254.903H46.1064ZM45.1064 257.872C45.1064 258.149 45.3302 258.372 45.6064 258.372C45.8825 258.372 46.1064 258.149 46.1064 257.872H45.1064ZM46.1064 262.821C46.1064 262.545 45.8825 262.321 45.6064 262.321C45.3302 262.321 45.1064 262.545 45.1064 262.821H46.1064ZM45.1064 265.791C45.1064 266.067 45.3302 266.291 45.6064 266.291C45.8825 266.291 46.1064 266.067 46.1064 265.791H45.1064ZM46.1064 270.74C46.1064 270.464 45.8825 270.24 45.6064 270.24C45.3302 270.24 45.1064 270.464 45.1064 270.74H46.1064ZM45.1064 273.709C45.1064 273.985 45.3302 274.209 45.6064 274.209C45.8825 274.209 46.1064 273.985 46.1064 273.709H45.1064ZM46.1064 278.658C46.1064 278.382 45.8825 278.158 45.6064 278.158C45.3302 278.158 45.1064 278.382 45.1064 278.658H46.1064ZM45.1064 281.628C45.1064 281.904 45.3302 282.128 45.6064 282.128C45.8825 282.128 46.1064 281.904 46.1064 281.628H45.1064ZM46.1064 286.577C46.1064 286.3 45.8825 286.077 45.6064 286.077C45.3302 286.077 45.1064 286.3 45.1064 286.577H46.1064ZM45.1064 289.546C45.1064 289.822 45.3302 290.046 45.6064 290.046C45.8825 290.046 46.1064 289.822 46.1064 289.546H45.1064ZM46.1064 294.495C46.1064 294.219 45.8825 293.995 45.6064 293.995C45.3302 293.995 45.1064 294.219 45.1064 294.495H46.1064ZM45.1064 297.464C45.1064 297.74 45.3302 297.964 45.6064 297.964C45.8825 297.964 46.1064 297.74 46.1064 297.464H45.1064ZM46.1064 302.413C46.1064 302.137 45.8825 301.913 45.6064 301.913C45.3302 301.913 45.1064 302.137 45.1064 302.413H46.1064ZM45.1064 305.383C45.1064 305.659 45.3302 305.883 45.6064 305.883C45.8825 305.883 46.1064 305.659 46.1064 305.383H45.1064ZM46.1064 310.332C46.1064 310.055 45.8825 309.832 45.6064 309.832C45.3302 309.832 45.1064 310.055 45.1064 310.332H46.1064ZM45.1064 313.301C45.1064 313.577 45.3302 313.801 45.6064 313.801C45.8825 313.801 46.1064 313.577 46.1064 313.301H45.1064ZM46.1064 318.25C46.1064 317.974 45.8825 317.75 45.6064 317.75C45.3302 317.75 45.1064 317.974 45.1064 318.25H46.1064ZM45.1064 321.219C45.1064 321.496 45.3302 321.719 45.6064 321.719C45.8825 321.719 46.1064 321.496 46.1064 321.219H45.1064ZM46.1064 326.168C46.1064 325.892 45.8825 325.668 45.6064 325.668C45.3302 325.668 45.1064 325.892 45.1064 326.168H46.1064ZM45.1064 329.138C45.1064 329.414 45.3302 329.638 45.6064 329.638C45.8825 329.638 46.1064 329.414 46.1064 329.138H45.1064ZM46.1064 334.087C46.1064 333.811 45.8825 333.587 45.6064 333.587C45.3302 333.587 45.1064 333.811 45.1064 334.087H46.1064ZM45.1064 337.056C45.1064 337.332 45.3302 337.556 45.6064 337.556C45.8825 337.556 46.1064 337.332 46.1064 337.056H45.1064ZM46.1064 342.005C46.1064 341.729 45.8825 341.505 45.6064 341.505C45.3302 341.505 45.1064 341.729 45.1064 342.005H46.1064ZM45.1064 344.974C45.1064 345.251 45.3302 345.474 45.6064 345.474C45.8825 345.474 46.1064 345.251 46.1064 344.974H45.1064ZM46.1064 349.923C46.1064 349.647 45.8825 349.423 45.6064 349.423C45.3302 349.423 45.1064 349.647 45.1064 349.923H46.1064ZM45.1064 352.893C45.1064 353.169 45.3302 353.393 45.6064 353.393C45.8825 353.393 46.1064 353.169 46.1064 352.893H45.1064ZM46.1064 357.842C46.1064 357.566 45.8825 357.342 45.6064 357.342C45.3302 357.342 45.1064 357.566 45.1064 357.842H46.1064ZM45.1064 360.811C45.1064 361.087 45.3302 361.311 45.6064 361.311C45.8825 361.311 46.1064 361.087 46.1064 360.811H45.1064ZM46.1064 365.76C46.1064 365.484 45.8825 365.26 45.6064 365.26C45.3302 365.26 45.1064 365.484 45.1064 365.76H46.1064ZM45.1064 368.73C45.1064 369.006 45.3302 369.23 45.6064 369.23C45.8825 369.23 46.1064 369.006 46.1064 368.73H45.1064ZM46.1064 373.679C46.1064 373.402 45.8825 373.179 45.6064 373.179C45.3302 373.179 45.1064 373.402 45.1064 373.679H46.1064ZM45.1064 376.648C45.1064 376.924 45.3302 377.148 45.6064 377.148C45.8825 377.148 46.1064 376.924 46.1064 376.648H45.1064ZM46.1064 381.597C46.1064 381.321 45.8825 381.097 45.6064 381.097C45.3302 381.097 45.1064 381.321 45.1064 381.597H46.1064ZM45.1064 384.566C45.1064 384.842 45.3302 385.066 45.6064 385.066C45.8825 385.066 46.1064 384.842 46.1064 384.566H45.1064ZM46.1064 389.515C46.1064 389.239 45.8825 389.015 45.6064 389.015C45.3302 389.015 45.1064 389.239 45.1064 389.515H46.1064ZM47.0562 391.5C47.3323 391.5 47.5562 391.276 47.5562 391C47.5562 390.724 47.3323 390.5 47.0562 390.5V391.5ZM51.8889 390.5C51.6127 390.5 51.3889 390.724 51.3889 391C51.3889 391.276 51.6127 391.5 51.8889 391.5V390.5ZM54.7885 391.5C55.0646 391.5 55.2885 391.276 55.2885 391C55.2885 390.724 55.0646 390.5 54.7885 390.5V391.5ZM59.6211 390.5C59.345 390.5 59.1211 390.724 59.1211 391C59.1211 391.276 59.345 391.5 59.6211 391.5V390.5ZM62.5207 391.5C62.7969 391.5 63.0207 391.276 63.0207 391C63.0207 390.724 62.7969 390.5 62.5207 390.5V391.5ZM67.3534 390.5C67.0772 390.5 66.8534 390.724 66.8534 391C66.8534 391.276 67.0772 391.5 67.3534 391.5V390.5ZM70.253 391.5C70.5291 391.5 70.753 391.276 70.753 391C70.753 390.724 70.5291 390.5 70.253 390.5V391.5ZM75.0857 390.5C74.8095 390.5 74.5857 390.724 74.5857 391C74.5857 391.276 74.8095 391.5 75.0857 391.5V390.5ZM77.9853 391.5C78.2614 391.5 78.4853 391.276 78.4853 391C78.4853 390.724 78.2614 390.5 77.9853 390.5V391.5ZM82.8179 390.5C82.5418 390.5 82.3179 390.724 82.3179 391C82.3179 391.276 82.5418 391.5 82.8179 391.5V390.5ZM85.7175 391.5C85.9937 391.5 86.2175 391.276 86.2175 391C86.2175 390.724 85.9937 390.5 85.7175 390.5V391.5ZM90.5502 390.5C90.2741 390.5 90.0502 390.724 90.0502 391C90.0502 391.276 90.2741 391.5 90.5502 391.5V390.5ZM3 3.5H4.59774V2.5H3V3.5ZM9.92354 3.5H13.119V2.5H9.92354V3.5ZM18.4448 3.5H21.6403V2.5H18.4448V3.5ZM26.9661 3.5H30.1616V2.5H26.9661V3.5ZM35.4874 3.5H38.6828V2.5H35.4874V3.5ZM44.0086 3.5H45.6064V2.5H44.0086V3.5ZM45.1064 3V4.48469H46.1064V3H45.1064ZM45.1064 9.43367V12.4031H46.1064V9.43367H45.1064ZM45.1064 17.352V20.3214H46.1064V17.352H45.1064ZM45.1064 25.2704V28.2398H46.1064V25.2704H45.1064ZM45.1064 33.1888V36.1582H46.1064V33.1888H45.1064ZM45.1064 41.1071V44.0765H46.1064V41.1071H45.1064ZM45.1064 49.0255V51.9949H46.1064V49.0255H45.1064ZM45.1064 56.9439V59.9133H46.1064V56.9439H45.1064ZM45.1064 64.8622V67.8316H46.1064V64.8622H45.1064ZM45.1064 72.7806V75.75H46.1064V72.7806H45.1064ZM45.1064 80.699V83.6684H46.1064V80.699H45.1064ZM45.1064 88.6174V91.5867H46.1064V88.6174H45.1064ZM45.1064 96.5357V99.5051H46.1064V96.5357H45.1064ZM45.1064 104.454V107.423H46.1064V104.454H45.1064ZM45.1064 112.372V115.342H46.1064V112.372H45.1064ZM45.1064 120.291V123.26H46.1064V120.291H45.1064ZM45.1064 128.209V131.179H46.1064V128.209H45.1064ZM45.1064 136.128V139.097H46.1064V136.128H45.1064ZM45.1064 144.046V147.015H46.1064V144.046H45.1064ZM45.1064 151.964V154.934H46.1064V151.964H45.1064ZM45.1064 159.883V162.852H46.1064V159.883H45.1064ZM45.1064 167.801V170.77H46.1064V167.801H45.1064ZM45.1064 175.719V178.689H46.1064V175.719H45.1064ZM45.1064 183.638V186.607H46.1064V183.638H45.1064ZM45.1064 191.556V194.526H46.1064V191.556H45.1064ZM45.1064 199.475V202.444H46.1064V199.475H45.1064ZM45.1064 207.393V210.362H46.1064V207.393H45.1064ZM45.1064 215.311V218.281H46.1064V215.311H45.1064ZM45.1064 223.23V226.199H46.1064V223.23H45.1064ZM45.1064 231.148V234.117H46.1064V231.148H45.1064ZM45.1064 239.066V242.036H46.1064V239.066H45.1064ZM45.1064 246.985V249.954H46.1064V246.985H45.1064ZM45.1064 254.903V257.872H46.1064V254.903H45.1064ZM45.1064 262.821V265.791H46.1064V262.821H45.1064ZM45.1064 270.74V273.709H46.1064V270.74H45.1064ZM45.1064 278.658V281.628H46.1064V278.658H45.1064ZM45.1064 286.577V289.546H46.1064V286.577H45.1064ZM45.1064 294.495V297.464H46.1064V294.495H45.1064ZM45.1064 302.413V305.383H46.1064V302.413H45.1064ZM45.1064 310.332V313.301H46.1064V310.332H45.1064ZM45.1064 318.25V321.219H46.1064V318.25H45.1064ZM45.1064 326.168V329.138H46.1064V326.168H45.1064ZM45.1064 334.087V337.056H46.1064V334.087H45.1064ZM45.1064 342.005V344.974H46.1064V342.005H45.1064ZM45.1064 349.923V352.893H46.1064V349.923H45.1064ZM45.1064 357.842V360.811H46.1064V357.842H45.1064ZM45.1064 365.76V368.73H46.1064V365.76H45.1064ZM45.1064 373.679V376.648H46.1064V373.679H45.1064ZM45.1064 381.597V384.566H46.1064V381.597H45.1064ZM45.1064 389.515V391H46.1064V389.515H45.1064ZM45.6064 391.5H47.0562V390.5H45.6064V391.5ZM51.8889 391.5H54.7885V390.5H51.8889V391.5ZM59.6211 391.5H62.5207V390.5H59.6211V391.5ZM67.3534 391.5H70.253V390.5H67.3534V391.5ZM75.0857 391.5H77.9853V390.5H75.0857V391.5ZM82.8179 391.5H85.7175V390.5H82.8179V391.5ZM90.5502 391.5H92V390.5H90.5502V391.5Z"
+                    fill="url(#paint0_linear_897_2511)"
+                    variants={draw}
+                    custom={5.5}
+                  />
+                  <defs>
+                    <linearGradient
+                      id="paint0_linear_897_2511"
+                      x1="47.5"
+                      y1="3"
+                      x2="47.5"
+                      y2="391"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop stop-color="#FFFF19" />
+                      <stop offset="1" stop-color="#FF9CFF" />
+                    </linearGradient>
+                  </defs>
+                </motion.svg>
+              </Box>
+            )} */}
+            {sm && (
+              <Box
+                style={{
+                  width: "100%",
+                  height: 490,
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "flex-end",
+                  justifyContent: "center",
+                }}
+              >
+                <img
+                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/hwg_mobile.webp"
+                  style={{ width: 340, height: 452, objectFit: "contain" }}
+                />
+              </Box>
+            )}
+            {!sm && (
+              <Box
+                style={{
+                  width: "100%",
+                  maxWidth: "1440px",
+                  margin: "0 auto",
+                  // minHeight: "100vh",
+                  height: "100%",
+                  position: "relative",
+                }}
+              >
+                <Box
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    paddingTop: sm ? "15px" : md ? "25px" : "35px",
+                    position: "relative",
+                    zIndex: 1,
+                  }}
+                >
+                  <img
+                    src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/how_we_gobbl.webp"
+                    alt="Gobbl AI"
+                    style={{
+                      width: "fit-content",
+                      height: "100%",
+                      maxHeight: 700,
+                      objectFit: "contain",
+                      marginRight: "-5%",
+                      zIndex: 2,
+                    }}
+                  />
+                </Box>
+                <img
+                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/user_gobbl.webp"
+                  alt="Gobbl AI"
+                  style={{
+                    maxWidth: "fit-content",
+                    maxHeight: sm ? 80 : md ? 160 : lg ? 220 : 350,
+                    height: "fit-content",
+                    objectFit: "contain",
+                    position: "absolute",
+                    left: sm ? -42 : md ? -80 : lg ? -60 : -80,
+                    top: sm ? "20%" : lg ? "5%" : "15%",
+                  }}
+                />
+                <img
+                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/restro_gobbl.webp"
+                  alt="Gobbl AI"
+                  style={{
+                    maxWidth: "fit-content",
+                    maxHeight: sm ? 90 : md ? 180 : lg ? 240 : 360,
+                    height: "fit-content",
+                    objectFit: "contain",
+                    position: "absolute",
+                    right: lg ? "2%" : "8%",
+                    bottom: sm ? -30 : md ? "-2%" : "-7%",
+                  }}
+                />
+              </Box>
+            )}
           </Box>
         </Box>
       </Box>
@@ -1952,58 +3456,61 @@ export const LandingPage = () => {
               day.
             </Typography>
           </Box>
-          <Box
-            style={{
-              width: "100%",
-              display: "grid",
-              gridTemplateColumns: lg ? "1fr 1fr" : "1fr 1fr 1fr 1fr",
-              placeItems: "center",
-              gap: "10px",
-              rowGap: lg ? (sm ? "60px" : "120px") : "20px",
-              paddingTop: md ? 80 : "12%",
-            }}
-          >
-            <ExploreCard
-              img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/roadmap1.png"
-              imgSize={sm ? 95 : 170}
-              title="ORDERING"
-              sub_title="Intuitive food ordering"
-              description1="Deploy self-learning"
-              description2="voice & chat agents to"
-              description3="accept orders using"
-              description4="natural language"
-            />
-            <ExploreCard
-              img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap2.png"
-              imgSize={sm ? 110 : 200}
-              title="ANALYTICS"
-              sub_title="Cultivate Customers"
-              description1="Recieve actionable"
-              description2="insights into sales and"
-              description3="trends to create strategies"
-              description4="for customer retention"
-            />
-            <ExploreCard
-              img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap3.png"
-              imgSize={sm ? 100 : 200}
-              title="MARKETING"
-              sub_title="Automate Campaigns"
-              description1="Run targeted campaigns"
-              description2="and promotions to attract"
-              description3="users, based on trends &"
-              description4="inventory"
-            />
-            <ExploreCard
-              img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap4.png"
-              imgSize={sm ? 110 : 200}
-              title="INTEGRATIONS"
-              sub_title="with partner systems"
-              description1="Connect to any platform,"
-              description2="anywhere, through"
-              description3="intelligent APIs that speak"
-              description4="every system's language"
-            />
-          </Box>
+          {sm && <ExploreCardsComponent />}
+          {!sm && (
+            <Box
+              style={{
+                width: "100%",
+                display: "grid",
+                gridTemplateColumns: lg ? "1fr 1fr" : "1fr 1fr 1fr 1fr",
+                placeItems: "center",
+                gap: "10px",
+                rowGap: lg ? (sm ? "60px" : "120px") : "20px",
+                paddingTop: md ? 80 : "12%",
+              }}
+            >
+              <ExploreCard
+                img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/roadmap1.png"
+                imgSize={sm ? 95 : 170}
+                title="ORDERING"
+                sub_title="Intuitive food ordering"
+                description1="Deploy self-learning"
+                description2="voice & chat agents to"
+                description3="accept orders using"
+                description4="natural language"
+              />
+              <ExploreCard
+                img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap2.png"
+                imgSize={sm ? 110 : 200}
+                title="ANALYTICS"
+                sub_title="Cultivate Customers"
+                description1="Recieve actionable"
+                description2="insights into sales and"
+                description3="trends to create strategies"
+                description4="for customer retention"
+              />
+              <ExploreCard
+                img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap3.png"
+                imgSize={sm ? 100 : 200}
+                title="MARKETING"
+                sub_title="Automate Campaigns"
+                description1="Run targeted campaigns"
+                description2="and promotions to attract"
+                description3="users, based on trends &"
+                description4="inventory"
+              />
+              <ExploreCard
+                img="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/newhome/roadmap4.png"
+                imgSize={sm ? 110 : 200}
+                title="INTEGRATIONS"
+                sub_title="with partner systems"
+                description1="Connect to any platform,"
+                description2="anywhere, through"
+                description3="intelligent APIs that speak"
+                description4="every system's language"
+              />
+            </Box>
+          )}
           <Box
             style={{
               position: "absolute",
@@ -2040,687 +3547,690 @@ export const LandingPage = () => {
             position: "relative",
           }}
         >
-          <Box
-            style={{
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              zIndex: 1,
-              gap: "15px",
-            }}
-          >
-            <Typography
+          {sm && <ArchitectureComponent />}
+          {!sm && (
+            <Box
               style={{
-                width: "fit-content",
-                height: sm ? 42 : 60,
-                background: "#FF9CFF",
-                borderRadius: "50px",
-                fontFamily: "'Rubik'",
-                fontWeight: 900,
-                fontSize: sm ? 24 : 32,
-                lineHeight: "120%",
-                fontVariant: "all-small-caps",
-                color: "#000000",
-                padding: "0 25px 5px",
+                width: "100%",
                 display: "flex",
-                alignItems: "center",
+                flexDirection: "column",
                 justifyContent: "center",
-                marginBottom: sm ? "10px" : "25px",
+                zIndex: 1,
+                gap: "15px",
               }}
             >
-              ARCHITECTURE
-            </Typography>
+              <Typography
+                style={{
+                  width: "fit-content",
+                  height: sm ? 42 : 60,
+                  background: "#FF9CFF",
+                  borderRadius: "50px",
+                  fontFamily: "'Rubik'",
+                  fontWeight: 900,
+                  fontSize: sm ? 24 : 32,
+                  lineHeight: "120%",
+                  fontVariant: "all-small-caps",
+                  color: "#000000",
+                  padding: "0 25px 5px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: sm ? "10px" : "25px",
+                }}
+              >
+                ARCHITECTURE
+              </Typography>
 
-            <Box
-              style={{
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: sm ? "10px" : "25px",
-              }}
-            >
               <Box
                 style={{
-                  minWidth: 65,
-                  width: sm ? 60 : 145,
-                  height: sm ? 70 : 120,
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: sm ? "10px" : "25px",
                 }}
               >
-                <img
-                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/base_arc.webp"
-                  alt="Gobbl AI"
+                <Box
                   style={{
-                    width: "fit-content",
-                    maxHeight: 130,
-                    objectFit: "contain",
+                    minWidth: 65,
+                    width: sm ? 60 : 145,
+                    height: sm ? 70 : 120,
                   }}
-                />
+                >
+                  <img
+                    src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/base_arc.webp"
+                    alt="Gobbl AI"
+                    style={{
+                      width: "fit-content",
+                      maxHeight: 130,
+                      objectFit: "contain",
+                    }}
+                  />
+                </Box>
+                <Box
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    gap: sm ? "3px" : "5px",
+                  }}
+                >
+                  <Box
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-end",
+                      justifyContent: "space-between",
+                      gap: "15px",
+                      padding: "0 15px",
+                    }}
+                  >
+                    <Typography
+                      style={{
+                        fontFamily: "'Rubik'",
+                        fontWeight: 900,
+                        fontSize: sm ? 18 : 30,
+                        lineHeight: "120%",
+                        fontVariant: "all-small-caps",
+                        color: "#FFFFFF",
+                      }}
+                    >
+                      APPLICATION
+                    </Typography>
+                    <Typography
+                      style={{
+                        fontFamily: "'Rubik'",
+                        fontWeight: 700,
+                        fontSize: sm ? 12 : 20,
+                        lineHeight: "120%",
+                        textAlign: "right",
+                        fontVariant: "all-small-caps",
+                        color: "#64FF99",
+                      }}
+                    >
+                      USER INTERACTION LAYER
+                    </Typography>
+                  </Box>
+                  <Box
+                    style={{
+                      width: "100%",
+                      height: sm ? "fit-content" : 70,
+                      background: "#161810",
+                      borderRadius: sm ? "20px" : "35px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      // flexDirection: sm ? "column" : "row",
+                      gap: sm ? "5px" : "25px",
+                      padding: sm ? "10px" : "0 20px",
+                    }}
+                  >
+                    <Typography
+                      style={{
+                        width: "100%",
+                        height: sm ? 30 : 41,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "8px",
+                        background:
+                          "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
+                        borderRadius: sm ? "24px" : "32px",
+                        fontFamily: "'Figtree'",
+                        fontWeight: 400,
+                        fontSize: sm ? 12 : 24,
+                        textAlign: "center",
+                        lineHeight: sm ? "100%" : "120%",
+                        fontVariant: "all-small-caps",
+                        color: "#EDEDED",
+                      }}
+                    >
+                      Customer Interface
+                    </Typography>
+                    <Typography
+                      style={{
+                        width: "100%",
+                        height: sm ? 30 : 41,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "8px",
+                        background:
+                          "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
+                        borderRadius: sm ? "24px" : "32px",
+                        fontFamily: "'Figtree'",
+                        fontWeight: 400,
+                        fontSize: sm ? 12 : 24,
+                        textAlign: "center",
+                        lineHeight: sm ? "100%" : "120%",
+                        fontVariant: "all-small-caps",
+                        color: "#EDEDED",
+                      }}
+                    >
+                      Restaurant Interface
+                    </Typography>
+                  </Box>
+                </Box>
               </Box>
               <Box
                 style={{
                   width: "100%",
                   display: "flex",
-                  flexDirection: "column",
+                  alignItems: "center",
                   justifyContent: "center",
-                  gap: sm ? "3px" : "5px",
+                  gap: sm ? "10px" : "25px",
                 }}
               >
                 <Box
                   style={{
-                    display: "flex",
-                    alignItems: "flex-end",
-                    justifyContent: "space-between",
-                    gap: "15px",
-                    padding: "0 15px",
+                    minWidth: 65,
+                    width: sm ? 60 : 145,
+                    height: sm ? 70 : 120,
                   }}
                 >
-                  <Typography
+                  <img
+                    src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/protein.webp"
+                    alt="Gobbl AI"
                     style={{
-                      fontFamily: "'Rubik'",
-                      fontWeight: 900,
-                      fontSize: sm ? 18 : 30,
-                      lineHeight: "120%",
-                      fontVariant: "all-small-caps",
-                      color: "#FFFFFF",
+                      width: "fit-content",
+                      maxHeight: 116,
+                      objectFit: "contain",
                     }}
-                  >
-                    APPLICATION
-                  </Typography>
-                  <Typography
-                    style={{
-                      fontFamily: "'Rubik'",
-                      fontWeight: 700,
-                      fontSize: sm ? 12 : 20,
-                      lineHeight: "120%",
-                      textAlign: "right",
-                      fontVariant: "all-small-caps",
-                      color: "#64FF99",
-                    }}
-                  >
-                    USER INTERACTION LAYER
-                  </Typography>
+                  />
                 </Box>
                 <Box
                   style={{
                     width: "100%",
-                    height: sm ? "fit-content" : 70,
-                    background: "#161810",
-                    borderRadius: sm ? "20px" : "35px",
                     display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    // flexDirection: sm ? "column" : "row",
-                    gap: sm ? "5px" : "25px",
-                    padding: sm ? "10px" : "0 20px",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    gap: sm ? "3px" : "5px",
                   }}
                 >
-                  <Typography
+                  <Box
                     style={{
-                      width: "100%",
-                      height: sm ? 30 : 41,
                       display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "8px",
-                      background:
-                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.5)",
-                      borderRadius: sm ? "24px" : "32px",
-                      fontFamily: "'Figtree'",
-                      fontWeight: 400,
-                      fontSize: sm ? 12 : 24,
-                      textAlign: "center",
-                      lineHeight: sm ? "100%" : "120%",
-                      fontVariant: "all-small-caps",
-                      color: "#EDEDED",
+                      alignItems: "flex-end",
+                      justifyContent: "space-between",
+                      gap: "15px",
+                      padding: "0 15px",
                     }}
                   >
-                    Customer Interface
-                  </Typography>
-                  <Typography
+                    <Typography
+                      style={{
+                        fontFamily: "'Rubik'",
+                        fontWeight: 900,
+                        fontSize: sm ? 18 : 30,
+                        lineHeight: "120%",
+                        fontVariant: "all-small-caps",
+                        color: "#FFFFFF",
+                      }}
+                    >
+                      INTELLIGENCE
+                    </Typography>
+                    <Typography
+                      style={{
+                        fontFamily: "'Rubik'",
+                        fontWeight: 700,
+                        fontSize: sm ? 12 : 20,
+                        lineHeight: "120%",
+                        textAlign: "right",
+                        fontVariant: "all-small-caps",
+                        color: "#64FF99",
+                      }}
+                    >
+                      LLM PROCESSING LAYER
+                    </Typography>
+                  </Box>
+                  <Box
                     style={{
                       width: "100%",
-                      height: sm ? 30 : 41,
-                      display: "flex",
-                      justifyContent: "center",
+                      height: sm ? "fit-content" : 70,
+                      background: "#161810",
+                      borderRadius: sm ? "20px" : "35px",
+                      display: sm ? "grid" : "flex",
+                      gridTemplateColumns: "1fr 1fr",
                       alignItems: "center",
-                      gap: "8px",
-                      background:
-                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.5)",
-                      borderRadius: sm ? "24px" : "32px",
-                      fontFamily: "'Figtree'",
-                      fontWeight: 400,
-                      fontSize: sm ? 12 : 24,
-                      textAlign: "center",
-                      lineHeight: sm ? "100%" : "120%",
-                      fontVariant: "all-small-caps",
-                      color: "#EDEDED",
+                      justifyContent: "space-between",
+                      gap: sm ? "5px" : "20px",
+                      padding: sm ? "10px" : "0 20px",
                     }}
                   >
-                    Restaurant Interface
-                  </Typography>
+                    <Typography
+                      style={{
+                        width: "100%",
+                        height: sm ? 30 : 41,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "8px",
+                        background:
+                          "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
+                        borderRadius: sm ? "24px" : "32px",
+                        fontFamily: "'Figtree'",
+                        fontWeight: 400,
+                        fontSize: sm ? 12 : 24,
+                        textAlign: "center",
+                        lineHeight: sm ? "100%" : "120%",
+                        fontVariant: "all-small-caps",
+                        color: "#EDEDED",
+                        gridColumn: "1/4",
+                      }}
+                    >
+                      Food Domain LLMs
+                    </Typography>
+                    <Typography
+                      style={{
+                        width: "100%",
+                        height: sm ? 30 : 41,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "8px",
+                        background:
+                          "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
+                        borderRadius: sm ? "24px" : "32px",
+                        fontFamily: "'Figtree'",
+                        fontWeight: 400,
+                        fontSize: sm ? 12 : 24,
+                        textAlign: "center",
+                        lineHeight: sm ? "100%" : "120%",
+                        fontVariant: "all-small-caps",
+                        color: "#EDEDED",
+                      }}
+                    >
+                      Restaurant LLMs
+                    </Typography>
+                    <Typography
+                      style={{
+                        width: "100%",
+                        height: sm ? 30 : 41,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "8px",
+                        background:
+                          "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
+                        borderRadius: sm ? "24px" : "32px",
+                        fontFamily: "'Figtree'",
+                        fontWeight: 400,
+                        fontSize: sm ? 12 : 24,
+                        textAlign: "center",
+                        lineHeight: sm ? "100%" : "120%",
+                        fontVariant: "all-small-caps",
+                        color: "#EDEDED",
+                      }}
+                    >
+                      Network LLMs
+                    </Typography>
+                  </Box>
                 </Box>
-              </Box>
-            </Box>
-            <Box
-              style={{
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: sm ? "10px" : "25px",
-              }}
-            >
-              <Box
-                style={{
-                  minWidth: 65,
-                  width: sm ? 60 : 145,
-                  height: sm ? 70 : 120,
-                }}
-              >
-                <img
-                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/protein.webp"
-                  alt="Gobbl AI"
-                  style={{
-                    width: "fit-content",
-                    maxHeight: 116,
-                    objectFit: "contain",
-                  }}
-                />
               </Box>
               <Box
                 style={{
                   width: "100%",
                   display: "flex",
-                  flexDirection: "column",
+                  alignItems: "center",
                   justifyContent: "center",
-                  gap: sm ? "3px" : "5px",
+                  gap: sm ? "10px" : "25px",
                 }}
               >
                 <Box
                   style={{
-                    display: "flex",
-                    alignItems: "flex-end",
-                    justifyContent: "space-between",
-                    gap: "15px",
-                    padding: "0 15px",
+                    minWidth: 65,
+                    width: sm ? 60 : 145,
+                    height: sm ? 70 : 120,
                   }}
                 >
-                  <Typography
+                  <img
+                    src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/veggies.webp"
+                    alt="Gobbl AI"
                     style={{
-                      fontFamily: "'Rubik'",
-                      fontWeight: 900,
-                      fontSize: sm ? 18 : 30,
-                      lineHeight: "120%",
-                      fontVariant: "all-small-caps",
-                      color: "#FFFFFF",
+                      width: "fit-content",
+                      maxHeight: 116,
+                      objectFit: "contain",
                     }}
-                  >
-                    INTELLIGENCE
-                  </Typography>
-                  <Typography
-                    style={{
-                      fontFamily: "'Rubik'",
-                      fontWeight: 700,
-                      fontSize: sm ? 12 : 20,
-                      lineHeight: "120%",
-                      textAlign: "right",
-                      fontVariant: "all-small-caps",
-                      color: "#64FF99",
-                    }}
-                  >
-                    LLM PROCESSING LAYER
-                  </Typography>
+                  />
                 </Box>
                 <Box
                   style={{
                     width: "100%",
-                    height: sm ? "fit-content" : 70,
-                    background: "#161810",
-                    borderRadius: sm ? "20px" : "35px",
-                    display: sm ? "grid" : "flex",
-                    gridTemplateColumns: "1fr 1fr",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: sm ? "5px" : "20px",
-                    padding: sm ? "10px" : "0 20px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    gap: sm ? "3px" : "5px",
                   }}
                 >
-                  <Typography
+                  <Box
                     style={{
-                      width: "100%",
-                      height: sm ? 30 : 41,
                       display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "8px",
-                      background:
-                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.5)",
-                      borderRadius: sm ? "24px" : "32px",
-                      fontFamily: "'Figtree'",
-                      fontWeight: 400,
-                      fontSize: sm ? 12 : 24,
-                      textAlign: "center",
-                      lineHeight: sm ? "100%" : "120%",
-                      fontVariant: "all-small-caps",
-                      color: "#EDEDED",
-                      gridColumn: "1/4",
+                      alignItems: "flex-end",
+                      justifyContent: "space-between",
+                      gap: "15px",
+                      padding: "0 15px",
                     }}
                   >
-                    Food Domain LLMs
-                  </Typography>
-                  <Typography
+                    <Typography
+                      style={{
+                        fontFamily: "'Rubik'",
+                        fontWeight: 900,
+                        fontSize: sm ? 18 : 30,
+                        lineHeight: "120%",
+                        fontVariant: "all-small-caps",
+                        color: "#FFFFFF",
+                      }}
+                    >
+                      MODELS
+                    </Typography>
+                    <Typography
+                      style={{
+                        fontFamily: "'Rubik'",
+                        fontWeight: 700,
+                        fontSize: sm ? 12 : 20,
+                        lineHeight: "120%",
+                        textAlign: "right",
+                        fontVariant: "all-small-caps",
+                        color: "#64FF99",
+                      }}
+                    >
+                      MODEL INFRASTRUCTURE
+                    </Typography>
+                  </Box>
+                  <Box
                     style={{
                       width: "100%",
-                      height: sm ? 30 : 41,
-                      display: "flex",
-                      justifyContent: "center",
+                      height: sm ? "fit-content" : 70,
+                      background: "#161810",
+                      borderRadius: sm ? "20px" : "35px",
+                      display: sm ? "grid" : "flex",
+                      gridTemplateColumns: "1fr 1fr",
                       alignItems: "center",
-                      gap: "8px",
-                      background:
-                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.5)",
-                      borderRadius: sm ? "24px" : "32px",
-                      fontFamily: "'Figtree'",
-                      fontWeight: 400,
-                      fontSize: sm ? 12 : 24,
-                      textAlign: "center",
-                      lineHeight: sm ? "100%" : "120%",
-                      fontVariant: "all-small-caps",
-                      color: "#EDEDED",
+                      justifyContent: "space-between",
+                      gap: sm ? "5px" : "20px",
+                      padding: sm ? "10px" : "0 20px",
                     }}
                   >
-                    Restaurant LLMs
-                  </Typography>
-                  <Typography
-                    style={{
-                      width: "100%",
-                      height: sm ? 30 : 41,
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "8px",
-                      background:
-                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.5)",
-                      borderRadius: sm ? "24px" : "32px",
-                      fontFamily: "'Figtree'",
-                      fontWeight: 400,
-                      fontSize: sm ? 12 : 24,
-                      textAlign: "center",
-                      lineHeight: sm ? "100%" : "120%",
-                      fontVariant: "all-small-caps",
-                      color: "#EDEDED",
-                    }}
-                  >
-                    Network LLMs
-                  </Typography>
+                    <Typography
+                      style={{
+                        width: "100%",
+                        height: sm ? 30 : 41,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "8px",
+                        background:
+                          "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
+                        borderRadius: sm ? "24px" : "32px",
+                        fontFamily: "'Figtree'",
+                        fontWeight: 400,
+                        fontSize: sm ? 12 : 24,
+                        textAlign: "center",
+                        lineHeight: sm ? "100%" : "120%",
+                        fontVariant: "all-small-caps",
+                        color: "#EDEDED",
+                      }}
+                    >
+                      Edge Intelligence
+                    </Typography>
+                    <Typography
+                      style={{
+                        width: "100%",
+                        height: sm ? 30 : 41,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "8px",
+                        background:
+                          "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
+                        borderRadius: sm ? "24px" : "32px",
+                        fontFamily: "'Figtree'",
+                        fontWeight: 400,
+                        fontSize: sm ? 12 : 24,
+                        textAlign: "center",
+                        lineHeight: sm ? "100%" : "120%",
+                        fontVariant: "all-small-caps",
+                        color: "#EDEDED",
+                      }}
+                    >
+                      Model Registry
+                    </Typography>
+                    <Typography
+                      style={{
+                        width: "100%",
+                        height: sm ? 30 : 41,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "8px",
+                        background:
+                          "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
+                        borderRadius: sm ? "24px" : "32px",
+                        fontFamily: "'Figtree'",
+                        fontWeight: 400,
+                        fontSize: sm ? 12 : 24,
+                        textAlign: "center",
+                        lineHeight: sm ? "100%" : "120%",
+                        fontVariant: "all-small-caps",
+                        color: "#EDEDED",
+                      }}
+                    >
+                      Training
+                    </Typography>
+                    <Typography
+                      style={{
+                        width: "100%",
+                        height: sm ? 30 : 41,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "8px",
+                        background:
+                          "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
+                        borderRadius: sm ? "24px" : "32px",
+                        fontFamily: "'Figtree'",
+                        fontWeight: 400,
+                        fontSize: sm ? 12 : 24,
+                        textAlign: "center",
+                        lineHeight: sm ? "100%" : "120%",
+                        fontVariant: "all-small-caps",
+                        color: "#EDEDED",
+                      }}
+                    >
+                      Inference
+                    </Typography>
+                  </Box>
                 </Box>
-              </Box>
-            </Box>
-            <Box
-              style={{
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: sm ? "10px" : "25px",
-              }}
-            >
-              <Box
-                style={{
-                  minWidth: 65,
-                  width: sm ? 60 : 145,
-                  height: sm ? 70 : 120,
-                }}
-              >
-                <img
-                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/veggies.webp"
-                  alt="Gobbl AI"
-                  style={{
-                    width: "fit-content",
-                    maxHeight: 116,
-                    objectFit: "contain",
-                  }}
-                />
               </Box>
               <Box
                 style={{
                   width: "100%",
                   display: "flex",
-                  flexDirection: "column",
+                  alignItems: "center",
                   justifyContent: "center",
-                  gap: sm ? "3px" : "5px",
+                  gap: sm ? "10px" : "25px",
                 }}
               >
                 <Box
                   style={{
-                    display: "flex",
-                    alignItems: "flex-end",
-                    justifyContent: "space-between",
-                    gap: "15px",
-                    padding: "0 15px",
+                    minWidth: 65,
+                    width: sm ? 60 : 145,
+                    height: sm ? 70 : 120,
                   }}
                 >
-                  <Typography
+                  <img
+                    src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/sauce.webp"
+                    alt="Gobbl AI"
                     style={{
-                      fontFamily: "'Rubik'",
-                      fontWeight: 900,
-                      fontSize: sm ? 18 : 30,
-                      lineHeight: "120%",
-                      fontVariant: "all-small-caps",
-                      color: "#FFFFFF",
+                      width: "fit-content",
+                      maxHeight: 116,
+                      objectFit: "contain",
                     }}
-                  >
-                    MODELS
-                  </Typography>
-                  <Typography
-                    style={{
-                      fontFamily: "'Rubik'",
-                      fontWeight: 700,
-                      fontSize: sm ? 12 : 20,
-                      lineHeight: "120%",
-                      textAlign: "right",
-                      fontVariant: "all-small-caps",
-                      color: "#64FF99",
-                    }}
-                  >
-                    MODEL INFRASTRUCTURE
-                  </Typography>
+                  />
                 </Box>
                 <Box
                   style={{
                     width: "100%",
-                    height: sm ? "fit-content" : 70,
-                    background: "#161810",
-                    borderRadius: sm ? "20px" : "35px",
-                    display: sm ? "grid" : "flex",
-                    gridTemplateColumns: "1fr 1fr",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: sm ? "5px" : "20px",
-                    padding: sm ? "10px" : "0 20px",
-                  }}
-                >
-                  <Typography
-                    style={{
-                      width: "100%",
-                      height: sm ? 30 : 41,
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "8px",
-                      background:
-                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.5)",
-                      borderRadius: sm ? "24px" : "32px",
-                      fontFamily: "'Figtree'",
-                      fontWeight: 400,
-                      fontSize: sm ? 12 : 24,
-                      textAlign: "center",
-                      lineHeight: sm ? "100%" : "120%",
-                      fontVariant: "all-small-caps",
-                      color: "#EDEDED",
-                    }}
-                  >
-                    Edge Intelligence
-                  </Typography>
-                  <Typography
-                    style={{
-                      width: "100%",
-                      height: sm ? 30 : 41,
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "8px",
-                      background:
-                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.5)",
-                      borderRadius: sm ? "24px" : "32px",
-                      fontFamily: "'Figtree'",
-                      fontWeight: 400,
-                      fontSize: sm ? 12 : 24,
-                      textAlign: "center",
-                      lineHeight: sm ? "100%" : "120%",
-                      fontVariant: "all-small-caps",
-                      color: "#EDEDED",
-                    }}
-                  >
-                    Model Registry
-                  </Typography>
-                  <Typography
-                    style={{
-                      width: "100%",
-                      height: sm ? 30 : 41,
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "8px",
-                      background:
-                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.5)",
-                      borderRadius: sm ? "24px" : "32px",
-                      fontFamily: "'Figtree'",
-                      fontWeight: 400,
-                      fontSize: sm ? 12 : 24,
-                      textAlign: "center",
-                      lineHeight: sm ? "100%" : "120%",
-                      fontVariant: "all-small-caps",
-                      color: "#EDEDED",
-                    }}
-                  >
-                    Training
-                  </Typography>
-                  <Typography
-                    style={{
-                      width: "100%",
-                      height: sm ? 30 : 41,
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "8px",
-                      background:
-                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.5)",
-                      borderRadius: sm ? "24px" : "32px",
-                      fontFamily: "'Figtree'",
-                      fontWeight: 400,
-                      fontSize: sm ? 12 : 24,
-                      textAlign: "center",
-                      lineHeight: sm ? "100%" : "120%",
-                      fontVariant: "all-small-caps",
-                      color: "#EDEDED",
-                    }}
-                  >
-                    Inference
-                  </Typography>
-                </Box>
-              </Box>
-            </Box>
-            <Box
-              style={{
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: sm ? "10px" : "25px",
-              }}
-            >
-              <Box
-                style={{
-                  minWidth: 65,
-                  width: sm ? 60 : 145,
-                  height: sm ? 70 : 120,
-                }}
-              >
-                <img
-                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/sauce.webp"
-                  alt="Gobbl AI"
-                  style={{
-                    width: "fit-content",
-                    maxHeight: 116,
-                    objectFit: "contain",
-                  }}
-                />
-              </Box>
-              <Box
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  gap: sm ? "3px" : "5px",
-                }}
-              >
-                <Box
-                  style={{
                     display: "flex",
-                    alignItems: "flex-end",
-                    justifyContent: "space-between",
-                    gap: "15px",
-                    padding: "0 15px",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    gap: sm ? "3px" : "5px",
                   }}
                 >
-                  <Typography
+                  <Box
                     style={{
-                      fontFamily: "'Rubik'",
-                      fontWeight: 900,
-                      fontSize: sm ? 18 : 30,
-                      lineHeight: "120%",
-                      fontVariant: "all-small-caps",
-                      color: "#FFFFFF",
+                      display: "flex",
+                      alignItems: "flex-end",
+                      justifyContent: "space-between",
+                      gap: "15px",
+                      padding: "0 15px",
                     }}
                   >
-                    DATA
-                  </Typography>
-                  <Typography
-                    style={{
-                      fontFamily: "'Rubik'",
-                      fontWeight: 700,
-                      fontSize: sm ? 12 : 20,
-                      lineHeight: "120%",
-                      textAlign: "right",
-                      fontVariant: "all-small-caps",
-                      color: "#64FF99",
-                    }}
-                  >
-                    VECTOR DATABASE LAYER
-                  </Typography>
-                </Box>
-                <Box
-                  style={{
-                    width: "100%",
-                    height: sm ? "fit-content" : 70,
-                    background: "#161810",
-                    borderRadius: sm ? "20px" : "35px",
-                    display: sm ? "grid" : "flex",
-                    gridTemplateColumns: "1fr 1fr",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: sm ? "5px" : "20px",
-                    padding: sm ? "10px" : "0 20px",
-                  }}
-                >
-                  <Typography
+                    <Typography
+                      style={{
+                        fontFamily: "'Rubik'",
+                        fontWeight: 900,
+                        fontSize: sm ? 18 : 30,
+                        lineHeight: "120%",
+                        fontVariant: "all-small-caps",
+                        color: "#FFFFFF",
+                      }}
+                    >
+                      DATA
+                    </Typography>
+                    <Typography
+                      style={{
+                        fontFamily: "'Rubik'",
+                        fontWeight: 700,
+                        fontSize: sm ? 12 : 20,
+                        lineHeight: "120%",
+                        textAlign: "right",
+                        fontVariant: "all-small-caps",
+                        color: "#64FF99",
+                      }}
+                    >
+                      VECTOR DATABASE LAYER
+                    </Typography>
+                  </Box>
+                  <Box
                     style={{
                       width: "100%",
-                      height: sm ? 30 : 41,
-                      display: "flex",
-                      justifyContent: "center",
+                      height: sm ? "fit-content" : 70,
+                      background: "#161810",
+                      borderRadius: sm ? "20px" : "35px",
+                      display: sm ? "grid" : "flex",
+                      gridTemplateColumns: "1fr 1fr",
                       alignItems: "center",
-                      gap: "8px",
-                      background:
-                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.5)",
-                      borderRadius: sm ? "24px" : "32px",
-                      fontFamily: "'Figtree'",
-                      fontWeight: 400,
-                      fontSize: sm ? 12 : 24,
-                      textAlign: "center",
-                      lineHeight: sm ? "100%" : "120%",
-                      fontVariant: "all-small-caps",
-                      color: "#EDEDED",
+                      justifyContent: "space-between",
+                      gap: sm ? "5px" : "20px",
+                      padding: sm ? "10px" : "0 20px",
                     }}
                   >
-                    Customer Vectors
-                  </Typography>
-                  <Typography
-                    style={{
-                      width: "100%",
-                      height: sm ? 30 : 41,
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "8px",
-                      background:
-                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.5)",
-                      borderRadius: sm ? "24px" : "32px",
-                      fontFamily: "'Figtree'",
-                      fontWeight: 400,
-                      fontSize: sm ? 12 : 24,
-                      textAlign: "center",
-                      lineHeight: sm ? "100%" : "120%",
-                      fontVariant: "all-small-caps",
-                      color: "#EDEDED",
-                    }}
-                  >
-                    Restaurant Vectors
-                  </Typography>
-                  <Typography
-                    style={{
-                      width: "100%",
-                      height: sm ? 30 : 41,
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "8px",
-                      background:
-                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.5)",
-                      borderRadius: sm ? "24px" : "32px",
-                      fontFamily: "'Figtree'",
-                      fontWeight: 400,
-                      fontSize: sm ? 12 : 24,
-                      textAlign: "center",
-                      lineHeight: sm ? "100%" : "120%",
-                      fontVariant: "all-small-caps",
-                      color: "#EDEDED",
-                    }}
-                  >
-                    Network Vectors
-                  </Typography>
-                  <Typography
-                    style={{
-                      width: "100%",
-                      height: sm ? 30 : 41,
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "8px",
-                      background:
-                        "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
-                      border: "1px solid rgba(255, 255, 255, 0.5)",
-                      borderRadius: sm ? "24px" : "32px",
-                      fontFamily: "'Figtree'",
-                      fontWeight: 400,
-                      fontSize: sm ? 12 : 24,
-                      textAlign: "center",
-                      lineHeight: sm ? "100%" : "120%",
-                      fontVariant: "all-small-caps",
-                      color: "#EDEDED",
-                    }}
-                  >
-                    Training Sets
-                  </Typography>
+                    <Typography
+                      style={{
+                        width: "100%",
+                        height: sm ? 30 : 41,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "8px",
+                        background:
+                          "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
+                        borderRadius: sm ? "24px" : "32px",
+                        fontFamily: "'Figtree'",
+                        fontWeight: 400,
+                        fontSize: sm ? 12 : 24,
+                        textAlign: "center",
+                        lineHeight: sm ? "100%" : "120%",
+                        fontVariant: "all-small-caps",
+                        color: "#EDEDED",
+                      }}
+                    >
+                      Customer Vectors
+                    </Typography>
+                    <Typography
+                      style={{
+                        width: "100%",
+                        height: sm ? 30 : 41,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "8px",
+                        background:
+                          "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
+                        borderRadius: sm ? "24px" : "32px",
+                        fontFamily: "'Figtree'",
+                        fontWeight: 400,
+                        fontSize: sm ? 12 : 24,
+                        textAlign: "center",
+                        lineHeight: sm ? "100%" : "120%",
+                        fontVariant: "all-small-caps",
+                        color: "#EDEDED",
+                      }}
+                    >
+                      Restaurant Vectors
+                    </Typography>
+                    <Typography
+                      style={{
+                        width: "100%",
+                        height: sm ? 30 : 41,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "8px",
+                        background:
+                          "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
+                        borderRadius: sm ? "24px" : "32px",
+                        fontFamily: "'Figtree'",
+                        fontWeight: 400,
+                        fontSize: sm ? 12 : 24,
+                        textAlign: "center",
+                        lineHeight: sm ? "100%" : "120%",
+                        fontVariant: "all-small-caps",
+                        color: "#EDEDED",
+                      }}
+                    >
+                      Network Vectors
+                    </Typography>
+                    <Typography
+                      style={{
+                        width: "100%",
+                        height: sm ? 30 : 41,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "8px",
+                        background:
+                          "linear-gradient(241.27deg, rgba(253, 255, 245, 0.24) -5.59%, rgba(253, 255, 245, 0) 100%)",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
+                        borderRadius: sm ? "24px" : "32px",
+                        fontFamily: "'Figtree'",
+                        fontWeight: 400,
+                        fontSize: sm ? 12 : 24,
+                        textAlign: "center",
+                        lineHeight: sm ? "100%" : "120%",
+                        fontVariant: "all-small-caps",
+                        color: "#EDEDED",
+                      }}
+                    >
+                      Training Sets
+                    </Typography>
+                  </Box>
                 </Box>
               </Box>
             </Box>
-          </Box>
+          )}
           {/* <Box
               style={{
                 position: "absolute",
@@ -2825,13 +4335,24 @@ export const LandingPage = () => {
                 paddingTop: sm ? "25px" : undefined, // Use ternary operator instead
               }}
             >
-              <img
-                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/meet_gobbl_new.webp"
-                alt="Gobbl AI"
-                width={1150}
-                height={600}
-                loading="eager"
-              />
+              {sm && (
+                <img
+                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/meet_gobbl_mobile.webp"
+                  alt="Gobbl AI"
+                  width={312}
+                  height={287}
+                  loading="eager"
+                />
+              )}
+              {!sm && (
+                <img
+                  src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/meet_gobbl_new.webp"
+                  alt="Gobbl AI"
+                  width={1150}
+                  height={600}
+                  loading="eager"
+                />
+              )}
             </Box>
             <img
               src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_coin.webp"
@@ -3041,88 +4562,69 @@ export const LandingPage = () => {
                   }}
                 >
                   <Button
-                    sx={{
+                    style={{
                       fontFamily: "Rubik",
-                      fontSize: 20,
+                      fontSize: sm ? 12 : 20,
                       textAlign: "center",
                       boxSizing: "border-box",
                       display: "flex",
                       flexDirection: "row",
                       justifyContent: "center",
                       alignItems: "center",
-                      padding: "10px 20px",
+                      padding: sm ? "5px 10px" : "10px 20px",
                       gap: "8px",
                       width: "max-content",
-                      height: "52px",
-                      borderRadius: "16px",
+                      borderRadius: sm ? "8px" : "16px",
                       fontWeight: tab === 1 ? 800 : 600,
                       opacity: tab === 1 ? 1 : 0.56,
                       background: tab === 1 ? "#D1FF19" : "transparent",
                       color: tab === 1 ? "#161810" : "#FDFFF5",
-                      [theme.breakpoints.down("sm")]: {
-                        fontSize: 12,
-                        padding: "5px 10px",
-                        height: "40px",
-                        borderRadius: "10px",
-                      },
                     }}
                     onClick={() => setTab(1)}
                   >
                     BRANDS
                   </Button>
                   <Button
-                    sx={{
+                    style={{
                       fontFamily: "Rubik",
-                      fontSize: 20,
+                      fontSize: sm ? 12 : 20,
                       textAlign: "center",
                       boxSizing: "border-box",
                       display: "flex",
                       flexDirection: "row",
                       justifyContent: "center",
                       alignItems: "center",
-                      padding: "10px 20px",
+                      padding: sm ? "5px 10px" : "10px 20px",
                       gap: "8px",
                       width: "max-content",
-                      borderRadius: "16px",
+                      borderRadius: sm ? "8px" : "16px",
                       fontWeight: tab === 2 ? 800 : 600,
                       opacity: tab === 2 ? 1 : 0.56,
                       background: tab === 2 ? "#D1FF19" : "transparent",
                       color: tab === 2 ? "#161810" : "#FDFFF5",
-                      [theme.breakpoints.down("sm")]: {
-                        fontSize: 12,
-                        padding: "5px 10px",
-                        height: "40px",
-                        borderRadius: "10px",
-                      },
                     }}
                     onClick={() => setTab(2)}
                   >
                     CHEFS
                   </Button>
                   <Button
-                    sx={{
+                    style={{
                       fontFamily: "Rubik",
-                      fontSize: 20,
+                      fontSize: sm ? 12 : 20,
                       textAlign: "center",
                       boxSizing: "border-box",
                       display: "flex",
                       flexDirection: "row",
                       justifyContent: "center",
                       alignItems: "center",
-                      padding: "10px 20px",
+                      padding: sm ? "5px 10px" : "10px 20px",
                       gap: "8px",
                       width: "max-content",
-                      borderRadius: "16px",
+                      borderRadius: sm ? "8px" : "16px",
                       fontWeight: tab === 3 ? 800 : 600,
                       opacity: tab === 3 ? 1 : 0.56,
                       background: tab === 3 ? "#D1FF19" : "transparent",
                       color: tab === 3 ? "#161810" : "#FDFFF5",
-                      [theme.breakpoints.down("sm")]: {
-                        fontSize: 12,
-                        padding: "5px 10px",
-                        height: "40px",
-                        borderRadius: "10px",
-                      },
                     }}
                     onClick={() => setTab(3)}
                   >
@@ -3165,17 +4667,17 @@ export const LandingPage = () => {
                   style={{
                     width: "100%",
                     paddingTop: "5%",
+                    maxWidth: 1200,
+                    margin: "0 auto",
                     display: "grid",
-                    gridTemplateColumns: sm
-                      ? "repeat(auto-fill,minmax(130px, 1fr))"
-                      : md
-                      ? "repeat(auto-fill,minmax(160px, 1fr))"
+                    gridTemplateColumns: md
+                      ? "1fr 1fr 1fr"
                       : "repeat(auto-fill,minmax(175px, 1fr))",
                     columnGap: md ? "15px" : "50px",
                     rowGap: md ? "25px" : "35px",
                   }}
                 >
-                  {home_brands.map((brand, i) => (
+                  {home_brands.slice(0, md ? 9 : 10).map((brand, i) => (
                     <Box
                       key={i}
                       style={{
@@ -3191,7 +4693,7 @@ export const LandingPage = () => {
                           boxSizing: "border-box",
                           background:
                             "linear-gradient(254.51deg, #00CCCC 5.63%, #009999 61.19%, #6666FF 116.96%)",
-                          borderRadius: sm ? "20px" : "24px",
+                          borderRadius: sm ? "12px" : "24px",
                           padding: "1px",
                         }}
                       >
@@ -3201,7 +4703,7 @@ export const LandingPage = () => {
                           width={170}
                           height={175}
                           style={{
-                            borderRadius: sm ? "20px" : "24px",
+                            borderRadius: sm ? "12px" : "24px",
                           }}
                         />
                       </Box>
@@ -3210,7 +4712,7 @@ export const LandingPage = () => {
                         style={{
                           fontFamily: "Karla",
                           fontWeight: 700,
-                          fontSize: sm ? 16 : 20,
+                          fontSize: sm ? 12 : 20,
                           lineHeight: "120%",
                           textAlign: "center",
                           color: "#FDFFF5",
@@ -3221,7 +4723,7 @@ export const LandingPage = () => {
                         <br />
                         <span
                           style={{
-                            fontSize: 18,
+                            fontSize: sm ? 12 : 18,
                             fontWeight: 500,
                           }}
                         >
@@ -3237,15 +4739,17 @@ export const LandingPage = () => {
                   style={{
                     width: "100%",
                     paddingTop: "5%",
+                    maxWidth: 1200,
+                    margin: "0 auto",
                     display: "grid",
                     gridTemplateColumns: md
-                      ? "repeat(auto-fill,minmax(160px, 1fr))"
+                      ? "1fr 1fr 1fr"
                       : "repeat(auto-fill,minmax(175px, 1fr))",
                     columnGap: md ? "15px" : "50px",
                     rowGap: md ? "25px" : "35px",
                   }}
                 >
-                  {chef_partners.map((chef, i) => (
+                  {chef_partners.slice(0, md ? 9 : 10).map((chef, i) => (
                     <Box
                       key={i}
                       style={{
@@ -3261,7 +4765,7 @@ export const LandingPage = () => {
                           boxSizing: "border-box",
                           background:
                             "linear-gradient(254.51deg, #00CCCC 5.63%, #009999 61.19%, #6666FF 116.96%)",
-                          borderRadius: sm ? "20px" : "24px",
+                          borderRadius: sm ? "12px" : "24px",
                           padding: "1px",
                         }}
                       >
@@ -3273,7 +4777,7 @@ export const LandingPage = () => {
                           style={{
                             maxHeight: 175,
                             objectFit: "cover",
-                            borderRadius: sm ? "20px" : "24px",
+                            borderRadius: sm ? "12px" : "24px",
                             objectPosition: "top",
                           }}
                         />
@@ -3283,7 +4787,7 @@ export const LandingPage = () => {
                         style={{
                           fontFamily: "Karla",
                           fontWeight: 700,
-                          fontSize: sm ? 16 : 20,
+                          fontSize: sm ? 12 : 20,
                           lineHeight: "120%",
                           textAlign: "center",
                           color: "#FDFFF5",
@@ -3294,7 +4798,7 @@ export const LandingPage = () => {
                         <br />
                         <span
                           style={{
-                            fontSize: 18,
+                            fontSize: sm ? 12 : 18,
                             fontWeight: 500,
                           }}
                         >
@@ -3310,15 +4814,17 @@ export const LandingPage = () => {
                   style={{
                     width: "100%",
                     paddingTop: "5%",
+                    maxWidth: 1200,
+                    margin: "0 auto",
                     display: "grid",
                     gridTemplateColumns: md
-                      ? "repeat(auto-fill,minmax(160px, 1fr))"
+                      ? "1fr 1fr 1fr"
                       : "repeat(auto-fill,minmax(175px, 1fr))",
                     columnGap: md ? "15px" : "50px",
                     rowGap: md ? "25px" : "35px",
                   }}
                 >
-                  {restaurants.map((restaurant, i) => (
+                  {restaurants.slice(0, md ? 9 : 10).map((restaurant, i) => (
                     <Box
                       key={i}
                       style={{
@@ -3334,7 +4840,7 @@ export const LandingPage = () => {
                           boxSizing: "border-box",
                           background:
                             "linear-gradient(254.51deg, #00CCCC 5.63%, #009999 61.19%, #6666FF 116.96%)",
-                          borderRadius: sm ? "20px" : "24px",
+                          borderRadius: sm ? "12px" : "24px",
                           padding: "1px",
                         }}
                       >
@@ -3344,7 +4850,7 @@ export const LandingPage = () => {
                           width={175}
                           height={175}
                           style={{
-                            borderRadius: sm ? "20px" : "24px",
+                            borderRadius: sm ? "12px" : "24px",
                           }}
                         />
                       </Box>
@@ -3353,7 +4859,7 @@ export const LandingPage = () => {
                         style={{
                           fontFamily: "Karla",
                           fontWeight: 700,
-                          fontSize: sm ? 16 : 20,
+                          fontSize: sm ? 12 : 20,
                           lineHeight: "120%",
                           textAlign: "center",
                           color: "#FDFFF5",
@@ -3364,7 +4870,7 @@ export const LandingPage = () => {
                         <br />
                         <span
                           style={{
-                            fontSize: 18,
+                            fontSize: sm ? 12 : 18,
                             fontWeight: 500,
                           }}
                         >
@@ -3461,7 +4967,7 @@ export const LandingPage = () => {
               justifyContent: "center",
               alignItems: "center",
               gap: sm ? "10px" : "75px",
-              padding: md ? "50px 0" : "5%",
+              padding: md ? "0 0 50px" : "5%",
             }}
           >
             <Box
@@ -3660,7 +5166,7 @@ export const LandingPage = () => {
           viewport={{ once: true, amount: 1 }}
           style={{
             position: "absolute",
-            top: md ? "23%" : "20%",
+            top: md ? "10%" : "20%",
             right: 0,
             zIndex: -1,
           }}
@@ -3683,8 +5189,8 @@ export const LandingPage = () => {
             <img
               src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/newhome/popcorn1.svg"
               alt="Gobbl AI"
-              width={md ? 90 : 300}
-              height={md ? 90 : 300}
+              width={md ? 100 : 300}
+              height={md ? 100 : 300}
             />
           </motion.div>
         </motion.div>
@@ -3748,7 +5254,7 @@ export const LandingPage = () => {
             alignItems: "flex-end",
             justifyContent: "space-between",
             flexDirection: sm ? "column" : "row",
-            gap: sm ? "50px" : "25px",
+            gap: sm ? 0 : "25px",
           }}
         >
           <Box
@@ -3756,6 +5262,7 @@ export const LandingPage = () => {
               width: "100%",
               display: "flex",
               flexDirection: "column",
+              alignItems: sm ? "center" : "flex-start",
               gap: "15px",
               marginBottom: md ? (sm ? "50px" : "75px") : "7%",
             }}
@@ -3765,9 +5272,10 @@ export const LandingPage = () => {
               style={{
                 fontFamily: "'Rubik'",
                 fontWeight: 900,
-                fontSize: sm ? 40 : 50,
+                fontSize: sm ? 46 : 50,
                 lineHeight: "100%",
                 color: "#64FF99",
+                textAlign: sm ? "center" : "left",
               }}
             >
               Ready or not, AI come!
@@ -3782,12 +5290,19 @@ export const LandingPage = () => {
                 display: "flex",
                 alignItems: "center",
                 color: "#FFFFFF",
+                textAlign: sm ? "center" : "left",
               }}
             >
               Make your restaurant future-ready with Gobbl Smart operations,
               smarter profits.
             </Typography>
-            <a href="https://forms.gle/VuR6zz3kxB4skbep6" target="_blank">
+            <a
+              href="https://forms.gle/VuR6zz3kxB4skbep6"
+              target="_blank"
+              style={{
+                width: sm ? 280 : 330,
+              }}
+            >
               <CommonButton
                 style={{
                   marginTop: sm ? "25px" : "50px",
@@ -3810,7 +5325,6 @@ export const LandingPage = () => {
               display: "flex",
               alignItems: "flex-end",
               justifyContent: "center",
-              gap: sm ? "50px" : "5%",
             }}
           >
             <motion.div
