@@ -145,122 +145,129 @@ const Navbar: React.FC = () => {
           color: theme.palette.primary.contrastText,
           display: "flex",
           alignItems: "center",
-          justifyContent: sm ? "space-between" : "flex-start",
+          justifyContent: "space-between",
           gap: !md ? "25px" : 0,
         }}
       >
-        <Link
-          to="/"
-          style={{
-            minWidth: 90,
-            padding: 0,
-            backgroundColor: "#000",
-            position: "relative",
-            zIndex: 4,
-            margin: md ? "0 15px" : "0 25px",
-          }}
-        >
-          <img
-            src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_logo.svg"
-            alt="FoodVerse logo"
-            width={90}
-            height={40}
-            style={{
-              objectFit: "contain",
-            }}
-          />
-        </Link>
         <Box
           style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-start",
-            gap: sm ? "15px" : "25px",
           }}
         >
           <Link
             to="/"
             style={{
-              textDecoration: "none",
-              display: "flex",
-              alignItems: "center",
-              flexDirection: "column",
+              minWidth: 90,
+              padding: 0,
+              backgroundColor: "#000",
+              position: "relative",
+              zIndex: 4,
+              margin: md ? "0 15px" : "0 25px",
             }}
           >
             <img
-              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/new_nav_icons/home.png"
-              alt="FoodVerse Project"
-              className={classes.nav_icon}
-              width={28}
-              height={28}
-            />
-            <Typography
+              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/tapAssets/gobbl_logo.svg"
+              alt="FoodVerse logo"
+              width={90}
+              height={40}
               style={{
-                fontSize: md ? 9 : 12,
-                lineHeight: "90%",
-                fontWeight: 400,
-                color: pathname === "/" ? "#64FF99" : "#fff",
+                objectFit: "contain",
               }}
-            >
-              HOME
-            </Typography>
+            />
           </Link>
-          <Link
-            to="/partners"
+          <Box
             style={{
-              textDecoration: "none",
               display: "flex",
               alignItems: "center",
-              flexDirection: "column",
+              justifyContent: "flex-start",
+              gap: sm ? "15px" : "25px",
             }}
           >
-            <img
-              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/new_nav_icons/partners.png"
-              alt="FoodVerse Project"
-              className={classes.nav_icon}
-              width={28}
-              height={28}
-            />
-            <Typography
+            <Link
+              to="/"
               style={{
-                fontSize: md ? 9 : 12,
-                lineHeight: "90%",
-                fontWeight: 400,
-                color: pathname === "/partners" ? "#64FF99" : "#fff",
+                textDecoration: "none",
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "column",
               }}
             >
-              PARTNERS
-            </Typography>
-          </Link>
-          <Link
-            to="/media"
-            style={{
-              textDecoration: "none",
-              display: "flex",
-              alignItems: "center",
-              flexDirection: "column",
-            }}
-          >
-            <img
-              src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/new_nav_icons/media.png"
-              alt="FoodVerse Project"
-              className={classes.nav_icon}
-              width={28}
-              height={28}
-            />
-            <Typography
+              <img
+                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/new_nav_icons/home.png"
+                alt="FoodVerse Project"
+                className={classes.nav_icon}
+                width={28}
+                height={28}
+              />
+              <Typography
+                style={{
+                  fontSize: md ? 9 : 12,
+                  lineHeight: "90%",
+                  fontWeight: 400,
+                  color: pathname === "/" ? "#64FF99" : "#fff",
+                }}
+              >
+                HOME
+              </Typography>
+            </Link>
+            <Link
+              to="/partners"
               style={{
-                fontSize: md ? 9 : 12,
-                lineHeight: "90%",
-                fontWeight: 400,
-                color: pathname === "/media" ? "#64FF99" : "#fff",
+                textDecoration: "none",
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "column",
               }}
             >
-              MEDIA
-            </Typography>
-          </Link>
+              <img
+                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/new_nav_icons/partners.png"
+                alt="FoodVerse Project"
+                className={classes.nav_icon}
+                width={28}
+                height={28}
+              />
+              <Typography
+                style={{
+                  fontSize: md ? 9 : 12,
+                  lineHeight: "90%",
+                  fontWeight: 400,
+                  color: pathname === "/partners" ? "#64FF99" : "#fff",
+                }}
+              >
+                PARTNERS
+              </Typography>
+            </Link>
+            <Link
+              to="/media"
+              style={{
+                textDecoration: "none",
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+            >
+              <img
+                src="https://gobbl-bucket.s3.ap-south-1.amazonaws.com/assets/new_nav_icons/media.png"
+                alt="FoodVerse Project"
+                className={classes.nav_icon}
+                width={28}
+                height={28}
+              />
+              <Typography
+                style={{
+                  fontSize: md ? 9 : 12,
+                  lineHeight: "90%",
+                  fontWeight: 400,
+                  color: pathname === "/media" ? "#64FF99" : "#fff",
+                }}
+              >
+                MEDIA
+              </Typography>
+            </Link>
 
-          {/* <Link
+            {/* <Link
             to="https://onerare.gitbook.io/docs"
             target="_blank"
             style={{
@@ -289,7 +296,31 @@ const Navbar: React.FC = () => {
               WHITEPAPER
             </Typography>
           </Link> */}
+          </Box>
         </Box>
+        <a href="https://global.gobbl.ai" target="_blank">
+          <Button
+            style={{
+              fontFamily: "Rubik",
+              fontSize: sm ? 10 : 14,
+              textAlign: "center",
+              boxSizing: "border-box",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: sm ? "5px 10px" : "10px 20px",
+              gap: "8px",
+              width: "max-content",
+              borderRadius: 12,
+              fontWeight: 600,
+              background: "#00e6a5",
+              color: "#000000",
+            }}
+          >
+            Product Demo{" "}
+          </Button>
+        </a>
       </nav>
     </Box>
   );
