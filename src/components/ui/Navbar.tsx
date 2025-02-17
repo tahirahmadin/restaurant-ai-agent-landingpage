@@ -318,7 +318,7 @@ const Navbar: React.FC = () => {
               color: "#000000",
             }}
           >
-            Product Demo{" "}
+            Try Gobbl{" "}
           </Button>
         </a>
       </nav>
