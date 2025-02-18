@@ -2695,6 +2695,7 @@ export const LandingPage = () => {
                   </motion.svg>
                 </Box>
               )}
+
               {!sm && (
                 <Box
                   style={{
@@ -3120,7 +3121,7 @@ export const LandingPage = () => {
                 style={{
                   fontFamily: "'Rubik'",
                   fontWeight: 900,
-                  fontSize: sm ? 48 : md ? 90 : lg ? 120 : 140,
+                  fontSize: xs ? 45 : sm ? 48 : md ? 90 : lg ? 120 : 140,
                   lineHeight: "120%",
                   textAlign: "center",
                   textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
